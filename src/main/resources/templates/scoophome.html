@@ -4,26 +4,86 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	*{padding:0;margin:0}
+	li{list-style:none}
+	a{text-decoration:none;font-size:14px}
+	
+	.men {
+		background:rgba(0,0,0,0.3);
+	}
+	
+	body {
+		background-image: url("https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MjRfNzAg%2FMDAxNjU4NTg5Njg2Njcz.12YsjbC98JoY-ES4RUZzzsJJAi09twC3rgPTNylO3Ywg.k5NGotQqqruQ1dv1XdqEzcoYPbvx3UHAY7qR3dna0YIg.JPEG.heng2log%2F1658589685856.jpg&type=sc960_832");
+		background-size: 100%;
+		background-color: infotext;
+		
+	}
+	
+	.menu {
+	  width: 800px;
+	  overflow: hidden;
+	  margin: 150px auto;
+	}
+	
+	.menu > li {
+	  width: 20%; /*20*5=100%*/
+	  float: left;
+	  text-align: center;
+	  line-height: 40px;
+	  background-color: #5778ff;
+	}
+	
+	.menu a {
+	  color: #1b1b1b;
+	  font-style: normal;
+	  font-size: 16px;
+	  font-weight: bold;
+	}
+	
+	.submenu > li {
+	  line-height: 50px;
+	  background-color: #94a9ff;
+	}
+	
+	.submenu {
+	  height: 0; /*ul의 높이를 안보이게 처리*/
+	  overflow: hidden;
+	}
+	
+	.menu > li:hover {
+	  background-color: #94a9ff;
+	  transition-duration: 0.5s;
+	}
+	
+	.menu > li:hover .submenu {
+	  height: 250px; /*서브메뉴 li한개의 높이 50*5*/
+	  transition-duration: 1s;
+	 }
 
 </style>
 </head>
 <body>
+<div style="display: flex;">
+	<div class="men" style="width: 200px; height: 1000px;">
+	<ul class="menu">
+	  <li>
+	    <a href="#">메뉴</a>
+	    <ul class="submenu">
+	      <li><a href="/scoop">홈</a></li>
+	      <li><a href="#">내작업</a></li>
+	      <li><a href="#">수신함</a></li>
+	      <li><a href="#">목표</a></li>
+	      <li><a href="#"></a></li>
+	    </ul>
+	  </li>
+	</ul>
+	</div>
+
 <div>
-	<div style="display: flex;">
-		<!-- 메뉴태그 홈버튼 -->
-
-
-		
-
-		
-		<div>
-			<h5 style="text-align: left;">홈</h5>
-		</div>
 		<!-- 검색태그 & 내정보 -->
-		<div style="text-align: right;">
-			<h5><input type="text"></h5>
-		</div>
+	<div style=" text-align: right; width: 1100px">
 		<div>
+			<h5><input type="text"></h5>
 			<input type="button" value="확인">	
 		</div>
 	</div>
@@ -32,13 +92,9 @@
 		<h5>x월 x일 x요일</h5>
 		<h2>Scoop</h2>
 	</div>
+
 </div>
-<div>
-	<a href="bang1">1</a>
-	<a href="bang2">2</a>
-	<a href="bang3">3</a>
-	<a href="bang4">4</a>
-	<a href="bang5">5</a>
+	
 </div>
 </body>
 </html>
