@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class Goalcontroll {
 	
-	@GetMapping({"goal"})
+	@GetMapping({"/goal"})
 	public String goal() {
 		return "goal";
 	}
