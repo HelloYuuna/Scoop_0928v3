@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/sidebar.css}">
 <style>
 	*{padding:0;margin:0}
 	li{list-style:none}
@@ -67,21 +69,33 @@
 </style>
 </head>
 <body>
-<div style="display: flex;">
-	<div class="men" style="width: 200px; height: 1000px;">
-	<ul class="menu">
-	  <li>
-	    <a href="#">메뉴</a>
-	    <ul class="submenu">
-	      <li><a href="/scoop">홈</a></li>
-	      <li><a href="#">내작업</a></li>
-	      <li><a href="#">수신함</a></li>
-	      <li><a href="#">목표</a></li>
-	      <li><a href="#"></a></li>
-	    </ul>
-	  </li>
-	</ul>
+	
+	<div id="navbar">
+		<a href="#" class="menu-bars" id="show-menu">
+			<img alt="sidebar" th:src="@{/img/menu.png}" width="30px"><i class="fas fa-bars"></i>
+		</a>
 	</div>
+	<nav id="nav-menu">
+		<ul class="nav-menu-items">
+			<div id="navbar-toggle">
+				<a th:href="@{/}" class="menu-bars" id="hide-menu">
+					<img alt="sidebar" th:src="@{/img/white_menu.png}" width="30px"></i>
+				</a>
+				<a href="#"><h1>Task-it</h1></a>
+			</div>
+			<hr>
+			<div class="nav-section">
+				
+					<li class="nav-text"><a th:href="@{/}">메인</a></li>
+					<li class="nav-text"><a href="#">내 작업</a></li>
+					<li class="nav-text"><a href="#">프로젝트 목록</a></li>
+					<li class="nav-text"><a href="#">목표</a></li>
+				
+			</div>
+			<hr>
+		</ul>
+	</nav>
+	<script th:src="@{/js/sidebar.js}"></script>
 
 <div>
 		<!-- 검색태그 & 내정보 -->
