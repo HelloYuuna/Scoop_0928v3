@@ -1,7 +1,5 @@
 @charset "UTF-8";
 
-@charset "UTF-8";
-
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 
 * {
@@ -17,12 +15,19 @@ hr {
 	border: none;
 }
 
-#navbar {
+.navbar {
 	/* background-color: #212121; */
 	height: 100px;
 	display: flex;
 	justify-content: start;
 	align-items: center;
+}
+
+.navbar-right {
+	margin-right: 10px;
+	text-align: right;
+	width: 1400px;
+	height: 50px;
 }
 
 .menu-bars {
@@ -77,8 +82,7 @@ hr {
 	color: #909090;
 }
 
-#youtube-logo {
-	color: #f90201;
+#logo {
 	padding-right: 0.2rem;
 }
 
@@ -105,8 +109,33 @@ hr {
 }
 
 .nav-section {
-	height: 200px;
+	height: 250px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+}
+
+.nav-section2 {
+	height: 250px; /* 프로젝트가 늘어남에 따라 스크롤? */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.nav-section3 {
+	margin-bottom: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#searchbox {
+	border-radius: 16px;
+	background-color: var(--color-background-weak);
+	border-color: var(--color-border-strong);
+	border-style: solid;
+	border-width: 1px;
+	height: 32px; padding: 0 16px 0 32px;
+	box-sizing: border-box;
+	color: var(--color-text);
 }
