@@ -16,8 +16,9 @@
 	
 	body {
 		background-image: url("https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MjRfNzAg%2FMDAxNjU4NTg5Njg2Njcz.12YsjbC98JoY-ES4RUZzzsJJAi09twC3rgPTNylO3Ywg.k5NGotQqqruQ1dv1XdqEzcoYPbvx3UHAY7qR3dna0YIg.JPEG.heng2log%2F1658589685856.jpg&type=sc960_832");
-		background-size: 100%;
+		background-size: cover;
 		background-color: infotext;
+		
 	}
 	
 	.menu {
@@ -64,7 +65,12 @@
 	 #sub{
 	 	display:inline-flex;
 	 }	
-	 
+	  #sub2{
+	 	display:inline-flex;
+	 }
+	 #tess{
+	 	text-align: center;
+	 }
 	 
 	 #goal{
 	 	margin-top: 50px;
@@ -113,6 +119,21 @@
 	 	padding:10px;
 	 	margin:10px
 	 }
+	 
+	 #tete{
+	 	height: 30px;
+	 	width: 230px;
+	 	border-radius: 4px;
+	 	font-size: 15px;
+	 	padding: 0 0 0 5px;
+	 }
+	 
+	 #butt{
+	 	height: 30px;
+	 	width: 50px;
+	 	font-size: 16px;
+	 	background-color: white;
+	 }
 
 
 
@@ -123,6 +144,10 @@
 		<a href="#" class="menu-bars" id="show-menu">
 			<img alt="sidebar" th:src="@{/img/menu.png}" width="30px"><i class="fas fa-bars"></i>
 		</a>
+		<div style=" text-align: right; width: 1400px; height: 50px;">
+			<input type="text" id="tete">
+			<input type="button" value="확인" id="butt">	
+		</div>
 	</div>
 	<nav id="nav-menu">
 		<ul class="nav-menu-items">
@@ -138,50 +163,38 @@
 					<li class="nav-text"><a th:href="@{/}">메인</a></li>
 					<li class="nav-text"><a href="#">내 작업</a></li>
 					<li class="nav-text"><a href="#">프로젝트 목록</a></li>
-					<li class="nav-text"><a href="#">목표</a></li>
+					<li class="nav-text"><a th:href="@{/mh}">목표</a></li>
 				
 			</div>
 			<hr>
 		</ul>
 	</nav>
+	
 	<script th:src="@{/js/sidebar.js}"></script>
 
 <div>
 		<!-- 검색태그 & 내정보 -->
-	<div style=" text-align: right; width: 1100px">
-		<div>
-			<h5><input type="text"></h5>
-			<input type="button" value="확인">	
-		</div>
-	</div>
+	
 	<!-- 상세정보 (가운데 상단) -->
 	<div style="text-align: center;">
-		<h5>x월 x일 x요일</h5>
-		<h2>Scoop</h2>
+		<h3>x월 x일 x요일</h3>
+		<h1>Scoop</h1>
 	</div>
-	
-	<div id="sub">
-		<div id="goal">
-			<p id="g1">내 목표</p>
-			
-		
+	<div id="tess">
+		<div id="sub">
+			<div id="goal">
+				<p id="g1">내 목표</p>
+			</div>
+			<div id="project">
+				<p id="p1">프로젝트</p>
+			</div>
 		</div>
-		
-		<div id="project">
-			<p id="p1">프로젝트</p>
-		
+		<div id="sub2">
+			<div id="user">
+				<p id="u1">사용자</p>
+			</div>
 		</div>
-		
 	</div>
-	
-	<div id="sub2">
-		<div id="user">
-			<p id="u1">사용자</p>
-		</div>
-		
-	</div>
-
-</div>
 	
 </div>
 
