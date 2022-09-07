@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-public class Scoophome {
+public class HomeController {
 	
 	@GetMapping({"","/"})
 	public String scoophome() {
