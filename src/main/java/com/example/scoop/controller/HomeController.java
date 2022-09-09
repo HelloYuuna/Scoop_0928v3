@@ -21,6 +21,7 @@ public class HomeController {
 	
 	@GetMapping({"","/"})
 	public String scoophome(Model model) {
+		
 		LocalDate now = LocalDate.now();
 		
 		int monthValue = now.getMonthValue();
@@ -39,4 +40,5 @@ public class HomeController {
 		}
 		return "scoophome";
 	}
+	
 }
