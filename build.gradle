@@ -32,6 +32,7 @@ dependencies {
 	annotationProcessor(group: 'org.projectlombok',name: 'lombok')
 	runtimeOnly('com.h2database:h2')
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	
 }
 
 tasks.named('test') {

@@ -47,3 +47,4 @@ public class User {
 		return this.role.getKey();
 	}
 }
+
