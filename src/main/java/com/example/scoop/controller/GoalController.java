@@ -15,5 +15,4 @@ public class GoalController {
 		return "/goalView/goal";
 	}
 
-	
 }

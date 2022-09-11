@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/home.css}">
 <link rel="stylesheet" th:href="@{/css/sidebar.css}">
 <style>
 	*{padding:0;margin:0}
@@ -135,8 +136,6 @@
 	 	background-color: white;
 	 }
 
-
-
 </style>
 </head>
 <body>
@@ -154,7 +153,7 @@
 		<ul class="nav-menu-items">
 			<div id="navbar-toggle">
 				<a th:href="@{/}" class="menu-bars" id="hide-menu">
-					<img alt="sidebar" th:src="@{/img/white_menu.png}" width="30px"></i>
+					<img alt="sidebar" th:src="@{/img/white_menu.png}" width="30px">
 				</a>
 				<a href="#"><h1><i id="logo"></i>Task-it</h1></a>
 			</div>
@@ -181,35 +180,45 @@
 	
 	<script th:src="@{/js/sidebar.js}"></script>
 
-<div>
-	<!-- 검색태그 & 내정보 -->
-	
-	<!-- 상세정보 (가운데 상단) -->
-	<div style="text-align: center;">
-		<h3>x월 x일 x요일</h3>
-		<h1>Scoop</h1>
-	</div>
-	<div id="tess">
-		<div id="sub">
-			<div id="goal">
-				<p id="g1">내 목표</p>
+	<div>
+		<!-- 검색태그 & 내정보 -->
+		
+		<!-- 상세정보 (가운데 상단) -->
+		
+		<div class="center">
+			<div class="today-date">
+				<h4>[[${month}]] 월 [[${dayOfMonth}]] 일 [[${dayOfWeek}]]</h2>
+
 			</div>
-			<div id="project">
-				<p id="p1">프로젝트</p>
+		
+			<div class="login-area">
+				<span th:if="${userName != null}">
+					<h1><span th:text="${userName}"></span> 님 안녕하세요 </h1><br>
+					<a th:href="@{/logout}" class="btn btn-info active" role="button">로그아웃</a>
+				</span>
+				<span th:if="${userName == null}">
+					<a href="/scoop/oauth2/authorization/google" class="btn btn-success active" role="button">구글로 로그인!</a>
+				</span>
 			</div>
 		</div>
-		<div id="sub2">
-			<div id="user">
-				<p id="u1">사용자</p>
+		
+		<div id="tess">
+			<div id="sub">
+				<div id="goal">
+					<p id="g1">내 목표</p>
+				</div>
+				<div id="project">
+					<p id="p1">프로젝트</p>
+				</div>
+			</div>
+			<div id="sub2">
+				<div id="user">
+					<p id="u1">사용자</p>
+				</div>
 			</div>
 		</div>
-	</div>
 	
-</div>
-
-
-
-
+	</div>
 
 </body>
 </html>
