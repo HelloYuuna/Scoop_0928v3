@@ -159,10 +159,9 @@
 		<meta charset="UTF-8">
 		<title>Goal</title>
 		<script>
-			window.onload = function moku() {
-				var moku = document.getElementById("moku").value;
-				window.open("http://localhost:9500/goalinsert", "moku", "width=500, height=500, left=500, top=200");
-
+			//moku()로 새로운창 생성하는 함수
+			function moku() {
+				window.open("http://localhost:9500/goal", "moku", "width=500, height=500, left=500, top=200");
 			}
 
 		</script>
