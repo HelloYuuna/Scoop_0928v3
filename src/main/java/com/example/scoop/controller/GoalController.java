@@ -8,11 +8,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class GoalController {
-	
+
 	@GetMapping("goal")
 	public String goal() {
-		log.debug("ToGoal");
 		return "/goalView/goal";
+	}
+
+	@GetMapping("teamgoal")
+	public String teamgoal() {
+		return "/goalView/teamgoal";
 	}
 
 }

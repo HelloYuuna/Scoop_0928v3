@@ -158,14 +158,6 @@
 		</style>
 		<meta charset="UTF-8">
 		<title>Goal</title>
-		<script>
-			window.onload = function moku() {
-				var moku = document.getElementById("moku").value;
-				window.open("http://localhost:9500/goalinsert", "moku", "width=500, height=500, left=500, top=200");
-
-			}
-
-		</script>
 	</head>
 
 	<body>
@@ -178,7 +170,7 @@
 					<a id="tess" th:href="@{/teamgoal}">팀목표</a>
 					<a id="tess" th:href="@{/goal}">내목표</a>
 				</div>
-				<hr style="width:65%;">
+				<hr width="65%">
 			</div>
 			<div class=" navbar navbar-right" style="margin-left: 70%;">
 				<input type="text" placeholder="검색" id="searchbox">
@@ -186,29 +178,23 @@
 			</div>
 		</div>
 
-
 		<div style="margin-top: 1%; margin-left: 8%;">
-			<input type="button" value="+ 목표추가" style="font-size: 17px;" onclick="moku()">
-			<input type="button" value="필터:진행 중인 목표" style="margin-left: 85%; margin-top:0px;">
+			<input type="text" placeholder="목표 제목을 적어주세요" id="gname"></input>
 		</div>
-		<hr style="width: 100%; margin-top: 1%;">
-
-		<div style="width: 100%; font-size: 17px; font-weight: bold;">
-			<span style="margin-left: 10%;">이름</span>
-			<span style="margin-left: 20%;">기간</span>
-			<span style="margin-left: 40%;">진행상태</span>
-			<span style="margin-left: 10%;">소유자</span>
+		<div style="margin-top: 1%; margin-left: 8%;">
+			<div>
+				<input type="text" placeholder="목표 내용을 적어주세요" id="gtext"></input>
+				<a href="">수정</a>
+				<!-- <a th:href="|javascript:deleteBoard(${board.boardnum})|"></a> -->
+			</div>
 		</div>
-		<div style="width: 100%;">
-			<span style="margin-left: 10%;"></span>
-			<span style="margin-left: 20%;"></span>
-			<span style="margin-left: 40%;"></span>
-			<span style="margin-left: 10%;"></span>
+		<div style="margin-top: 40px; margin-left: 200px;">
+			<p style="font-size: 30px; font-weight: bold; ;">목표
+				<input type="button" value="+" style="font-size: 30px;">
+
+				<input type="button" value="기간" style="margin-left: 70%; font-size: 20px;">
+			</p>
 		</div>
-
-
-
-
 
 		<nav id="nav-menu">
 			<ul class="nav-menu-items">
