@@ -23,14 +23,13 @@ public class SecurityConfig {
 	   @Bean
 	   @Order(SecurityProperties.BASIC_AUTH_ORDER)
 	   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		   
 	       http
 	               .csrf().disable()
 	               .headers().frameOptions().disable() 
 	               .and()
                    .authorizeRequests()
                    .antMatchers("/", "/css/**", "/img/**",
-                           "/js/**", "/h2-console/**").permitAll()
+                           "/js/**", "/h2-console/**", "/goal").permitAll()
                    .antMatchers("/api/v1/**").hasRole(Role.
                                                     USER.name())
                    .anyRequest().authenticated()
