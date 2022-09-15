@@ -19,4 +19,8 @@ public class GoalController {
 		return "/goalView/teamgoal";
 	}
 
+	@GetMapping("calendar")
+	public String calendar() {
+		return "/calendar";
+	}
 }
