@@ -30,12 +30,27 @@ const renderCalender = () => {
     }
 
     const dates = prevDates.concat(thisDates, nextDates);
-
+    const firstDateIndex = dates.indexOf(1);
+    const lastDateIndex = dates.lastIndexOf(TLDate);
     dates.forEach((date, i) => {
-        dates[i] = `<div class="date">${date}</div>`;
+        const condition = i >= firstDateIndex && i < lastDateIndex + 1
+            ? 'this'
+            : 'other';
+        dates[i] = `<div class="date"><span class=${condition} onclick="event(${date})">${date}</span></div>`;
     });
 
+
     document.querySelector('.dates').innerHTML = dates.join('');
+
+    const today = new Date();
+    if (viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
+        for (let date of document.querySelectorAll('.this')) {
+            if (+date.innerText === today.getDate()) {
+                date.classList.add('today');
+                break;
+            }
+        }
+    }
 };
 
 renderCalender();
