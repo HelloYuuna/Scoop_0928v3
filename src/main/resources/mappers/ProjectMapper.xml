@@ -1,0 +1,74 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace ="com.example.scoop.dao.ProjectDAO">
+
+	<update id="updateContent" parameterType="Project">
+		update scoop_project
+		set pnotice = #{pnotice}, ptext = #{ptext}
+		where pnum = #{pnum}
+	</update>
+
+	<select id="selectContent" resultType="String" parameterType="int">
+		select pnotice
+		from scoop_project
+		where pnum = #{pnum}
+	</select>
+
+	<select id="selectMember" resultType="User">
+		select *
+		from scoop_user
+	</select>
+
+	<select id="memberselect" resultType="String" parameterType="String">
+		select email
+		from scoop_user
+		where id = #{id}
+	</select>
+
+	<update id="updatemember" parameterType="map">
+		update scoop_user
+		set pmember = #{pmember}
+		where pnum= #{pnum}
+	</update>
+
+	<insert id="projectInsert" parameterType="Project">
+		insert into scoop_project 
+		(pnum
+		, uemail
+		, pnotice
+		, ptext
+		, pname
+		, powner
+		, pmember)
+		values 
+		(scoop_project_seq.nextval
+		, #{uemail}
+		, #{pnotice}
+		, #{ptext}
+		, #{pname}
+		, #{powner}
+		, #{pmember}
+		)
+	</insert>
+
+	<select id="selectProject" resultType="Project">
+		select *
+		from scoop_project
+		order by pnum desc
+	</select>
+	
+	<select id="projectread" resultType="Project" parameterType="int">
+		select * 
+		from scoop_project
+		where pnum = #{pnum}
+	</select>
+	
+	<select id="choiceMember" resultType="String" parameterType="int">
+		select pmember
+		from scoop_project
+		where pnum = #{pnum}
+	</select>
+	
+</mapper>
