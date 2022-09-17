@@ -19,23 +19,24 @@ drop table scoop_goal;
 
 CREATE TABLE scoop_goal
 (
-    key NUMBER PRIMARY KEY,                                               --목표 넘버(시퀀스)
-    gname number(30),                                                     --워크스페이스아이디
-    gstartdate DATE,                                                      --시작일
-    genddate date,                                                        --종료일
-    gstatus number(1) CHECK (gstatus IN('0','1','2','3','4','5','6','7')),--진행상태(0:진행상태 , 1: 위험, 2:기간지남,3:완료,4:보류,5:목표완성,6:목표미완성,7:목표중지.
-    uowner VARCHAR2(50),                                                  --소유자 이메일(update가능하도록)
-    gpublic number(1) check (gpublic in('0','1')),                        --0: 비공개, 1:공개
-    gmember varchar2(2000),                                               --참가맴버 아이디등록
-    gfinish number(1) check (gfinish in('0','1')),                        -- 0: 미완료, 1: 완료 (마일스톤)  
-    gcreator VARCHAR2(50) not null                                        -- 생성자 (못지움)
+    key NUMBER PRIMARY KEY,                                        --목표 넘버(시퀀스)
+    wsid number(30),                                                          --워크스페이스아이디
+    gname varchar2(200),                                                  --목표제목
+    gstartdate DATE,                                                         --시작일
+    genddate date,                                                             --종료일
+    gstatus number(1) CHECK (gstatus IN('0','1','2','3','4','5','6','7')),                  --진행상태(0:진행상태 , 1: 위험, 2:기간지남,3:완료,4:보류,5:목표완성,6:목표미완성,7:목표중지.
+    uowner VARCHAR2(50),                                                --소유자 이메일(update가능하도록)
+    gpublic number(1) check (gpublic in('0','1')),                     --0: 비공개, 1:공개
+    gmember varchar2(2000),                                             --참가맴버 아이디등록
+    gfinish number(1) check (gfinish in('0','1')),                      -- 0: 미완료, 1: 완료 (마일스톤)  
+    gcreator VARCHAR2(50) not null                                   -- 생성자 (못지움)
 );
 create SEQUENCE key_seq;
 
 INSERT INTO scoop_goal
-(key, gname ,gstartdate ,genddate ,gstatus ,uowner ,gpublic ,gmember ,gfinish ,gcreator)
+(key,wsid, gname ,gstartdate ,genddate ,gstatus ,uowner ,gpublic ,gmember ,gfinish ,gcreator)
 VALUES
-(key_seq.nextval, '1' ,'2022-09-17' ,'2022-09-19' ,'0' ,'answngusdld@gmail.com' ,'1' ,'answngusdld@gmail.com' ,'0' ,'answngusdld@gmail.com');
+(key_seq.nextval, '1','생성' ,'2022-09-17' ,'2022-09-19' ,'0' ,'answngusdld@gmail.com' ,'1' ,'answngusdld@gmail.com' ,'0' ,'answngusdld@gmail.com');
 
 select * from scoop_goal;
 

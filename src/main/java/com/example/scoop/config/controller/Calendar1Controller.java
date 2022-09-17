@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+//import org.json.simple.JSONArray;
+//import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,14 +31,14 @@ public class Calendar1Controller {
     // this.calendarservice = calendarservice;
     // }
 
-    @RequestMapping(value = "/insert", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Map<String, Object>> insert() {
+//    @RequestMapping(value = "/insert", method = RequestMethod.GET)
+//    @ResponseBody
+//    public List<Map<String, Object>> insert() {
         // List<Map<String, Object>> list = CalendarService.getCalendarList();
 
-        JSONObject jsonObj = new JSONObject();
-        JSONArray jsonArr = new JSONArray();
-        HashMap<String, Object> hash = new HashMap<String, Object>();
+//        JSONObject jsonObj = new JSONObject();
+//        JSONArray jsonArr = new JSONArray();
+//        HashMap<String, Object> hash = new HashMap<String, Object>();
 
         // for (int i = 0; i < list.size(); i++) {
         // hash.put("title", list.get(i).get("detailed_categorized_name")); // 제목
@@ -53,6 +53,6 @@ public class Calendar1Controller {
 
         // log.info("jsonArrCheck: {}", jsonArr);
 
-        return jsonArr;
-    }
+//        return jsonArr;
+//    }
 }

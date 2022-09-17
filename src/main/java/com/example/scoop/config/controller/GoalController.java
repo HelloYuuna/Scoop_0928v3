@@ -19,4 +19,9 @@ public class GoalController {
 		return "/goalView/teamgoal";
 	}
 
+	@GetMapping("goalgaip")
+	public String goalgaip() {
+		return "/goalView/goalgaip";
+	}
+
 }
