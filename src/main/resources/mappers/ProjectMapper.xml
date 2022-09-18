@@ -71,4 +71,16 @@
 		where pnum = #{pnum}
 	</select>
 	
+	<update id="memberupdate" parameterType="map">
+		update scoop_project
+		set pmember = pmember ||','||#{pmember}
+		where pnum = #{pnum}
+	</update>
+	
+	
+	
+	
+	
+	
+	
 </mapper>

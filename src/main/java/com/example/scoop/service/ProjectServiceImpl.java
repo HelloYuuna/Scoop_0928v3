@@ -84,7 +84,6 @@ public class ProjectServiceImpl implements ProjectService{
 		}
 		
 		public int updatemember(int pnum, User user) {
-			
 			//select String으로 pmember 다 받아오고
 			String pmember = choiceMember(pnum);
 			pmember += user.getName();
@@ -98,10 +97,20 @@ public class ProjectServiceImpl implements ProjectService{
 			return result;	
 		}
 		
-		
 		public String choiceMember(int pnum) {
 			
 			String result = projectdao.choiceMember(pnum);
+			return result;
+		}
+		
+		public int memberupdate(String str, int pnum) {
+			
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("pmember", str);
+			map.put("pnum",pnum);
+			
+			int result = projectdao.memberupdate(map);
+			
 			return result;
 		}
 		

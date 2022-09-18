@@ -9,7 +9,7 @@
 $(document).ready(function(){
 	$('#pnotice').keyup(insert);
 	$('#ptext').keyup(insert);
-	
+	$('#memberselect').click(set);
 });
 
 function insert(){
@@ -32,21 +32,26 @@ function insert(){
 }
 
 function set(){
-	//let memberselect = $('#memberselect').
+	let val = $('#val').val();
+	$('#memberlist').html(val);
+	
+	let pnum = $('#pnum').val();
+	
 	$.ajax({
-		url:'set',
-		type:'post',
-		data:{str:$('#memberselect').html()
-		},
-		dataType:'text',
-		success:function(){	
-			alert('성공');
+		url: 'insertmember',
+		type: 'post',
+		data: {str:$('#memberlist').html(), pnum:pnum},
+		success: function(){
+			//alert('되긴함');
+			//$(input).val(ob);
 		},
 		error: function(){
 			alert('실패');
 		}
-	})
+	});
+	
 }
+
 
 
 
@@ -225,18 +230,18 @@ function set(){
 				<p>프로젝트 멤버</p>
 				
 				<div id="list">
+					<select id="memberselect" name="memberselect">
+						<option value="">선택</option>
+						<option th:each="val: ${memberlist}"
+							th:value="${val.name}" 
+							th:utext="${val.name}" id="val">
+						</option>
+					</select>
+				</div>
 				
-					<input type="hidden" id="pnum" name="pnum" th:value="${input.pnum}">
-					<button th:onclick="window.open('getmember','win','left=600,top=300,width=400,height=300')">멤버 추가</button>
-			
-					<div id="memberselect">
+				<div id="memberlist" th:text="${choiceMember}">
 					
-						<p th:text="${choiceMember}">
-						
-						</p>
-					
-					</div>
-					
+				
 				</div>
 				
 			</div>

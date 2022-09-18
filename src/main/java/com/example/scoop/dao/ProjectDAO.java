@@ -43,4 +43,6 @@ public interface ProjectDAO {
 
 	public String choiceMember(int pnum);
 
+	public int memberupdate(HashMap<String, Object>map);
+
 }

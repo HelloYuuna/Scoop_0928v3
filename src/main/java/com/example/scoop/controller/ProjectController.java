@@ -37,13 +37,18 @@ public class ProjectController {
 			@RequestParam(name="pnum",defaultValue="0") int pnum) {
 		//별도로 프로젝트를 생성해야한다...
 		log.debug("전달될 프로젝트 번호{}:",pnum);
-
+		//공지사항
 		Project pproject = service.projectread(pnum);
 		if(pproject == null) {
 			return "redirect:/";
 		}
 		model.addAttribute("input", pproject);
 		
+		//멤버 리스트를 가져오는 애
+		ArrayList<User> list = service.selectMember();
+		model.addAttribute("memberlist", list);
+		
+		//선택된 멤버를 가져오는 애
 		String member = service.choiceMember(pnum);
 		if(member == null) {
 			return "redirect:/";
@@ -54,8 +59,7 @@ public class ProjectController {
 	}
 
 	@GetMapping("/getmember")
-	public String getlist(Model model,
-			@RequestParam(name="pnum",defaultValue="0") int pnum) {
+	public String getlist(Model model) {
 		ArrayList<User> list = service.selectMember();
 		log.debug("넘어온 리스트:{}", list);
 		model.addAttribute("memberlist", list);

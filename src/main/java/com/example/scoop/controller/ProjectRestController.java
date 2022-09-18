@@ -38,20 +38,22 @@ public class ProjectRestController {
 	}
 
 	//참여 멤버 업데이트
-	@PostMapping("updatemember")
-	public void updatemember(User user, int pnum) {
-		log.debug("ajax에서 넘어 온 멤버:{}", user);
-		log.debug("넘어온 pnum:{}",pnum);
-		int result = service.updatemember(pnum,user);
-		log.debug("입력된 멤버:{}", result);
-	}
-	
-//	@PostMapping("set")
-//	public void set(String str) {
-//		log.debug("ajax에서 넘어간 값:{} ", str);	
-//		
-//		
+//	@PostMapping("updatemember")
+//	public void updatemember(User user, int pnum) {
+//		log.debug("ajax에서 넘어 온 멤버:{}", user);
+//		log.debug("넘어온 pnum:{}",pnum);
+//		int result = service.updatemember(pnum,user);
+//		log.debug("입력된 멤버:{}", result);
 //	}
+	
+	@PostMapping("insertmember")
+	public void set(String str, int pnum) {
+		//이 목록은 user가 아니라 project에 스트링으로 저장 되는거 아임매?
+		log.debug("ajax에서 넘어간 값:{} ", str);
+		log.debug("ajax에서 넘어간 프로젝트 번호:{}", pnum);
+		service.memberupdate(str, pnum);
+
+	}
 	
 	
 //	@PostMapping("insert")
