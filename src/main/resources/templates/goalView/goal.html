@@ -177,8 +177,8 @@
 			</a>
 			<div style="font-size: 25px; margin-left: 2%;">[ 목표 ]
 				<div id="subb" style="width: 200px;">
-					<a id="tess" th:href="@{/teamgoal}">팀목표</a>
-					<a id="tess" th:href="@{/goal}">내목표</a>
+					<a id="tess" th:href="@{/goalView/teamgoal}">팀목표</a>
+					<a id="tess" th:href="@{/goalView/goal}">내목표</a>
 				</div>
 				<hr style="width:65%;">
 			</div>
@@ -210,7 +210,8 @@
 
 		<div class="modal">
 			<div class="modal_body">
-				<form th:action="@{/goalView/insert}" id="insertform" name="insertform" method="post" onsubmit="return validation();">
+				<form th:action="@{/goalView/insert}" id="insertform" name="insertform" method="post"
+					onsubmit="return validation();">
 					<h2>[ 목표 생성 ]</h2>
 					<br>
 					<div>제목 : <input type="text" id="tete" name="title" placeholder="제목을 입력하세요"></div>
@@ -234,8 +235,7 @@
 					<div>맴버 : <input type="text" id="gmember" name="gmember" placeholder="이름또는 이메일로 맴버 추가"></div>
 					<br>
 					<div>
-						<input type="submit" value="확인" style="margin-right: 5px;">
-						<input type="reset" value="취소" th:href="@{/goal}" style="margin-left: 5px;">
+						<input type="submit" value="확인">
 					</div>
 				</form>
 			</div>
