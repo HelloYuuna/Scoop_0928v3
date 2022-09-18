@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" th:href="@{/css/home.css}">
 		<link rel="stylesheet" th:href="@{/css/sidebar.css}">
+		<link rel="stylesheet" th:href="@{/css/goalmodel.css}">
 
 		<style>
 			* {
@@ -158,6 +159,13 @@
 		</style>
 		<meta charset="UTF-8">
 		<title>Goal</title>
+		<script>
+			function calendar() {
+				window.open("http://localhost:9500/scoop/calendarView/calendar1", "calendar_parent"
+					, "width=750, height=750, left=1500, top=350");
+
+			}
+		</script>
 	</head>
 
 	<body>
@@ -190,16 +198,45 @@
 		</div>
 		<div style="margin-top: 40px; margin-left: 200px;">
 			<p style="font-size: 30px; font-weight: bold; ;">목표
-				<input type="button" value="+" style="font-size: 30px;">
+				<input type="button" class="btn-open-popup" value="+" style="font-size: 30px;">
 
 				<input type="button" value="기간" style="margin-left: 70%; font-size: 20px;">
 			</p>
 		</div>
 
+		<div>
+			<div class="timegoal"></div>
+
+		</div>
+
+
+
+
+		<div class="modal">
+			<div class="modal_body">
+				<form id="goaljoinform" th:action="@{/goalView/join}" method="post" onsubmit="return validation();">
+					<h2>[ 목표 생성 ]</h2>
+					<br>
+					<div>제목 : <input type="text" id="tete" name="title" placeholder="제목을 입력하세요"></div>
+					<br>
+					<div>소유자 : <input type="text" id="uowner" name="uowner"></div>
+					<br>
+					<div>기간 : <input type="button" id="calender" name="calender" value="캘린더" onclick="calendar()"></div>
+					<br>
+					<div>맴버 : <input type="text" id="gmember" name="gmember" placeholder="이름또는 이메일로 맴버 추가"></div>
+					<br>
+					<div>
+						<input type="submit" value="확인" style="margin-right: 5px;">
+						<input type="reset" value="취소" style="margin-left: 5px;">
+					</div>
+				</form>
+			</div>
+		</div>
+
 		<nav id="nav-menu">
 			<ul class="nav-menu-items">
 				<div id="navbar-toggle">
-					<a th:href="@{/goal}" class="menu-bars" id="hide-menu">
+					<a href="#" class="menu-bars" id="hide-menu">
 						<img alt="sidebar" th:src="@{/img/white_menu.png}" width="30px">
 					</a>
 					<a href="#">
@@ -227,7 +264,7 @@
 			</ul>
 		</nav>
 		<script th:src="@{/js/sidebar.js}"></script>
-
+		<script th:src="@{/js/goalmodel.js}"></script>
 
 	</body>
 

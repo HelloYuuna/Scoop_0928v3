@@ -39,6 +39,11 @@
                     locale: 'ko', // 한국어 설정
                     eventAdd: function (obj) { // 이벤트가 추가되면 발생하는 이벤트
                         console.log(obj);
+                        let start = obj.event.start;
+                        let end = obj.event.end;
+                        console.log(start, end);
+
+
                     },
                     eventChange: function (obj) { // 이벤트가 수정되면 발생하는 이벤트
                         console.log(obj);
