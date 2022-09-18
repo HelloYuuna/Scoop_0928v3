@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.example.scoop.config.auth.dto.SessionUser;
+
+import com.example.scoop.config.dto.SessionUser;
 import com.example.scoop.domain.Project;
 import com.example.scoop.service.ProjectService;
 

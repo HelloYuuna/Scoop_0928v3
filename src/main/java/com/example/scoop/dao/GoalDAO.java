@@ -1,4 +1,4 @@
-package com.example.scoop.service.dao;
+package com.example.scoop.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 

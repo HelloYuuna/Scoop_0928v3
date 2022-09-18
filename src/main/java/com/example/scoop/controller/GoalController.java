@@ -1,4 +1,4 @@
-package com.example.scoop.config.controller;
+package com.example.scoop.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.scoop.config.auth.dto.SessionUser;
+import com.example.scoop.config.dto.SessionUser;
 import com.example.scoop.domain.Goal;
 import com.example.scoop.service.GoalService;
 

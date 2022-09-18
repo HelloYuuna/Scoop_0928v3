@@ -1,4 +1,4 @@
-package com.example.scoop.config.auth;
+package com.example.scoop.auth;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.security.ConditionalOnDefaultWebSecurity;

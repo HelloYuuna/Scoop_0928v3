@@ -5,8 +5,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.scoop.dao.GoalDAO;
 import com.example.scoop.domain.Goal;
-import com.example.scoop.service.dao.GoalDAO;
 
 import lombok.extern.slf4j.Slf4j;
 
