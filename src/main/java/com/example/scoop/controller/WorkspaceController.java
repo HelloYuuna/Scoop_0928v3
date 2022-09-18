@@ -97,19 +97,8 @@ public class WorkspaceController {
 		// insert
 		service.insertWorkspace(workspace);
 		
-//		int wsid = workspace.getWsid();
-//		log.debug("wsid:{}", wsid);
-//		
-//		Workspace workspaceOne = service.selectOne(wsid);
-//		
-//		
-//		workspaceOne.setWsid(wsid);
-		
-		
 		log.debug("Workspace:{}", workspace); // ajax
 		
-//		return "redirect:/?wsid=" + workspace.getWsid() + "&wsname=" + workspace.getWsname() + "&wsowner=" + workspace.getWsowner(); // "workspace?wsid=" + wsid; // return "redirect:/boardView/read?boardnum=" + reply.getBoardnum();
-//		return "redirect:/workspaceHome?wsid=" + workspace.getWsid();
 		return "redirect:/wsid=" + workspace.getWsid();
 	}
 	
