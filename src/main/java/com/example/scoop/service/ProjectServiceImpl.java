@@ -6,9 +6,9 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.scoop.dao.ProjectDAO;
 import com.example.scoop.domain.Project;
 import com.example.scoop.domain.User;
+import com.example.scoop.dao.ProjectDAO;
 import com.example.scoop.domain.Project;
 
 @Service

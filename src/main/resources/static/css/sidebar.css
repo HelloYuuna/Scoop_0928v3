@@ -15,27 +15,6 @@ hr {
 	border: none;
 }
 
-.navbar {
-	/* background-color: #212121; */
-	height: 100px;
-	display: flex;
-	justify-content: start;
-	align-items: center;
-}
-
-.navbar-right {
-	margin-right: 10px;
-	text-align: right;
-	width: 1400px;
-	height: 50px;
-}
-
-.menu-bars {
-	margin-left: 2rem;
-	font-size: 2rem;
-	color: #fff;
-}
-
 #nav-menu {
 	background-color: #212121;
 	width: 250px;
@@ -129,13 +108,3 @@ hr {
 	justify-content: center;
 }
 
-#searchbox {
-	border-radius: 16px;
-	background-color: var(--color-background-weak);
-	border-color: var(--color-border-strong);
-	border-style: solid;
-	border-width: 1px;
-	height: 32px; padding: 0 16px 0 32px;
-	box-sizing: border-box;
-	color: var(--color-text);
-}
