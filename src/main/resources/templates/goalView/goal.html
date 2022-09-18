@@ -188,20 +188,48 @@
 			</div>
 		</div>
 		<div style="margin-top: 1%; margin-left: 8%;">
-			<input type="button" class="btn-open-popup" value="+ 목표추가" style="font-size: 17px;">
-			<input type="button" value="필터:진행 중인 목표" style="margin-left: 85%; margin-top:0px;" onclick="calendar()">
+			<form th:action="@{/goal/selectcal}" method="post" onsubmit="return validation();"> //만들어야함
+				<input type="button" class="btn-open-popup" value="+ 목표추가" style="font-size: 17px;">
+				<div class="write" style="margin-left: 85%;">
+					<div style="font-family: bold; font-size: 25px;">진행상황</div>
+					<div>
+						<select name="category" style="width: 150px; height: 30px;">
+							<option value="0">0 : 진행상태</option>
+							<option value="1">1 : 위험</option>
+							<option value="2">2 : 기간지남</option>
+							<option value="3">3 : 완료</option>
+						</select>
+					</div>
+				</div>
+			</form>
 		</div>
+		<div style="text-align: center;">
+			<div class="goalne"></div>
+		</div>
+
 
 		<div class="modal">
 			<div class="modal_body">
-				<form>
+				<form th:action="@{/goalView/insert}" id="insertform" name="insertform" method="post" onsubmit="return validation();">
 					<h2>[ 목표 생성 ]</h2>
 					<br>
 					<div>제목 : <input type="text" id="tete" name="title" placeholder="제목을 입력하세요"></div>
+
 					<br>
 					<div>소유자 : <input type="text" id="uowner" name="uowner"></div>
 					<br>
 					<div>기간 : <input type="button" id="calender" name="calender" value="캘린더" onclick="calendar()"></div>
+					<br>
+					<div>
+						<div style="font-family: bold; font-size: 17px;">진행상황 :
+							<select name="category" style="width: 150px; height: 30px;">
+								<option value="0">0 : 진행상태</option>
+								<option value="1">1 : 위험</option>
+								<option value="2">2 : 기간지남</option>
+								<option value="3">3 : 완료</option>
+							</select>
+						</div>
+					</div>
 					<br>
 					<div>맴버 : <input type="text" id="gmember" name="gmember" placeholder="이름또는 이메일로 맴버 추가"></div>
 					<br>

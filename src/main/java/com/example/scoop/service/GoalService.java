@@ -1,5 +1,9 @@
 package com.example.scoop.service;
 
-public interface GoalService {
+import com.example.scoop.domain.Goal;
 
+public interface GoalService {
+	
+	public int insertgoal(Goal goal);
+	
 }
