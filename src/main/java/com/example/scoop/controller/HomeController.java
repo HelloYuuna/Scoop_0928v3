@@ -28,7 +28,7 @@ public class HomeController {
 	private final HttpSession httpSession;
 
 	@Autowired
-	WorkspaceService workspaceService;
+	private WorkspaceService workspaceService;
 
 	@GetMapping({ "", "/" })
 	public String scoophome(Model model) {
