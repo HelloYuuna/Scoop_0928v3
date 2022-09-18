@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
-<link rel="stylesheet" th:href="@{/css/home.css}">
-<link rel="stylesheet" th:href="@{/css/sidebar.css}">
-<link rel="stylesheet" th:href="@{/css/header.css}">
-<link rel="stylesheet" th:href="@{/css/newWorkspace.css}">
-<script th:src="@{/js/header.js}"></script>
-<script th:src="@{/js/home.js}"></script>
-<script th:src="@{/js/jquery-3.6.0.js}"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Workspace Home</title>
+	<link rel="stylesheet" th:href="@{/css/header.css}">
+	<link rel="stylesheet" th:href="@{/css/sidebar.css}">
+	<link rel="stylesheet" th:href="@{/css/newWorkspace.css}">
+	<link rel="stylesheet" th:href="@{/css/workspaceHome.css}">
+	<script th:src="@{/js/header.js}"></script>
+	<script th:src="@{/js/jquery-3.6.0.js}"></script>
+	
 </head>
 <body>
-	<!-- modal -->
 	<div class="modal">
 		<div class="modal_body">
 			<div class="newWorkspace_title">작업 공간 생성</div>
@@ -27,7 +26,7 @@
 						</tr>
 						<tr>
 							<td class="newWorkspace_td-name">멤버</td>
-							<td><br><textarea type="text" class="newWorkspace_textarea" placeholder="name@company.com"></textarea></td>
+							<td><br><textarea class="newWorkspace_textarea" placeholder="name@company.com"></textarea></td>
 						</tr>
 					</table>
 				</div>
@@ -39,13 +38,23 @@
 		</div>
    	</div>
    	
-	<!-- header -->
 	<div class="header">
 		<div class="navbar">
 			<a href="#" class="menu-bars" id="show-menu">
 				<img alt="sidebar" th:src="@{/img/menu.png}" width="30px">
 			</a>
-			
+			<div class="navbar navbar-left">
+				<table class="nav-table">
+					<tr>
+						<td colspan="3"><div th:text="${latelyWorkspace.wsname}"></div></td> <!--  th:text="${hye.wsname}" -->
+					</tr>
+					<tr>
+						<td><a class="a-header" th:href="@{/workspaceHome}" style="text-decoration: underline; color: #000000;">개요</a></td>
+						<td><a class="a-header" th:href="@{/workspaceMessage}">메시지</a></td>
+						<td><a class="a-header" th:href="@{/workspaceCalender}">캘린더</a></td>
+					</tr>
+				</table>
+			</div>
 			<div class="navbar navbar-right">
 				<input type="text" placeholder="검색" id="searchbox">
 				
@@ -63,15 +72,27 @@
 				<div class="dropdown">
 					<button onclick="myFunction()" class="dropbtn">+</button>
 					<div id="myDropdown" class="dropdown-content my-dropdown-content">
-						<a th:href="@{/}">(워크스페이스명)</a>
+						<a th:href="@{/}"><span th:text="${wsname}"></span></a>
+						
+						<form> <!--  th:action="@{moveToWorkspaceHome}" method="get" -->
+							<table th:each="workspaceList : ${ownerWorkspaceList}">
+								<tr>
+									<td><input type="submit" th:wsnum="${workspaceList.wsid}" th:onclick="workspaceHome(this.getAttribute('wsnum'))" th:value="${workspaceList.wsname}"></td>
+								</tr>
+							</table>
+						</form>
+						
 						<hr>
 						<a th:href="@{/myWorkspaceInfo}">내 작업 공간 정보...</a>
-						<!-- <a th:href="@{/seeMore}">더 보기</a> -->
 						
 						<div class="dropdown" id="seeMoreDropdown">
 							<button onclick="seeMoreFunction()">더 보기</button>
 							<div id="seeMoreDropdown" class="dropdown-content dropleft">
+								<!-- <a th:href="@{/newWorkspace}">새 작업 공간 생성</a> -->
 								<button class="btn-open-popup">새 작업 공간 생성</button>
+									
+								
+								<!-- <a th:wsnum="${workspaceList.wsid}" th:onclick="removeWorkspace(this.getAttribute('wsnum'))">이 작업 공간에서 나를 제거</a> -->
 								<a th:href="@{/}">이 작업 공간에서 나를 제거</a>
 							</div>
 						</div>
@@ -83,12 +104,11 @@
 					</div>
 				</div>
 			</div>
-			<br>
 		</div>
+		<br>
 	</div>
 	
-	<!-- sidebar -->
-	<div id="nav-menu">
+	<nav id="nav-menu">
 		<ul class="nav-menu-items">
 			<div id="navbar-toggle">
 				<a href="#" class="menu-bars" id="hide-menu">
@@ -105,11 +125,8 @@
 			</div>
 			<hr>
 			<div class="nav-section2">
-				<!-- <li class="nav-text" th:wsnum="${latelyWorkspace.wsid}" th:onclick="workspaceHome(this.getAttribute('wsnum'))">
-					<i class="nav-icon"><span th:text="${latelyWorkspace.wsname}"></span></i><a th:href="@{/workspaceHome}">
-				</li> -->
-				<li class="nav-text">
-					<i class="nav-icon"><a th:href="@{/workspaceHome}">워크스페이스</a></i>
+				<li class="nav-text" th:wsnum="${latelyWorkspace.wsid}" th:onclick="workspaceHome(this.getAttribute('wsnum'))"><!-- <a th:href="@{/workspaceHome}"> --> <!--  -->
+					<i class="nav-icon"><span th:text="${latelyWorkspace.wsname}"></span></i>
 				</li>
 				<li class="nav-text"><a href="#"><i class="nav-icon"></i>(사람들 표시)</a></li>
 				<li class="nav-text"><a href="#"><i class="nav-icon"></i>(프로젝트명)</a></li>
@@ -120,72 +137,58 @@
 				<li class="nav-text nav-section3"><a href="#"><i class="nav-icon"></i>팀원 초대</a></li>
 			</div>
 		</ul>
-	</div>
+	</nav>
 	<script th:src="@{/js/sidebar.js}"></script>
+	
+	<!-- *************************************************************** -->
 
 	<div class="body">
-		<!-- 검색태그 & 내정보 -->
-		
-		<!-- 상세정보 (가운데 상단) -->
-		
-		<div class="center">
-			<div class="today-date">
-				<h4>[[${month}]] 월 [[${dayOfMonth}]] 일 [[${dayOfWeek}]]</h2>
-			</div>
-		
-			<div class="login-area">
-				<span th:if="${userName != null}">
-					<h1><span th:text="${userName}"></span> 님 안녕하세요 </h1><br>
-					<a th:href="@{/logout}" class="btn btn-info active" role="button">로그아웃</a>
-				</span>
-				<span th:if="${userName == null}">
-					<a href="/scoop/oauth2/authorization/google" class="btn btn-success active" role="button">구글로 로그인!</a>
-				</span>
-			</div>
-		</div>
-		
-		<div id="tess">
-			<div id="sub">
-				<div id="goal">
-					<p id="g1">내 목표</p>
-				</div>
-				<div id="project">
-					<p id="p1">프로젝트</p>
-				</div>
-			</div>
-			<div id="sub2">
-				<div id="user">
-					<p id="u1">사용자</p>
+		<div class="workspace-member">
+			<div class="section-header">멤버(<span></span>명)</div>
+			<div class="workspace-member-content">
+				<div>
+					
 				</div>
 			</div>
 		</div>
-	
+		
+		<div class="workspace-project">
+			<div class="section-header">프로젝트</div>
+			<table class="content">
+				<tr>
+					<td><a class="a-body" th:href="@{/}">신규 프로젝트</a></td> <!-- 프로젝트 생성 링크 수정 -->
+				</tr>
+				<tr>
+					<td></td>
+				</tr>
+			</table>
+		</div>	
 	</div>
 	
 	<!-- modal -->
-	<script>
-	    const body = document.querySelector('body');
-	    const modal = document.querySelector('.modal');
-	    const btnOpenPopup = document.querySelector('.btn-open-popup');
+	  <script>
+	      const body = document.querySelector('body');
+	      const modal = document.querySelector('.modal');
+	      const btnOpenPopup = document.querySelector('.btn-open-popup');
 	
-	    btnOpenPopup.addEventListener('click', () => {
-	      modal.classList.toggle('show');
-	
-	      if (modal.classList.contains('show')) {
-	        body.style.overflow = 'hidden';
-	      }
-	    });
-	
-	    modal.addEventListener('click', (event) => {
-	      if (event.target === modal) {
+	      btnOpenPopup.addEventListener('click', () => {
 	        modal.classList.toggle('show');
 	
-	        if (!modal.classList.contains('show')) {
-	          body.style.overflow = 'auto';
+	        if (modal.classList.contains('show')) {
+	          body.style.overflow = 'hidden';
 	        }
-	      }
-	    });
-	 </script>
+	      });
+	
+	      modal.addEventListener('click', (event) => {
+	        if (event.target === modal) {
+	          modal.classList.toggle('show');
+	
+	          if (!modal.classList.contains('show')) {
+	            body.style.overflow = 'auto';
+	          }
+	        }
+	      });
+    </script>
 
 </body>
 </html>
