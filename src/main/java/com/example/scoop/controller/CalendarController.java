@@ -16,9 +16,9 @@ public class CalendarController {
 		return "/calendarView/calendar1";
 	}
 
-	@GetMapping("calendar-insert")
-	public String calendar_insert() {
-		return "/calendarView/calendar-insert";
-	}
+	// @GetMapping("calendar-insert")
+	// public String calendar_insert() {
+	// return "/calendarView/calendar-insert";
+	// }
 
 }

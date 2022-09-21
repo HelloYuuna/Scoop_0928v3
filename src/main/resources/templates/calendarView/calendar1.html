@@ -3,10 +3,10 @@
 
 <head>
     <meta charset='utf-8' />
-    <link th:href='@{/css/calendar/main.min.css}' rel='stylesheet' />
+    <link th:href='@{/css/calendar/main.css}' rel='stylesheet' />
 
     <script th:src="@{/js/calendar/jquery-3.6.0.min.js}"></script>
-    <script th:src="@{/js/calendar/main.min.js}"></script>
+    <script th:src="@{/js/calendar/main.js}"></script>
     <script th:src="@{/js/calendar/locales-all.min.js}"></script>
 
     <script>
@@ -42,6 +42,37 @@
                         let start = obj.event.start;
                         let end = obj.event.end;
                         console.log(start, end);
+
+                        $(function () {
+
+                            var request = $.ajax({
+                                url: "/scoop/calendarView/calendar1",
+                                method: "GET",
+                                dataType: "json"
+                            });
+
+                            request.done(function (data) {
+                                console.log(data);
+
+                                var calendarEl = document.getElementById('calendar');
+
+                                var calendar = new FullCalendar.Calendar(calendarEl, {
+                                    initialView: 'dayGridMonth',
+                                    headerToolbar: {
+                                        left: 'prev,next today',
+                                        center: 'title',
+                                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                                    },
+                                    events: data
+                                });
+
+                                calendar.render();
+                            });
+
+                            request.fail(function (jqXHR, textStatus) {
+                                alert("Request failed: " + textStatus);
+                            });
+                        });
 
 
                     },
@@ -82,36 +113,7 @@
 
     </script>
 </head>
-<!-- $(function () {
 
-var request = $.ajax({
-url: "/scoop/calendarView/calendar_insert",
-method: "GET",
-dataType: "json"
-});
-
-request.done(function (data) {
-console.log(data);
-
-var calendarEl = document.getElementById('calendar');
-
-var calendar = new FullCalendar.Calendar(calendarEl, {
-initialView: 'dayGridMonth',
-headerToolbar: {
-left: 'prev,next today',
-center: 'title',
-right: 'dayGridMonth,timeGridWeek,timeGridDay'
-},
-events: data
-});
-
-calendar.render();
-});
-
-request.fail(function (jqXHR, textStatus) {
-alert("Request failed: " + textStatus);
-});
-}); -->
 
 <body>
     <div id='calendar-container'>

@@ -1,9 +1,12 @@
 package com.example.scoop.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.scoop.auth.dto.SessionUser;
 import com.example.scoop.domain.Goal;
+import com.example.scoop.domain.Workspace;
 import com.example.scoop.service.GoalService;
+import com.example.scoop.service.WorkspaceService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,13 +27,19 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class GoalController {
 
-	private final HttpSession httpsession;
-
+	private static final String Workspace = null;
+	private final HttpSession httpSession;
 	@Autowired
 	private GoalService service;
 
 	@GetMapping("goal")
-	public String goal() {
+	public String goal(Model model) {
+		SessionUser user = (SessionUser) httpSession.getAttribute("user");
+		log.debug("email:{}", user.getEmail());
+		String email = user.getEmail();
+		ArrayList<Goal> goallist = service.selectOne1Goal();
+		log.debug("goallist:{}", goallist);
+		model.addAttribute("goallist", goallist);
 		return "/goalView/goal";
 	}
 
@@ -42,14 +53,30 @@ public class GoalController {
 		return "/goalView/goalgaip";
 	}
 
-	@PostMapping("insert")
-	public String insert(Goal goal) {
-		SessionUser user = (SessionUser) httpsession.getAttribute("user");
-		log.debug("목표 내용 :", goal);
+	@PostMapping("insertgoal")
+	public String insertgoal(Goal goal) {
+		SessionUser user = (SessionUser) httpSession.getAttribute("user");
+		log.debug("목표 내용 : {}", goal);
 		goal.setGcreator(user.getEmail());
-		log.debug("유저 내용 :", user.getEmail());
 		service.insertgoal(goal);
-		return "/goalView/goal";
+		return "redirect:/goalView/goal";
 	}
+
+	@GetMapping("goalvyu")
+	public String goalvyu() {
+		return "/goalView/goalvyu";
+	}
+
+	// @GetMapping("selectme")
+	// public String selectme(Model model) {
+	// SessionUser user = (SessionUser) httpSession.getAttribute("user");
+	// log.debug("email:{}", user.getEmail());
+	// String email = user.getEmail();
+	// ArrayList<Goal> goallist = service.selectOne1Goal();
+	// log.debug("result:{}", goallist);
+	// model.addAttribute("goallist", goallist);
+	//
+	// return "/goalView/goal";
+	// }
 
 }

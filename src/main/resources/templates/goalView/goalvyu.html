@@ -8,6 +8,8 @@
 		<link rel="stylesheet" th:href="@{/css/sidebar.css}">
 		<link rel="stylesheet" th:href="@{/css/goalmodel.css}">
 
+
+
 		<style>
 			* {
 				padding: 0;
@@ -162,8 +164,8 @@
 			function calendar() {
 				window.open("http://localhost:9500/scoop/calendarView/calendar1", "calendar_parent"
 					, "width=750, height=750, left=1500, top=350");
-			}
 
+			}
 
 		</script>
 	</head>
@@ -173,64 +175,68 @@
 			<a href="#" class="menu-bars" id="show-menu">
 				<img alt="sidebar" th:src="@{/img/menu.png}" width="30px">
 			</a>
-			<div style="font-size: 25px; margin-left: 2%;">[ 목표 ]
-				<div id="subb" style="width: 200px;">
-					<a id="tess" th:href="@{/goalView/teamgoal}">팀목표</a>
-					<a id="tess" th:href="@{/goalView/goal}">내목표</a>
-				</div>
-				<hr width="65%">
-			</div>
-			<div class=" navbar navbar-right" style="margin-left: 70%;">
-				<input type="text" placeholder="검색" id="searchbox">
-				<img th:src="@{/img/add_circle.png}" style="width: 30px">
-			</div>
 		</div>
 
-		<div style="margin-top: 1%; margin-left: 8%;">
-			<input type="text" placeholder="목표 제목을 적어주세요" id="gname"></input>
+		<div style="text-align: center;">
+			<div class="goalne"></div>
 		</div>
-		<div style="margin-top: 1%; margin-left: 8%;">
-			<div>
-				<input type="text" placeholder="목표 내용을 적어주세요" id="gtext"></input>
-				<a href="">수정</a>
-				<!-- <a th:href="|javascript:deleteBoard(${board.boardnum})|"></a> -->
-			</div>
-		</div>
-		<div style="margin-top: 40px; margin-left: 200px;">
-			<p style="font-size: 30px; font-weight: bold; ;">목표
-				<input type="button" class="btn-open-popup" value="+" style="font-size: 30px;">
-
-				<input type="button" value="기간" style="margin-left: 70%; font-size: 20px;">
-			</p>
-		</div>
-
-		<div>
-			<div class="timegoal"></div>
-
-		</div>
-
-
 
 
 		<div class="modal">
 			<div class="modal_body">
-				<form th:action="@{/goal/join}" method="post" onsubmit="return validation();">
+				<form th:action="@{/goalView/insertgoal}" id="insertform" name="insertform" method="post"
+					onsubmit="return validation();">
 					<h2>[ 목표 생성 ]</h2>
 					<br>
-					<div>제목 : <input type="text" id="tete" name="title" placeholder="제목을 입력하세요"></div>
+					<div>제목 : <input type="text" id="gname" name="gname" placeholder="제목을 입력하세요"></div>
 					<br>
 					<div>소유자 : <input type="text" id="uowner" name="uowner"></div>
 					<br>
 					<div>기간 : <input type="button" id="calender" name="calender" value="캘린더" onclick="calendar()"></div>
 					<br>
+					<div>
+						<div style="font-family: bold; font-size: 17px;">진행상황 :
+							<select name="category" style="width: 150px; height: 30px;">
+								<option value="0">0 : 진행상태</option>
+								<option value="1">1 : 위험</option>
+								<option value="2">2 : 기간지남</option>
+								<option value="3">3 : 완료</option>
+							</select>
+						</div>
+					</div>
+					<br>
 					<div>맴버 : <input type="text" id="gmember" name="gmember" placeholder="이름또는 이메일로 맴버 추가"></div>
 					<br>
 					<div>
-						<input type="submit" value="확인">
+						<input type="submit" value="확인" th:goal="@{insertgoal.insertgoal}"
+							th:onclick="test(this.getAttribute('goal'))">
 					</div>
 				</form>
 			</div>
 		</div>
+
+
+		<hr style="width: 100%; margin-top: 1%;">
+
+		<div style="width: 100%; font-size: 17px; font-weight: bold;">
+			<span style="margin-left: 10%;">이름</span>
+			<span style="margin-left: 20%;">기간</span>
+			<span style="margin-left: 40%;">진행상태</span>
+			<span style="margin-left: 10%;">소유자</span>
+		</div>
+		<form>
+
+			<div style="width: 100%;">
+				<span style="margin-left: 10%;"></span>
+				<span style="margin-left: 20%;"></span>
+				<span style="margin-left: 40%;"></span>
+				<span style="margin-left: 10%;"></span>
+			</div>
+		</form>
+
+
+
+
 
 		<nav id="nav-menu">
 			<ul class="nav-menu-items">
@@ -247,7 +253,7 @@
 					<li class="nav-text"><a th:href="@{/}"><i class="nav-icon"></i>메인</a></li>
 					<li class="nav-text"><a href="#"><i class="nav-icon"></i>내 작업</a></li>
 					<li class="nav-text"><a href="#"><i class="nav-icon"></i>프로젝트 목록</a></li>
-					<li class="nav-text"><a th:href="@{/goal}"><i class="nav-icon"></i>목표</a></li>
+					<li class="nav-text"><a th:href="@{/goalView/goal}"><i class="nav-icon"></i>목표</a></li>
 				</div>
 				<hr>
 				<div class="nav-section2">
@@ -263,8 +269,8 @@
 			</ul>
 		</nav>
 		<script th:src="@{/js/sidebar.js}"></script>
+		<!-- model 창을 띄우기 -->
 		<script th:src="@{/js/goalmodel.js}"></script>
-
 	</body>
 
 	</html>

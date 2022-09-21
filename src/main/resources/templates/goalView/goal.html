@@ -10,6 +10,7 @@
 
 
 
+
 		<style>
 			* {
 				padding: 0;
@@ -30,9 +31,8 @@
 			}
 
 			body {
-				background-image: url("https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MjRfNzAg%2FMDAxNjU4NTg5Njg2Njcz.12YsjbC98JoY-ES4RUZzzsJJAi09twC3rgPTNylO3Ywg.k5NGotQqqruQ1dv1XdqEzcoYPbvx3UHAY7qR3dna0YIg.JPEG.heng2log%2F1658589685856.jpg&type=sc960_832");
 				background-size: cover;
-				background-color: infotext;
+				background-color: skyblue;
 
 			}
 
@@ -161,13 +161,19 @@
 		</style>
 		<meta charset="UTF-8">
 		<title>Goal</title>
+
 		<script>
 			function calendar() {
 				window.open("http://localhost:9500/scoop/calendarView/calendar1", "calendar_parent"
 					, "width=750, height=750, left=1500, top=350");
-
 			}
+			function calendar11() {
+				window.open("http://localhost:9500/scoop/calendarView1/calendar11", "calendar_parent"
+					, "width=750, height=750, left=1500, top=350");
+			}
+
 		</script>
+
 	</head>
 
 	<body>
@@ -180,12 +186,16 @@
 					<a id="tess" th:href="@{/goalView/teamgoal}">팀목표</a>
 					<a id="tess" th:href="@{/goalView/goal}">내목표</a>
 				</div>
-				<hr style="width:65%;">
+				<div>
+					<input type="button" id="calender11" name="calender11" value="캘린더" onclick="calendar11()">
+				</div>
 			</div>
-			<div class=" navbar navbar-right" style="margin-left: 70%;">
-				<input type="text" placeholder="검색" id="searchbox">
-				<img th:src="@{/img/add_circle.png}" style="width: 30px">
-			</div>
+			<hr style="width:65%;">
+		</div>
+		<div class=" navbar navbar-right" style="margin-left: 70%;">
+			<input type="text" placeholder="검색" id="searchbox">
+			<img th:src="@{/img/add_circle.png}" style="width: 30px">
+		</div>
 		</div>
 		<div style="margin-top: 1%; margin-left: 8%;">
 			<form th:action="@{/goal/selectcal}" method="post" onsubmit="return validation();"> //만들어야함
@@ -210,12 +220,11 @@
 
 		<div class="modal">
 			<div class="modal_body">
-				<form th:action="@{/goalView/insert}" id="insertform" name="insertform" method="post"
+				<form th:action="@{/goalView/insertgoal}" id="insertform" name="insertform" method="post"
 					onsubmit="return validation();">
 					<h2>[ 목표 생성 ]</h2>
 					<br>
-					<div>제목 : <input type="text" id="tete" name="title" placeholder="제목을 입력하세요"></div>
-
+					<div>제목 : <input type="text" id="gname" name="gname" placeholder="제목을 입력하세요"></div>
 					<br>
 					<div>소유자 : <input type="text" id="uowner" name="uowner"></div>
 					<br>
@@ -235,7 +244,8 @@
 					<div>맴버 : <input type="text" id="gmember" name="gmember" placeholder="이름또는 이메일로 맴버 추가"></div>
 					<br>
 					<div>
-						<input type="submit" value="확인">
+						<input type="submit" value="확인" th:goal="@{insertgoal.insertgoal}"
+							th:onclick="test(this.getAttribute('goal'))">
 					</div>
 				</form>
 			</div>
@@ -244,18 +254,53 @@
 
 		<hr style="width: 100%; margin-top: 1%;">
 
-		<div style="width: 100%; font-size: 17px; font-weight: bold;">
-			<span style="margin-left: 10%;">이름</span>
-			<span style="margin-left: 20%;">기간</span>
-			<span style="margin-left: 40%;">진행상태</span>
-			<span style="margin-left: 10%;">소유자</span>
-		</div>
-		<div style="width: 100%;">
-			<span style="margin-left: 10%;"></span>
-			<span style="margin-left: 20%;"></span>
-			<span style="margin-left: 40%;"></span>
-			<span style="margin-left: 10%;"></span>
-		</div>
+		<style>
+			.gilta {
+				width: 100%;
+				height: 20px;
+				text-align: center;
+				font-size: 20px;
+			}
+
+			.goalne {
+				margin-top: 15px;
+
+			}
+		</style>
+
+		<table>
+			<tr>
+				<th id="gil" style="width: 10%;">[ 제목 ]</th>
+				<th id="gil" style="width: 30%;">[ 기간 ]</th>
+				<th id="gil" style="width: 55%;">[ 진행상태 ]</th>
+				<th id="gil" style="width: 80px;">[ 소유자 ]</th>
+			</tr>
+			<tr th:each="goallist: ${goallist}" class="gilta">
+				<div>
+					<table>
+						<form th:action="@{/goalView/goalvyu}" id="list" name="list" method="post"
+							onsubmit="return validation();">
+							<div class="goalne">
+								<td th:text="${goallist.gname}" class="goalne" id="gname" name="gname"
+									style="width: 300px;">
+								</td>
+								<div>
+									<td th:text="|${goallist.calendar}|" class="goalne" id="gnal" name="gnal"
+										style="width: 300px;">
+									</td>
+								</div>
+								<td th:text="${goallist.gstatus}" class="goalne" id="gstatus" name="gstatus"
+									style="width: 300px;">
+								</td>
+								<td th:text="${goallist.gcreator}" class="goalne" id="gcreator" name="gcreator"
+									style="width: 300px;"></td>
+								</td>
+								</td>
+						</form>
+					</table>
+				</div>
+			</tr>
+		</table>
 
 
 
@@ -276,7 +321,7 @@
 					<li class="nav-text"><a th:href="@{/}"><i class="nav-icon"></i>메인</a></li>
 					<li class="nav-text"><a href="#"><i class="nav-icon"></i>내 작업</a></li>
 					<li class="nav-text"><a href="#"><i class="nav-icon"></i>프로젝트 목록</a></li>
-					<li class="nav-text"><a th:href="@{/goal}"><i class="nav-icon"></i>목표</a></li>
+					<li class="nav-text"><a th:href="@{/goalView/goal}"><i class="nav-icon"></i>목표</a></li>
 				</div>
 				<hr>
 				<div class="nav-section2">
@@ -291,6 +336,7 @@
 				</div>
 			</ul>
 		</nav>
+
 		<script th:src="@{/js/sidebar.js}"></script>
 		<!-- model 창을 띄우기 -->
 		<script th:src="@{/js/goalmodel.js}"></script>

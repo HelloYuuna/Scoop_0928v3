@@ -154,7 +154,6 @@
 		}
 	</style>
 
-	=======
 
 	<head>
 		<meta charset="UTF-8">
@@ -164,10 +163,10 @@
 		<link rel="stylesheet" th:href="@{/css/sidebar.css}">
 		<link rel="stylesheet" th:href="@{/css/header.css}">
 		<link rel="stylesheet" th:href="@{/css/newWorkspace.css}">
+		<!-- <script th:src="@{/js/home.js}"></script> -->
 		<script th:src="@{/js/header.js}"></script>
-		<script th:src="@{/js/home.js}"></script>
 		<script th:src="@{/js/jquery-3.6.0.js}"></script>
-		>>>>>>> 4ad661947f353c09fd1d0df22c53577ec2bc0b32
+
 	</head>
 
 	<body>
@@ -265,14 +264,16 @@
 					<li class="nav-text"><a th:href="@{/taskKanbanBoard}"><i class="nav-icon"></i>내 작업</a></li>
 					<li class="nav-text"><a th:href="@{/projectView/project}"><i class="nav-icon"></i>프로젝트 목록</a>
 					</li>
-					<li class="nav-text"><a th:href="@{/goalView/goal}"><i class="nav-icon"></i>목표</a></li>
+					<li class="nav-text"><a th:href="@{/goalView/goal}"><i class="nav-icon"></i>목표</a>
+					</li>
 
 				</div>
+
 				<hr>
 				<div class="nav-section2">
-					<!-- <li class="nav-text" th:wsnum="${latelyWorkspace.wsid}" th:onclick="workspaceHome(this.getAttribute('wsnum'))">
-					<i class="nav-icon"><span th:text="${latelyWorkspace.wsname}"></span></i><a th:href="@{/workspaceHome}">
-				</li> -->
+					<!--<li class="nav-text" th:wsnum="${latelyWorkspace.wsid}" th:onclick="workspaceHome(this.getAttribute('wsnum'))">
+				 <i class="nav-icon"><span th:text="${latelyWorkspace.wsname}"></span></i><a th:href="@{/workspaceHome}">
+				</li>  -->
 					<li class="nav-text">
 						<i class="nav-icon"><a th:href="@{/workspaceHome}">워크스페이스</a></i>
 					</li>
