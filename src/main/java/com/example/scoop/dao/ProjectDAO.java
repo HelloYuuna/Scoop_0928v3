@@ -45,4 +45,12 @@ public interface ProjectDAO {
 
 	public int memberupdate(HashMap<String, Object>map);
 
+	public int updateproject(Project project);
+
+	public int deleteproject(Project project);
+//
+//	public int insertMember(User user);
+//
+//	public User findByName(String member);
+
 }

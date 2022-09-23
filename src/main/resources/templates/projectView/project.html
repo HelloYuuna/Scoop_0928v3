@@ -9,7 +9,7 @@
 $(document).ready(function(){
 	$('#pnotice').keyup(insert);
 	$('#ptext').keyup(insert);
-	$('#memberselect').click(set);
+	$('#mmm').change(set);
 });
 
 function insert(){
@@ -32,32 +32,63 @@ function insert(){
 }
 
 function set(){
-	let val = $('#val').val();
-	$('#memberlist').html(val);
+	//select 선택시 
+	let member = $('#mmm').val();
+	console.log(member); //option에서 선택한 값 
+
+ 	let val  = $('#mmm').val(); //option의 값
+	//만일 선택을 하면 그 선택 창 안에 
+	$('#mlist').html(val);
 	
+	//프로젝트 넘버
 	let pnum = $('#pnum').val();
 	
-	$.ajax({
+	$.ajax ({
+		url: 'insertmember' ,
+		type: 'post',
+		data: { member:member } ,
+		success: function() {
+			
+		} ,
+		error: function() {
+
+		}
+	})
+	
+	/* $.ajax({
 		url: 'insertmember',
 		type: 'post',
-		data: {str:$('#memberlist').html(), pnum:pnum},
-		success: function(){
+ 		data: {str:$('#mlist').html(), pnum:pnum},
+		success: function(member){
+			$('#mlist').html(member);
+			
+			
 			//alert('되긴함');
 			//$(input).val(ob);
 		},
 		error: function(){
 			alert('실패');
 		}
-	});
+	});  */
 	
 }
 
+function clickcheck(){
+	onfocus="this.placeholder=''";
+	
+}
 
+function deleteProject(num){
+	if(confirm('해당 프로젝트를 삭제하시겠습니까?')){	
+		location.href = 'deleteproject?pnum='+num;
+	}
+
+}
 
 
 </script>
 <link rel="stylesheet" th:href="@{/css/sidebar.css}">
-
+<link rel="stylesheet" th:href="@{/css/projectupdatemodal.css}">
 <style>
 
 	*{padding:0;margin:0}
@@ -83,13 +114,32 @@ function set(){
 	
 	#pnotice{
 		resize: none;
-		margin-right: 1050px;
-		border-radius: 50px 50px;
-		border-collapse: collapse;
-		/* border: solid;
-		border-width: thin; */
-		background-color: #C0C6CC;
+		width: 300px;
+		margin-right: 800px;
+		font-size:20px;
+		border-radius: 12px 12px;
+		/* border-collapse: collapse; */
+		padding: 2px;
+		border: solid;
+		border-width: thin;
+		background-color: white;
 		/* background-color: rgba( 255, 255, 255, 0.0 ); */
+	}
+	
+	#projectdelete{
+		width: 300px;
+		height: 50px;
+		padding: 2px;
+		border: solid;
+		border-width: thin;
+		background-color: white;
+		border-radius: 10px 10px;
+		margin-bottom: 10px;
+		
+	}
+	
+	#deletebox{
+		display: inline-block;
 	}
 	
 	#sub{
@@ -110,12 +160,14 @@ function set(){
 		resize: none;
 		width: 575px;
 		height: 400px;
-		/* border: solid;
-		border-width: thin; */
+		font-size:15px;
+		border: solid;
+		border-width: thin;
 		border-radius: 10px 10px;
-		border-collapse: collapse;
+		/* border-collapse: collapse; */
+		padding: 2px;
 		margin-right: 25px;
-		background-color:#C0C6CC;
+		background-color:white;
 		/* background-color: rgba( 255, 255, 255, 0.0 ); */
 	
 	}
@@ -127,16 +179,16 @@ function set(){
 	}
 	
 	#member{
+		padding: 18px;
 		width: 575px;
 		height: 400px;
-		/* border: solid;
-		border-width: thin; */
-		border-collapse: collapse;
-		background-color: #526A80;
+		border: solid;
+		border-width: thin;
+		/* border-collapse: collapse; */
+		background-color: white;
 		/* background-color: rgba( 255, 255, 255, 0.0 ); */
 		border-radius: 10px 10px;
 		margin-left: 25px;
-		
 	
 	
 	}
@@ -145,12 +197,13 @@ function set(){
 	}
 	
 	#state{
+		padding: 18px;
 		width: 1200px;
 		height: 400px;
-		/* border: solid;
-		border-width: thin; */
-		border-collapse: collapse;
-		background-color: #A3D4FF;
+		border: solid;
+		border-width: thin;
+		/* border-collapse: collapse; */
+		background-color: white;
 		/* background-color: rgba( 255, 255, 255, 0.0 ); */
 		border-radius: 10px 10px;
 		margin: 50px;
@@ -165,11 +218,59 @@ function set(){
 	
 	}
 	
-	memberselect{
+	#memberselect{
 		resize: none;
 	
 	}
-
+	
+	#tbl3{
+		margin-top: 50px;
+		margin-left:auto; 
+    	margin-right:auto;
+		text-align: center;
+		padding: 5px;
+	
+	}
+	#pname{
+		border: none;
+		float: left;
+		width: 250px;
+		height: 30px;
+		border-radius: 8px 8px;
+		
+	}
+	#pmember{
+		border: none;
+		float: left;
+		width: 250px;
+		height: 30px;
+		border-radius: 8px 8px;
+	}
+	#updateproject{
+		text-align: center;
+		margin-top: 20px;
+	}
+	#updatebtn{
+		margin: 30px auto;
+		text-align: center;
+		width: 180px;
+		height: 30px;
+		border-radius: 10px 10px;
+		border: 0;
+		outline: 0;
+		color: #526A80;
+		background-color: #C0C6CC;
+	
+	}
+	#updatebtn:hover{
+		background-color: aliceblue;
+		font-weight: 700;
+	}
+	
+	#updatetitle:hover{
+		color: #526A80;
+		font-weight: 700;
+	}
 
 </style>
 
@@ -187,7 +288,7 @@ function set(){
 		</div>
 	</div>
 	
-	<div id="title"><p>프로젝트</p></div>
+	<div id="title"><h2 th:text="${input.pname}" th:href="@{/projectView/projectupdate(pnum=${input.pnum})}" class="updatetitle" id="updatetitle"></h2></div>
 	
 	<nav id="nav-menu">
 		<ul class="nav-menu-items">
@@ -218,19 +319,21 @@ function set(){
 		<div id="mes">
 			<div>
 			<!-- 폼으로 보내는게 맞는데... --><!-- [[${input}]] -->
-				<textarea id="pnotice" name="pnotice" th:text="${input.pnotice}"></textarea>
+				<div><textarea id="pnotice" name="pnotice" th:text="${input.pnotice}" placeholder="프로젝트 협업 방식" onsubmit="return clickcheck"></textarea>
+				<span id="deletebox"><a th:href="|javascript:deleteProject(${input.pnum})|" id="projectdelete">프로젝트 삭제</a></span></div>
 				<input type="hidden" id="pnum" name="pnum" th:value="${input.pnum}">
+			
 			</div>
 		</div>
 		<div id="sub">
 			<div>
-				<textarea id="ptext" name="ptext" th:text="${input.ptext}"></textarea>
+				<textarea id="ptext" name="ptext" th:text="${input.ptext}" placeholder="수행할 업무를 정하고 중요한 정보를 추가하세요." onsubmit="return clickcheck"></textarea>
 			</div>
 			<div id="member">
-				<p>프로젝트 멤버</p>
+				<h3>프로젝트 멤버</h3>
 				
 				<div id="list">
-					<select id="memberselect" name="memberselect">
+					<select id="mmm" name="memberselect">
 						<option value="">선택</option>
 						<option th:each="val: ${memberlist}"
 							th:value="${val.name}" 
@@ -239,10 +342,10 @@ function set(){
 					</select>
 				</div>
 				
-				<div id="memberlist" th:text="${choiceMember}">
+			<div id="mlist" th:text="${choiceMember}">
+						
 					
-				
-				</div>
+			</div> 
 				
 			</div>
 		</div>
@@ -250,12 +353,45 @@ function set(){
 		
 		<div id="sub2">
 			<div id="state">
-				<p>진행 및 상태</p>
+				<h3>진행 및 상태</h3>
 			</div>
 		</div>
 		
 	</form>
 	
 	</div>
+	
+	
+	<div class="projectupdatemodal">
+		<div class="modalmodalmodal">
+			<h2 id="updateproject">프로젝트 수정</h2>
+			<form th:object="${input}" th:action="@{/projectView/projectupdate}" method="post" onsubmit="return check()">
+				<input type="hidden" name="pnum" id="pnum" th:value="${input.pnum}">
+			
+			<table id="tbl3">
+				
+				<tr id="updatename">
+					<th>프로젝트 이름 수정</th>
+					<td><input type="text" name="pname" id="pname" th:value="${input.pname}"></td>
+				</tr>
+				
+				<tr id="updatemember">
+					<th>참여 멤버 수정</th>
+					<td><input type="text" name="pmember" id="pmember" th:value="${input.pmember}"></td>
+				</tr>
+				
+				<tr id="updatebutton">
+					<th colspan="2" id="btn"><input type="submit" value="수정" id="updatebtn"></th>
+				</tr>
+			
+			</table>
+			
+			</form>
+		</div>
+	
+	</div>
+	
+	<script th:src="@{/js/projectupdatemodal.js}"></script>
+	
 </body>
 </html>

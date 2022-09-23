@@ -7,6 +7,51 @@
 	<title>Insert title here</title>
 	<link rel="stylesheet" th:href="@{/css/home.css}">
 	<link rel="stylesheet" th:href="@{/css/sidebar.css}">
+	<link rel="stylesheet" th:href="@{/css/projectmodal.css}">
+	<script th:src="@{/js/jquery-3.6.0.js}"></script>
+	
+	<script>
+	$(document).ready(function(){
+		$('#mmm').change(asd);
+		
+		
+	})
+	
+
+		function check(){
+			let pname = document.getElementById('pname');
+			
+			if(pname.value == ''){
+				alert('프로젝트 제목을 입력해주세요.');
+				return false;
+			}
+		
+		}
+		
+		function clickcheck(){
+			onfocus="this.placeholder=''";
+			
+			
+		}
+		let memberNameList = '';
+		let listCount = 0;
+
+		function asd() {
+			//alert($('#mmm').val());
+			if(listCount == 0) {
+				memberNameList += $('#mmm').val();
+				listCount++;
+			} else {
+				memberNameList += ', ' + $('#mmm').val();			
+			}
+			
+			//console.log(memberNameList);
+			$('#pmember').html(memberNameList);			
+			$('#pmber').val(memberNameList);
+		}
+		
+	</script>
+	
 	<style>
 		* {
 			padding: 0;
@@ -107,6 +152,7 @@
 			background-color: #526A80;
 			background-color: rgba(255, 255, 255, 1.0);
 			border-radius: 10px 10px;
+			position: relative;
 
 		}
 
@@ -153,6 +199,142 @@
 			font-size: 16px;
 			background-color: white;
 		}
+		
+		
+		#createproject{
+			background-color: #C0C6CC;
+		    /* padding: 15px 15px; */
+		    border: 0;
+		    outline: 0;
+		    padding-top: 2px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    color: #526A80;
+		    border-radius: 10px 10px;
+		    width: 180px;
+		    height: 30px;
+		    margin: 2px;
+		    position: absolute; 
+		    clear: right;
+		    float: left;
+		    right: 0;
+		    bottom: 0px;
+		}
+		
+		#createproject:hover {
+			/* color: white; */
+			background-color: aliceblue;
+			font-weight: 700;
+		}
+		
+		#pplist{
+			display: inline-flex;
+		}
+		
+		/* #tbl{
+			display: vertical-align;
+		} */
+		/* #p1{
+
+		} */
+		
+		#tabled {
+			background-color: aliceblue;
+		    padding: 15px 25px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    color: #526A80;
+		    overflow:auto;
+		    border-radius: 10px 10px;
+		   /*  width: 150px;
+		    height: 50px; */
+		    margin: 1px;
+		}
+		#tabled:hover{
+			/* background-color:#C0C6CC; */
+			font-weight: 700;
+		}
+		
+		
+		#projecttitle{
+			margin-top: 20px;
+		
+		}
+		
+		#tbl2{
+			margin-top: 50px;
+			margin-left:auto; 
+    		margin-right:auto;
+			text-align: center;
+			
+		}
+		#pname{
+			padding: 5px;
+			border: none;
+			float: left;
+			width: 250px;
+			height: 30px;
+			border-radius: 8px 8px;
+			
+		}
+		#pnotice{
+			padding: 5px;
+			border: none;
+			float: left;
+			width: 250px;
+			height: 30px;
+			border-radius: 8px 8px;
+		}
+		#ptext{
+			padding: 5px;
+			border: none;
+			float: left;
+			border-radius: 10px 10px;
+		}
+		
+		#pname{
+			margin-left:10px;
+			margin-bottom:10px;
+			border-collapse: collapse;
+			border: solid;
+			border-width: thin;
+		}	
+		
+		#pnotice{
+			margin-left:10px;
+			margin-bottom:10px;
+			border-collapse: collapse;
+			border: solid;
+			border-width: thin;
+		}
+		
+		#ptext{
+			margin-left:10px;
+			margin-bottom:10px;
+			border-collapse: collapse;
+			border: solid;
+			border-width: thin;
+		}	
+		
+		#btn3{
+			margin: 30px auto;
+			text-align: center;
+			width: 180px;
+		    height: 30px;
+			border-radius: 10px 10px;
+			border: 0;
+		    outline: 0;
+		    color: #526A80;
+			background-color: #C0C6CC
+		}
+		#btn3:hover{
+			background-color: aliceblue;
+			font-weight: 700;
+		}
+			
+
 	</style>
 
 </head>
@@ -203,7 +385,6 @@
 
 	<div>
 		<!-- 검색태그 & 내정보 -->
-		<<<<<<< HEAD <!-- 상세정보 (가운데 상단) -->
 
 			<div class="center">
 				<div class="today-date">
@@ -220,69 +401,90 @@
 						<a href="/scoop/oauth2/authorization/google" class="btn btn-success active" role="button">구글로
 							로그인!</a>
 					</span>
-					=======
 
-					<!-- 상세정보 (가운데 상단) -->
-					<div class="center">
-						<div class="today-date">
-							<h2>[[${month}]] 월 [[${dayOfMonth}]] 일 [[${dayOfWeek}]]</h2>
 
-						</div>
-
-						<div class="login-area">
-							<span th:if="${userName != null}">
-								<h1><span th:text="${userName}"></span> 님 안녕하세요 </h1><br>
-								<a th:href="@{/logout}" class="btn btn-info active" role="button">로그아웃</a>
-							</span>
-							<span th:if="${userName == null}">
-								<a href="/scoop/oauth2/authorization/google" class="btn btn-success active"
-									role="button">구글로 로그인!</a>
-							</span>
+		<div id="tess">
+			<div id="sub">
+				<div id="goal">
+					<h3 id="g1">내 목표</h3>
+				</div>
+				<div id="project">
+					<div>
+						<h3 id="p1">프로젝트</h3>
+					</div>
+					
+					<div>
+						<div id="tbl">
+							<div th:each="pplist: ${projectlist}" class="pplist" id="pplist">
+								<div><a th:text="${pplist.pname}"
+									th:href="@{/projectView/project(pnum=${pplist.pnum})}" id="tabled"></a></div>
+							</div>
 						</div>
 					</div>
-
-					<div id="tess">
-						<div id="sub">
-							<div id="goal">
-								<p id="g1">내 목표</p>
-							</div>
-							<div id="project">
-								<div>
-									<p id="p1">프로젝트</p>
-								</div>
-								<div>
-									<p><a th:href="@{/projectView/createproject}">프로젝트 생성</a></p>
-								</div>
-								<div>
-									<table>
-										<tr th:each="pplist: ${projectlist}" class="pplist" id="pplist">
-											<td><a th:text="${pplist.pname}"
-													th:href="@{/projectView/project(pnum=${pplist.pnum})}"></a></td>
-										</tr>
-									</table>
-								</div>
-								>>>>>>> 2496192dc7085b460c3de5ffbdb79450693dc326
-							</div>
-						</div>
-
-						<div id="tess">
-							<div id="sub">
-								<div id="goal">
-									<p id="g1">내 목표</p>
-								</div>
-								<div id="project">
-									<p id="p1">프로젝트</p>
-								</div>
-							</div>
-							<div id="sub2">
-								<div id="user">
-									<p id="u1">사용자</p>
-								</div>
-							</div>
-						</div>
-
+					
+					<div>
+						<input type="button" id="createproject" class="createproject" value="프로젝트 생성">
+						<!-- <p><a th:href="@{/projectView/createproject}">프로젝트 생성</a></p> -->
 					</div>
-
+					
+				</div>
+			</div>
+			<div id="sub2">
+				<div id="user">
+					<h3 id="u1">사용자</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+		<div class="projectmodal">
+			<div class="modalmodal">
+				<h2 id="projecttitle">프로젝트 생성</h2>
+					<form th:action="@{/projectView/createproject}" method="post" onsubmit="return check()">
+										
+					<table id="tbl2">
+						<tr id="inputname">
+							<th><input type="text" name="pname" id="pname" placeholder="프로젝트 이름 입력" onsubmit="return clickcheck"></th>
+						</tr>
+											
+						<tr id="selectmember">
+							<th>
+								<select id="mmm" name="memberselect">
+									<option th:each="val: ${ulist}"
+										th:value="${val.name}" 
+										th:utext="${val.name}">
+									</option>
+								</select>
+							
+							</th>
+						</tr>
+						
+						<tr>
+							<th>
+								<div id="pmember">
+									<input type="hidden" name="pmember" id="pmber">
+								</div>
+							</th>
+						</tr>
+											
+						<tr id="inputbtn">
+							<th colspan="2" id="btn"><input type="submit" value="프로젝트 생성" id="btn3"></th>
+												
+						</tr>
+										
+					</table>
+										
+					</form>
+				</div>																							
+			</div>
+								
+		</div>
+		</div>
+					
+	<script th:src="@{/js/projectmodal.js}"></script>
+	
+	
+	
 </body>
 
 </html>

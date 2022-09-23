@@ -9,9 +9,13 @@ import org.springframework.stereotype.Service;
 import com.example.scoop.dao.ProjectDAO;
 import com.example.scoop.domain.Project;
 import com.example.scoop.domain.User;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.example.scoop.domain.Project;
 
 @Service
+@Slf4j
 public class ProjectServiceImpl implements ProjectService {
 
 	@Autowired
@@ -112,6 +116,31 @@ public class ProjectServiceImpl implements ProjectService {
 		int result = projectdao.memberupdate(map);
 
 		return result;
+	}
+	
+	public int updateproject(Project project) {
+		int result = projectdao.updateproject(project);
+		
+		return result;
+		
+	}
+	
+	public int deleteproject(Project project) {
+		
+		int result = projectdao.deleteproject(project);
+		return result;
+		
+	}
+
+	@Override
+	public int insertMember(String member) {
+		log.debug("member :{}", member);
+		
+//		User user = projectdao.findByName(member);
+//		log.debug("찾아온 유저 정보: {}", user);
+		
+//		return projectdao.insertMember(user);
+		return 0;
 	}
 
 }

@@ -56,8 +56,9 @@ public class ProjectController {
 		log.debug("전달될 멤버:{}",member);
 		model.addAttribute("choiceMember",member);
 		return "projectView/project";
+		
 	}
-
+	
 	@GetMapping("/getmember")
 	public String getlist(Model model) {
 		ArrayList<User> list = service.selectMember();
@@ -77,21 +78,63 @@ public class ProjectController {
 	}
 
 	@PostMapping("createproject")
-	public String createproject(
-	//@AuthenticationPrincipal UserDetails user
-			 Project pproject) {
-//		String id = user.getUsername();
-//		pproject.setUemail(id);
+	public String createproject(Project pproject) {
 		SessionUser user = (SessionUser) httpSession.getAttribute("user");
 		log.debug("가져온 유저 user:{}", user);
 		pproject.setUemail(user.getEmail());
-		pproject.setPmember(user.getName());
+		//project.setPmember(user.getName());
 		pproject.setPowner(user.getEmail());
+		//String id = user.getName();
+		String id = user.getEmail();
+		pproject.setUemail(id);
 		log.debug("전달 될 값:{}", pproject);
 		int result = service.projectInsert(pproject);
 		log.debug("전달 결과:{}", result);
 		return "redirect:/";
 	}
 
+	@GetMapping("deleteproject")
+	public String deleteproject(int pnum, Project project) {
+		Project pproject = service.projectread(pnum);
+		if(pproject == null) {
+			log.debug("정보가 불일치 합니다.");
+			return "redirect:/";
+		}
+		
+		log.debug("정보가 일치 합니다.");
+		
+		int result = service.deleteproject(project);
+		return "redirect:/";
+	}
 
+	@GetMapping("projectupdate")
+	public String projectupdate() {
+		return "/projectView/projectupdate";
+	}
+	
+	
+	@PostMapping("projectupdate")
+	public String projectupdate(Project project) {
+		SessionUser user = (SessionUser) httpSession.getAttribute("user");
+		log.debug("가져온 유저 user:{}", user);
+		project.setUemail(user.getEmail());
+		project.setPmember(user.getName());
+		//project.setPowner(user.getEmail());
+		log.debug("전달 될 값:{}", project);
+		int result = service.updateproject(project);
+		if(result <1) {
+			log.debug("수정 실패");	
+		} else {
+			log.debug("수정 성공");
+		}
+		return "redirect:/";
+	}
+	
+
+	
+	
+	
+	
+	
+	
 }
