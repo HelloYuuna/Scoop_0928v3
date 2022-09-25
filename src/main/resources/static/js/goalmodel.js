@@ -22,21 +22,21 @@ modal.addEventListener('click', (event) => {
     }
 });
 
-btnOpenPopup1.addEventListener('click', () => {
-    modal.classList.toggle('show');
+// btnOpenPopup1.addEventListener('click', () => {
+//     modal.classList.toggle('show');
 
-    if (modal.classList.contains('show')) {
-        body.style.overflow = 'hidden';
-    }
-});
+//     if (modal.classList.contains('show')) {
+//         body.style.overflow = 'hidden';
+//     }
+// });
 
-modal1.addEventListener('click', (event) => {
-    if (event.target === modal) {
-        modal.classList.toggle('show');
+// modal1.addEventListener('click', (event) => {
+//     if (event.target === modal) {
+//         modal.classList.toggle('show');
 
-        if (!modal.classList.contains('show')) {
-            body.style.overflow = 'auto';
-        }
-    }
-});
+//         if (!modal.classList.contains('show')) {
+//             body.style.overflow = 'auto';
+//         }
+//     }
+// });
 

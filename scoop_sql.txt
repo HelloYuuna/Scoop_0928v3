@@ -41,3 +41,16 @@ VALUES
 select * from scoop_goal;
 
 
+CREATE TABLE calendar
+(
+    title VARCHAR2(100),                                                                 --제목
+    text VARCHAR2(500),                                                            --내용
+    star VARCHAR2(50),                                                  --시작 날짜
+    end VARCHAR2(50),                                                         --종료일
+    startday VARCHAR2(50),                                                       --시작 시간
+    endday VARCHAR2(50),                                                        --종료 시간
+    allday varchar2(50),                                                        --전체시간
+    wsid NUMBER references scoop_workspace(wsid)     --워크스페 넘버(시퀀스)
+);
+drop table calendar;
+

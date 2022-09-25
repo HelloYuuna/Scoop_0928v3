@@ -36,10 +36,14 @@ public class GoalController {
 	public String goal(Model model) {
 		SessionUser user = (SessionUser) httpSession.getAttribute("user");
 		log.debug("email:{}", user.getEmail());
+		log.debug("wsid:{}", httpSession.getAttribute("wsid"));
 		String email = user.getEmail();
 		ArrayList<Goal> goallist = service.selectOne1Goal();
+		int wsid = goallist.get(0).getWsid();
+		model.addAttribute("wsid", wsid);
 		log.debug("goallist:{}", goallist);
 		model.addAttribute("goallist", goallist);
+		log.debug("goallist:{}", wsid);
 		return "/goalView/goal";
 	}
 
@@ -66,17 +70,5 @@ public class GoalController {
 	public String goalvyu() {
 		return "/goalView/goalvyu";
 	}
-
-	// @GetMapping("selectme")
-	// public String selectme(Model model) {
-	// SessionUser user = (SessionUser) httpSession.getAttribute("user");
-	// log.debug("email:{}", user.getEmail());
-	// String email = user.getEmail();
-	// ArrayList<Goal> goallist = service.selectOne1Goal();
-	// log.debug("result:{}", goallist);
-	// model.addAttribute("goallist", goallist);
-	//
-	// return "/goalView/goal";
-	// }
 
 }

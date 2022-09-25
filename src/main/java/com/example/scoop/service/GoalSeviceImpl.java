@@ -30,31 +30,25 @@ public class GoalSeviceImpl implements GoalService {
         ArrayList<Goal> returnGList = new ArrayList<Goal>();
 
         for (Goal goal : result) {
-        	log.debug("처음값 : {}" ,goal);
-            if (goal.getGstartdate() != "" &&  goal.getGenddate() != "" &&
-            		goal.getGstartdate() != null &&  goal.getGenddate() != null) {
+            log.debug("처음값 : {}", goal);
+            if (goal.getGstartdate() != "" && goal.getGenddate() != "" &&
+                    goal.getGstartdate() != null && goal.getGenddate() != null) {
                 String goal1 = goal.getGstartdate() + "~" + goal.getGenddate();
                 goal.setCalendar(goal1);
                 returnGList.add(goal);
                 log.debug("Calendar1 : {}", goal);
                 result = returnGList;
-            }else if(goal.getGstartdate() == "" ||  goal.getGenddate() == ""&&
-            		goal.getGstartdate() == null ||  goal.getGenddate() == null) {
-            	String goal1 = "null";
-            	goal.setCalendar(goal1);
-            	returnGList.add(goal);
-                 log.debug("Calendar2 : {}", goal);
-                 result = returnGList;
+            } else if (goal.getGstartdate() == "" || goal.getGenddate() == "" &&
+                    goal.getGstartdate() == null || goal.getGenddate() == null) {
+                String goal1 = "";
+                goal.setCalendar(goal1);
+                returnGList.add(goal);
+                log.debug("Calendar2 : {}", goal);
+                result = returnGList;
             }
-            
+
         }
         return result;
     };
-
-    // @Override
-    // public ArrayList<Goal> selectme() {
-    // ArrayList<Goal> result = boardDAO.selectme();
-    // return result;
-    // };
 
 }
