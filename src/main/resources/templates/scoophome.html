@@ -13,19 +13,29 @@
 	<script>
 	$(document).ready(function(){
 		$('#mmm').change(asd);
-		
-		
+			
 	})
 	
-
 		function check(){
 			let pname = document.getElementById('pname');
-			
+			let pmember = document.getElementById('pmember').innerHTML;
+			//alert(pmember);
 			if(pname.value == ''){
 				alert('프로젝트 제목을 입력해주세요.');
 				return false;
 			}
-		
+			
+			if(pname.length<15){
+				alert('제목은 15자리 이하로 입력하세요.')
+				return false;
+			}
+			
+			if(pmember == ''){
+				alert('프로젝트에 참여 할 멤버를 선택해주세요.');
+				return false;
+			}
+			
+			
 		}
 		
 		function clickcheck(){
@@ -46,8 +56,9 @@
 			}
 			
 			//console.log(memberNameList);
-			$('#pmember').html(memberNameList);			
-			$('#pmber').val(memberNameList);
+			$('#pmember').html(memberNameList); //이곳의 div 칸에다가 선택 된 value 값을 집어 넣고
+			$('#pmber').val(memberNameList); //이것은 선택 된 애들을 hidden으로 보내기 위한 것 
+			console.log($('#pmber').val());
 		}
 		
 	</script>
@@ -232,12 +243,6 @@
 			display: inline-flex;
 		}
 		
-		/* #tbl{
-			display: vertical-align;
-		} */
-		/* #p1{
-
-		} */
 		
 		#tabled {
 			background-color: aliceblue;
@@ -333,6 +338,9 @@
 			background-color: aliceblue;
 			font-weight: 700;
 		}
+		#mmm{
+			margin-top:5px;
+		}
 			
 
 	</style>
@@ -401,7 +409,7 @@
 						<a href="/scoop/oauth2/authorization/google" class="btn btn-success active" role="button">구글로
 							로그인!</a>
 					</span>
-
+ 
 
 		<div id="tess">
 			<div id="sub">
@@ -444,15 +452,16 @@
 										
 					<table id="tbl2">
 						<tr id="inputname">
-							<th><input type="text" name="pname" id="pname" placeholder="프로젝트 이름 입력" onsubmit="return clickcheck"></th>
+							<th><input type="text" maxlength='16' name="pname" id="pname" placeholder="프로젝트 이름 입력"></th>
 						</tr>
 											
 						<tr id="selectmember">
-							<th>
+							<th><p>멤버 선택</p>
 								<select id="mmm" name="memberselect">
+								<!-- <option id="choose">선택</option> -->
 									<option th:each="val: ${ulist}"
-										th:value="${val.name}" 
-										th:utext="${val.name}">
+										th:value="${val.email}" 
+										th:utext="${val.email}">
 									</option>
 								</select>
 							
@@ -461,29 +470,24 @@
 						
 						<tr>
 							<th>
-								<div id="pmember">
-									<input type="hidden" name="pmember" id="pmber">
-								</div>
+								<div id="pmember"></div>
 							</th>
 						</tr>
 											
 						<tr id="inputbtn">
 							<th colspan="2" id="btn"><input type="submit" value="프로젝트 생성" id="btn3"></th>
 												
-						</tr>
-										
+						</tr>			
 					</table>
-										
+					<input type="hidden" name="pmember" id="pmber">		
 					</form>
 				</div>																							
 			</div>
 								
 		</div>
-		</div>
+	</div>
 					
 	<script th:src="@{/js/projectmodal.js}"></script>
-	
-	
 	
 </body>
 
