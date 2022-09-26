@@ -43,7 +43,7 @@ public class CalendarController {
 		calendar.setAllday(allday);
 		calendar.setWsid(wsid);
 		log.debug("calendar:{}", calendar);
-		calendarservice.insert(title, star, end, allday, wsid);
+		calendarservice.insert(calendar);
 	}
 
 }
