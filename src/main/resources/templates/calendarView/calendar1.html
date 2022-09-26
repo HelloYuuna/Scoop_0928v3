@@ -57,42 +57,45 @@
                         var stdaye = st.getHours() + ":" + st.getMinutes();
                         var edaye = e.getHours() + ":" + e.getMinutes();
 
-                        var star = st.toLocaleDateString('ko-KR');
-                        star = star.substr(0, 11);
-                        console.log(star);
+                        let start = st.toLocaleDateString('ko-KR');
+                        start = start.substr(0, 11);
+                        console.log(start);
 
-                        var en = e.toLocaleDateString('ko-KR');
-                        en = en.substr(0, 11);
-                        console.log(en);
+                        let end = e.toLocaleDateString('ko-KR');
+                        end = end.substr(0, 11);
+                        console.log(end);
 
                         //let calendar = (star + ' ~ ' + en);
-                        let start = star + "," + stdaye + ",";
-                        let end = en + "," + edaye;
+                        let star = start + "," + stdaye + ",";
+                        let en = end + "," + edaye;
                         let allday = start + " ~ " + end;
                         let title = obj.event._def.title;
+                        let wsid = window.location.search;
 
-                        //session에서 wsid값 가져오기
-                        let wsid = sessionStorage.getItem("wsid");
-                        console.log(wsid);
+                        wsid = wsid.substr(6);
+                        console.log("start :", start);
+                        console.log("end :", end);
+                        console.log("allday :", allday);
+                        console.log("title:", title);
+                        console.log("wsid:", wsid);
 
-                        //ajax로 comtroller에 값 전달
                         $.ajax({
                             url: "/scoop/calendarView/callin",
                             type: "POST",
                             data: {
-                                title: title,
-                                star: star,
-                                end: end,
-                                startday: stdaye,
-                                endday: edaye,
-                                allday: allday,
-                                wsid: wsid
+                                title: 'title',
+                                star: 'star',
+                                end: 'end',
+                                stdaye: 'stdaye',
+                                edaye: 'edaye',
+                                allday: 'allday',
+                                wsid: 'wsid'
+
+                            }, success: function (data) {
+                                alert('통신성공!!');
                             },
                             error: function () {
                                 alert('통신실패!!');
-                            },
-                            success: function (data) {
-                                alert('통신성공!!');
                             }
                         });
 

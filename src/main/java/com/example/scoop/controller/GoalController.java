@@ -41,9 +41,9 @@ public class GoalController {
 		ArrayList<Goal> goallist = service.selectOne1Goal();
 		int wsid = goallist.get(0).getWsid();
 		model.addAttribute("wsid", wsid);
-		log.debug("goallist:{}", goallist);
+		log.debug("goallist1:{}", goallist);
 		model.addAttribute("goallist", goallist);
-		log.debug("goallist:{}", wsid);
+		log.debug("wsidlog:{}", wsid);
 		return "/goalView/goal";
 	}
 
