@@ -43,7 +43,6 @@ public class ProjectController {
 			return "redirect:/";
 		}
 		model.addAttribute("input", pproject);
-		
 		//멤버 리스트를 가져오는 애
 		ArrayList<User> list = service.selectMember();
 		model.addAttribute("memberlist", list);
@@ -56,7 +55,6 @@ public class ProjectController {
 		log.debug("전달될 멤버:{}",member);
 		model.addAttribute("choiceMember",member);
 		return "projectView/project";
-		
 	}
 	
 	@GetMapping("/getmember")
@@ -74,6 +72,7 @@ public class ProjectController {
 	
 	@GetMapping("createproject")
 	public String createproject() {
+		
 		return "/projectView/createproject";	
 	}
 
@@ -108,17 +107,23 @@ public class ProjectController {
 	}
 
 	@GetMapping("projectupdate")
-	public String projectupdate() {
+	public String projectupdate(int pnum, Model model) {
+		log.debug("전달 된 숫자:{}", pnum);
+		Project pproject = service.projectread(pnum);
+		if(pproject == null) {
+			return "redirect:/";
+		}
+		model.addAttribute("input", pproject);
+		
 		return "/projectView/projectupdate";
 	}
 	
-	
 	@PostMapping("projectupdate")
 	public String projectupdate(Project project) {
-		SessionUser user = (SessionUser) httpSession.getAttribute("user");
+		SessionUser user = (SessionUser) htKtpSession.getAttribute("user");
 		log.debug("가져온 유저 user:{}", user);
 		project.setUemail(user.getEmail());
-		project.setPmember(user.getName());
+		//project.setPmember(user.getName());
 		//project.setPowner(user.getEmail());
 		log.debug("전달 될 값:{}", project);
 		int result = service.updateproject(project);
@@ -129,12 +134,6 @@ public class ProjectController {
 		}
 		return "redirect:/";
 	}
-	
-
-	
-	
-	
-	
 	
 	
 }

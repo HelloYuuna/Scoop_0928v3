@@ -9,7 +9,7 @@
 $(document).ready(function(){
 	$('#pnotice').keyup(insert);
 	$('#ptext').keyup(insert);
-	$('#mmm').change(set);
+	$('#mmm').change(asd);
 });
 
 function insert(){
@@ -31,7 +31,11 @@ function insert(){
 	
 }
 
-function set(){
+
+let memberNameList = '';
+let listCount = 0;
+
+function asd(){
 	//select 선택시 
 	let member = $('#mmm').val();
 	console.log(member); //option에서 선택한 값 
@@ -85,6 +89,12 @@ function deleteProject(num){
 
 }
 
+function update(pnum){
+	alert(pnum);
+	location.href = 'projectupdate?pnum='+pnum;
+	
+}
+
 
 </script>
 <link rel="stylesheet" th:href="@{/css/sidebar.css}">
@@ -115,7 +125,7 @@ function deleteProject(num){
 	#pnotice{
 		resize: none;
 		width: 300px;
-		margin-right: 800px;
+		margin-right: 780px;
 		font-size:20px;
 		border-radius: 12px 12px;
 		/* border-collapse: collapse; */
@@ -126,20 +136,37 @@ function deleteProject(num){
 		/* background-color: rgba( 255, 255, 255, 0.0 ); */
 	}
 	
-	#projectdelete{
-		width: 300px;
-		height: 50px;
-		padding: 2px;
-		border: solid;
-		border-width: thin;
-		background-color: white;
-		border-radius: 10px 10px;
-		margin-bottom: 10px;
+	 #projectdelete{
+		
+		color: #526A80;
+		
+	}
+	
+	#two{
+		display:inline-flex;
+		margin-bottom:10px;
 		
 	}
 	
 	#deletebox{
-		display: inline-block;
+		background-color: #C0C6CC;
+		color: #526A80;
+		border: 0;
+		outline: 0;
+		padding-top: 1px;
+		width: 120px;
+		height: 22px;
+		text-decoration: none;
+		color: #526A80;
+		border-radius: 10px 10px;
+		margin-top:30px;
+		
+	}
+	
+	#deletebox:hover {
+			/* color: white; */
+		background-color: aliceblue;
+		font-weight: 700;
 	}
 	
 	#sub{
@@ -175,7 +202,8 @@ function deleteProject(num){
 	#title{
 		margin: 0 auto;
 		text-align: center;
-	
+		display: flex;
+		justify-content: center;
 	}
 	
 	#member{
@@ -255,6 +283,7 @@ function deleteProject(num){
 		text-align: center;
 		width: 180px;
 		height: 30px;
+		border-collapse: collapse;
 		border-radius: 10px 10px;
 		border: 0;
 		outline: 0;
@@ -267,10 +296,26 @@ function deleteProject(num){
 		font-weight: 700;
 	}
 	
+	#updatetitle{
+		border-collapse: collapse;
+		border: 0;
+		outline: 0;
+		background-color: aliceblue;
+	}
+	
 	#updatetitle:hover{
 		color: #526A80;
 		font-weight: 700;
 	}
+	#sign{
+		background-color: aliceblue;
+		width:20px;
+		margin-top: 10px;
+		margin-left: 5px;
+		cursor: pointer;
+	
+	}
+
 
 </style>
 
@@ -286,9 +331,17 @@ function deleteProject(num){
 			<input type="text" placeholder="검색" id="searchbox">
 			<img th:src="@{/img/add_circle.png}" style="width: 30px">
 		</div>
-	</div>
+	</div><!-- th:href="@{/projectView/projectupdate(pnum=${input.pnum})}" class="updatetitle" id="updatetitle" -->
 	
-	<div id="title"><h2 th:text="${input.pname}" th:href="@{/projectView/projectupdate(pnum=${input.pnum})}" class="updatetitle" id="updatetitle"></h2></div>
+	<div id="title">
+		<div id="title2">
+			<h2 th:text="${input.pname}"></h2>
+		</div>
+		<!-- <a th:text="${input.pname}" th:href="@{/projectView/projectupdate(pnum=${input.pnum})}" class="updatetitle" id="updatetitle"></a> -->
+		<!-- <button class="updatetitle" id="updatetitle" th:onclick="|location.href='@{/projectView/projectupdate(pnum=${input.pnum})} '|">버튼</button> -->
+		<div id="updatebtn2"><button th:href="@{/projectView/projectupdate(pnum=${input.pnum})}" class="updatetitle" id="updatetitle"><img th:src="@{/img/sign.png}" id="sign" title="프로젝트 수정"></button></div>
+		
+	</div>
 	
 	<nav id="nav-menu">
 		<ul class="nav-menu-items">
@@ -319,8 +372,10 @@ function deleteProject(num){
 		<div id="mes">
 			<div>
 			<!-- 폼으로 보내는게 맞는데... --><!-- [[${input}]] -->
-				<div><textarea id="pnotice" name="pnotice" th:text="${input.pnotice}" placeholder="프로젝트 협업 방식" onsubmit="return clickcheck"></textarea>
-				<span id="deletebox"><a th:href="|javascript:deleteProject(${input.pnum})|" id="projectdelete">프로젝트 삭제</a></span></div>
+				<div id="two">
+					<textarea id="pnotice" name="pnotice" th:text="${input.pnotice}" placeholder="프로젝트 협업 방식" onsubmit="return clickcheck"></textarea>
+					<div id="deletebox"><a th:href="|javascript:deleteProject(${input.pnum})|" id="projectdelete">프로젝트 삭제</a></div>
+				</div>
 				<input type="hidden" id="pnum" name="pnum" th:value="${input.pnum}">
 			
 			</div>
@@ -330,14 +385,14 @@ function deleteProject(num){
 				<textarea id="ptext" name="ptext" th:text="${input.ptext}" placeholder="수행할 업무를 정하고 중요한 정보를 추가하세요." onsubmit="return clickcheck"></textarea>
 			</div>
 			<div id="member">
-				<h3>프로젝트 멤버</h3>
+				<h3>멤버추가</h3>
 				
 				<div id="list">
 					<select id="mmm" name="memberselect">
-						<option value="">선택</option>
+						<!-- <option id="choose">선택</option> -->
 						<option th:each="val: ${memberlist}"
-							th:value="${val.name}" 
-							th:utext="${val.name}" id="val">
+							th:value="${val.email}" 
+							th:utext="${val.email}" id="val">
 						</option>
 					</select>
 				</div>
@@ -372,12 +427,12 @@ function deleteProject(num){
 				
 				<tr id="updatename">
 					<th>프로젝트 이름 수정</th>
-					<td><input type="text" name="pname" id="pname" th:value="${input.pname}"></td>
+					<td><input type="text" maxlength='16' name="pname" id="pname" th:value="${input.pname}"></td>
 				</tr>
 				
 				<tr id="updatemember">
 					<th>참여 멤버 수정</th>
-					<td><input type="text" name="pmember" id="pmember" th:value="${input.pmember}"></td>
+					<td><input type="text" maxlength='16' name="pmember" id="pmember" th:value="${input.pmember}"></td>
 				</tr>
 				
 				<tr id="updatebutton">
@@ -392,6 +447,6 @@ function deleteProject(num){
 	</div>
 	
 	<script th:src="@{/js/projectupdatemodal.js}"></script>
-	
+
 </body>
 </html>
