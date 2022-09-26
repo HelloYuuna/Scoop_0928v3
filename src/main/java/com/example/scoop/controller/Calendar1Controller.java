@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -13,13 +12,11 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class Calendar1Controller {
 
-<<<<<<< HEAD
         @GetMapping("calendar11")
         public String calendar11() {
                 return "/goalView/calendar11";
         }
 
-=======
         // private static final Logger log =
         // LoggerFactory.getLogger(Calendar1Controller.class);
 
@@ -53,5 +50,5 @@ public class Calendar1Controller {
 
         // return jsonArr;
         // }
->>>>>>> 42cade8d94db9c6ba00ee69076aeb1f0db1706c2
+
 }
