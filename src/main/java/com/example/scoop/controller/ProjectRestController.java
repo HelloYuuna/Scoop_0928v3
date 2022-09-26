@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.scoop.domain.Project;
-import com.example.scoop.domain.User;
 import com.example.scoop.service.ProjectService;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -26,6 +24,7 @@ public class ProjectRestController {
 	// log.debug("ajax에서 넘어 온 값:{}", input);
 	// session.setAttribute("reid", input);
 	// }
+
 	// 공지사항 생성
 	@PostMapping("insert")
 	public void insert(Project pproject) {
@@ -45,13 +44,19 @@ public class ProjectRestController {
 	// log.debug("입력된 멤버:{}", result);
 	// }
 
+	// TODO 프로젝트 생성 합치기
 	@PostMapping("insertmember")
-	public void set(String str, int pnum) {
-		// 이 목록은 user가 아니라 project에 스트링으로 저장 되는거 아임매?
-		log.debug("ajax에서 넘어간 값:{} ", str);
-		log.debug("ajax에서 넘어간 프로젝트 번호:{}", pnum);
-		service.memberupdate(str, pnum);
+	public void set(String member) {
+		log.debug("받아온 멤버: {}", member);
 
+		int res = service.insertMember(member);
+		// 이 목록은 user가 아니라 project에 스트링으로 저장 되는거 아임매?
+		// log.debug("ajax에서 넘어간 값:{} ", str);
+		// log.debug("ajax에서 넘어간 프로젝트 번호:{}", pnum);
+		// service.memberupdate(str, pnum);
+		// String member = service.choiceMember(pnum);
+
+		// return member;
 	}
 
 	// @PostMapping("insert")

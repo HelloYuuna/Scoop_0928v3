@@ -71,4 +71,14 @@ public class GoalController {
 		return "/goalView/goalvyu";
 	}
 
+	// @PostMapping("insert")
+	// public String insert(Goal goal) {
+	// SessionUser user = (SessionUser) httpsession.getAttribute("user");
+	// log.debug("목표 내용 :", goal);
+	// goal.setGcreator(user.getEmail());
+	// log.debug("유저 내용 :", user.getEmail());
+	// service.insertgoal(goal);
+	// return "/goalView/goal";
+	// }
+
 }

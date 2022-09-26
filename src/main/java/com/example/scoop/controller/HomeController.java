@@ -15,6 +15,7 @@ import com.example.scoop.service.WorkspaceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.example.scoop.domain.Project;
+import com.example.scoop.domain.User;
 import com.example.scoop.service.ProjectService;
 
 @Slf4j
@@ -54,7 +55,12 @@ public class HomeController {
 		log.debug("넘어온 프로젝트 리스트:{}", plist);
 		model.addAttribute("projectlist", plist);
 
+		ArrayList<User> ulist = service.selectMember();
+		// 유저인게?
+		log.debug("넘어온 프로젝트 리스트:{}", ulist);
+		model.addAttribute("ulist", ulist);
 		return "scoophome";
+
 	}
 
 }

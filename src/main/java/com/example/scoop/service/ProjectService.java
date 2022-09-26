@@ -26,5 +26,11 @@ public interface ProjectService {
 	public String choiceMember(int pnum);
 
 	public int memberupdate(String str, int pnum);
+
+	public int updateproject(Project project);
+
+	public int deleteproject(Project project);
+
+	public int insertMember(String member);
 	
 }

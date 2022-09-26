@@ -4,6 +4,11 @@
 
 <mapper namespace ="com.example.scoop.dao.ProjectDAO">
 
+	<!-- <insert id="insertMember" parameterType="User">
+		insert scoop_project (pnum, uemail, wsid, key, pname, powner, pmember)
+		values ()
+	</insert> -->
+	
 	<update id="updateContent" parameterType="Project">
 		update scoop_project
 		set pnotice = #{pnotice}, ptext = #{ptext}
@@ -18,17 +23,17 @@
 
 	<select id="selectMember" resultType="User">
 		select *
-		from scoop_user
+		from scoop_member
 	</select>
 
 	<select id="memberselect" resultType="String" parameterType="String">
 		select email
-		from scoop_user
+		from scoop_member
 		where id = #{id}
 	</select>
 
 	<update id="updatemember" parameterType="map">
-		update scoop_user
+		update scoop_member
 		set pmember = #{pmember}
 		where pnum= #{pnum}
 	</update>
@@ -36,20 +41,21 @@
 	<insert id="projectInsert" parameterType="Project">
 		insert into scoop_project 
 		(pnum
-		, uemail
-		, pnotice
-		, ptext
-		, pname
-		, powner
-		, pmember)
+			, uemail
+			, wsid
+			, key
+			, pname
+			, powner
+			, pmember
+			)
 		values 
 		(scoop_project_seq.nextval
-		, #{uemail}
-		, #{pnotice}
-		, #{ptext}
-		, #{pname}
-		, #{powner}
-		, #{pmember}
+			, #{uemail}
+			, 1
+			, 1
+			, #{pname}
+			, #{powner}
+			, #{pmember}
 		)
 	</insert>
 
@@ -77,8 +83,19 @@
 		where pnum = #{pnum}
 	</update>
 	
+	<update id="updateproject" parameterType="Project">
+		update scoop_project
+		set 
+			pname = #{pname}, 
+			pmember = #{pmember}
+		where pnum = #{pnum}
+	</update>
 	
-	
+	<delete id="deleteproject" parameterType="Project">
+		delete from scoop_project
+		where pnum = #{pnum}
+			
+	</delete>	
 	
 	
 	
