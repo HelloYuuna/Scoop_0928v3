@@ -16,8 +16,6 @@ public class Calendar {
 	String text;
 	String star;
 	String end;
-	String startday;
-	String endday;
 	String allday;
 	int wsid;
 }

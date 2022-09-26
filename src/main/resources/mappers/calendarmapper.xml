@@ -11,9 +11,9 @@
     </insert> -->
     <insert id="insert" parameterType="Calendar">
         INSERT INTO calendar 
-        (title, text, star, end,startday, endday, allday, wsid)
+        (title, star, end,startday, endday, allday, wsid)
         VALUES 
-        (#{title}, #{text},#{star},#{end},#{startday},#{endday},#{allday}, #{wsid})
+        (#{title},#{star},#{end},#{startday},#{endday},#{allday}, #{wsid})
     </insert>
 
 

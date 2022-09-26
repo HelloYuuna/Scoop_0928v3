@@ -54,26 +54,19 @@
                         let st = obj.event.start;
                         let e = obj.event.end;
 
-                        var stdaye = st.getHours() + ":" + st.getMinutes();
-                        var edaye = e.getHours() + ":" + e.getMinutes();
-
-                        let start = st.toLocaleDateString('ko-KR');
-                        start = start.substr(0, 11);
-                        console.log(start);
-
+                        let star = st.toLocaleDateString('ko-KR');
+                        star = star.substr(0, 11);
                         let end = e.toLocaleDateString('ko-KR');
                         end = end.substr(0, 11);
-                        console.log(end);
 
                         //let calendar = (star + ' ~ ' + en);
-                        let star = start + "," + stdaye + ",";
-                        let en = end + "," + edaye;
-                        let allday = start + " ~ " + end;
+                        let allday = star + " ~ " + end;
+                        console.log(obj.event);
                         let title = obj.event._def.title;
                         let wsid = window.location.search;
-
                         wsid = wsid.substr(6);
-                        console.log("start :", start);
+
+                        console.log("star :", star);
                         console.log("end :", end);
                         console.log("allday :", allday);
                         console.log("title:", title);
@@ -83,19 +76,12 @@
                             url: "/scoop/calendarView/callin",
                             type: "POST",
                             data: {
-                                title: 'title',
-                                star: 'star',
-                                end: 'end',
-                                stdaye: 'stdaye',
-                                edaye: 'edaye',
-                                allday: 'allday',
-                                wsid: 'wsid'
-
+                                title: title, star: star, end: end, allday: allday, wsid: wsid
                             }, success: function (data) {
                                 alert('통신성공!!');
                             },
-                            error: function () {
-                                alert('통신실패!!');
+                            error: function (e) {
+                                alert(JSON.stringify(e));
                             }
                         });
 
@@ -106,7 +92,7 @@
                                 dataType: "json"
                             });
                             request.done(function (data) {
-                                console.log(data);
+                                //console.log(data);
 
                                 var calendarEl = document.getElementById('calendar');
                                 var calendar = new FullCalendar.Calendar(calendarEl, {

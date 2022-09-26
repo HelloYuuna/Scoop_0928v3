@@ -2,6 +2,7 @@ package com.example.scoop.service;
 
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,10 @@ public class CalendarSeviceImpl implements CalendarService {
     @Autowired
     CalendarDAO calendardao;
 
-    public void insert(String title, String text, String star, String end, String startday, String endday,
-            String allday, int wsid) {
-        calendardao.insert(title, text, star, end, startday, endday, allday, wsid);
-        log.debug(title, text, star, end, startday, endday, allday, wsid);
+    @Override
+    public int insert(Calendar calendar) {
+        int result = calendardao.insert(calendar);
+        log.debug("result2  :", result);
+        return result;
     }
-
 }
