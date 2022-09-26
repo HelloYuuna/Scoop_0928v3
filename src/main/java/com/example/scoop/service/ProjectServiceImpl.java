@@ -117,29 +117,29 @@ public class ProjectServiceImpl implements ProjectService {
 
 		return result;
 	}
-	
+
 	public int updateproject(Project project) {
 		int result = projectdao.updateproject(project);
-		
+
 		return result;
-		
+
 	}
-	
+
 	public int deleteproject(Project project) {
-		
+
 		int result = projectdao.deleteproject(project);
 		return result;
-		
+
 	}
 
 	@Override
 	public int insertMember(String member) {
 		log.debug("member :{}", member);
-		
-//		User user = projectdao.findByName(member);
-//		log.debug("찾아온 유저 정보: {}", user);
-		
-//		return projectdao.insertMember(user);
+
+		// User user = projectdao.findByName(member);
+		// log.debug("찾아온 유저 정보: {}", user);
+
+		// return projectdao.insertMember(user);
 		return 0;
 	}
 

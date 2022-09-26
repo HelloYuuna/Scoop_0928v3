@@ -22,23 +22,23 @@ import ch.qos.logback.classic.Logger;
 @RequestMapping("/calendarcrud")
 public class Calendar1Controller {
 
-    // private static final Logger log =
-    // LoggerFactory.getLogger(Calendar1Controller.class);
+        // private static final Logger log =
+        // LoggerFactory.getLogger(Calendar1Controller.class);
 
-    // private final CalendarService calendarservice;
+        // private final CalendarService calendarservice;
 
-    // public Calendar1Controller(CalendarService calendarservice) {
-    // this.calendarservice = calendarservice;
-    // }
+        // public Calendar1Controller(CalendarService calendarservice) {
+        // this.calendarservice = calendarservice;
+        // }
 
-//    @RequestMapping(value = "/insert", method = RequestMethod.GET)
-//    @ResponseBody
-//    public List<Map<String, Object>> insert() {
+        // @RequestMapping(value = "/insert", method = RequestMethod.GET)
+        // @ResponseBody
+        // public List<Map<String, Object>> insert() {
         // List<Map<String, Object>> list = CalendarService.getCalendarList();
 
-//        JSONObject jsonObj = new JSONObject();
-//        JSONArray jsonArr = new JSONArray();
-//        HashMap<String, Object> hash = new HashMap<String, Object>();
+        // JSONObject jsonObj = new JSONObject();
+        // JSONArray jsonArr = new JSONArray();
+        // HashMap<String, Object> hash = new HashMap<String, Object>();
 
         // for (int i = 0; i < list.size(); i++) {
         // hash.put("title", list.get(i).get("detailed_categorized_name")); // 제목
@@ -53,6 +53,6 @@ public class Calendar1Controller {
 
         // log.info("jsonArrCheck: {}", jsonArr);
 
-//        return jsonArr;
-//    }
+        // return jsonArr;
+        // }
 }
