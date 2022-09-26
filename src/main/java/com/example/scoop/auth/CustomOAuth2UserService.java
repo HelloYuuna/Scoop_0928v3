@@ -1,7 +1,7 @@
 package com.example.scoop.auth;
 
-import com.example.scoop.config.dto.OAuthAttributes;
-import com.example.scoop.config.dto.SessionUser;
+import com.example.scoop.auth.dto.OAuthAttributes;
+import com.example.scoop.auth.dto.SessionUser;
 import com.example.scoop.domain.User;
 import com.example.scoop.domain.UserRepository;
 import lombok.RequiredArgsConstructor;

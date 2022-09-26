@@ -1,4 +1,4 @@
-package com.example.scoop.config.dto;
+package com.example.scoop.auth.dto;
 
 import com.example.scoop.domain.User;
 import lombok.Getter;
