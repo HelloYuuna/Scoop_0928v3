@@ -519,9 +519,7 @@
 			<hr>
 			<div>
 				<li class="nav-text nav-section3"><button class="btn-open-popup2">팀원 초대</button></li>
-			</div>
-			<div>
-				<li class="nav-text nav-section4"><a th:href="@{/logout}"><i class="nav-icon"></i>로그 아웃</a></li>
+				<li class="nav-text nav-section4"><a th:href="@{/logout}"><i class="nav-icon"></i>로그아웃</a></li>
 			</div>
 		</ul>
 	</div>
@@ -550,7 +548,6 @@
 						<div>
 							<p id="p1">프로젝트</p>
 						</div>
-
 						<div>
 							<div id="tbl">
 								<div th:each="pplist: ${projectlist}" class="pplist" id="pplist">
@@ -560,7 +557,6 @@
 								</div>
 							</div>
 						</div>
-
 						<div>
 							<input type="button" id="createproject" class="createproject" value="프로젝트 생성">
 							<!-- <p><a th:href="@{/projectView/createproject}">프로젝트 생성</a></p> -->
@@ -614,7 +610,7 @@
 			</div>
 		</div>
 	</div>
-
+  
 	<script th:src="@{/js/modal.js}"></script>
 
 </body>
