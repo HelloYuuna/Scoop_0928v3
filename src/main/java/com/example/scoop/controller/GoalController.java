@@ -58,9 +58,11 @@ public class GoalController {
 	}
 
 	@PostMapping("insertgoal")
-	public String insertgoal(Goal goal) {
+	public String insertgoal(Goal goal, String gstartdate, String genddate) {
 		SessionUser user = (SessionUser) httpSession.getAttribute("user");
 		log.debug("목표 내용 : {}", goal);
+		log.debug("gstartdate : {}", gstartdate);
+		log.debug("genddate : {}", genddate);
 		goal.setGcreator(user.getEmail());
 		service.insertgoal(goal);
 		return "redirect:/goalView/goal";

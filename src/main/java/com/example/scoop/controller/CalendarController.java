@@ -30,7 +30,7 @@ public class CalendarController {
 
 	@ResponseBody
 	@PostMapping("callin")
-	public void callin(String title, String text, String star, String end,
+	public Calendar callin(String title, String text, String star, String end,
 			String allday, Integer wsid) throws Exception {
 		Integer wsid1 = Integer.valueOf(wsid);
 		wsid = wsid1;
@@ -44,6 +44,7 @@ public class CalendarController {
 		calendar.setWsid(wsid);
 		log.debug("calendar:{}", calendar);
 		calendarservice.insert(calendar);
+		return calendar;
 	}
 
 }

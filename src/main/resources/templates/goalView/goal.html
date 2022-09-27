@@ -78,7 +78,9 @@
 				<br>
 				<div>소유자 : <input type="text" id="uowner" name="uowner"></div>
 				<br>
-				<div>기간 : <input type="button" id="calender" name="calender" value="캘린더" onclick="calendar()">
+				<div>기간 : <input type="date" id="gstartdate" name="gstartdate"> ~ <input type="date" id="genddate"
+						name="genddate">
+					<!-- <input type="button" id="calender" name="calender" value="캘린더" onclick="calendar()"> -->
 				</div>
 				<br>
 				<div>
@@ -130,8 +132,10 @@
 			<div>
 				<table>
 					<form th:action="@{/goalView/goalvyu}" id="list" name="list" method="post"
-						onsubmit="return validation();">
-
+						onsubmit="return validation();" style="">
+						<!-- <td id="gil" style="width: 10%;">
+							<input type="submit" th:value="${goallist.gname}" th:goal="@{goalvyu.goalvyu}"
+								th:onclick="test(this.getAttribute('goal'))"> -->
 						<input type="hidden" id="wsid" name="wsid" th:value="${wsid}">
 						<div class="goalne">
 							<td th:text="${goallist.gname}" class="goalne" id="gname" name="gname"
@@ -149,6 +153,7 @@
 								style="width: 300px;"></td>
 							</td>
 							</td>
+							<!-- </td> -->
 					</form>
 				</table>
 			</div>
@@ -188,11 +193,6 @@
 	<script th:src="@{/js/sidebar.js}"></script>
 	<!-- model 창을 띄우기 -->
 	<script th:src="@{/js/goalmodel.js}"></script>
-</body>
-
-<script th:src="@{/js/sidebar.js}"></script>
-<!-- model 창을 띄우기 -->
-<script th:src="@{/js/goalmodel.js}"></script>
 </body>
 
 </html>
