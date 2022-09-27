@@ -3,13 +3,18 @@
 
 <head>
     <meta charset='utf-8' />
-    <link th:href='@{/css/calendar/main.min.css}' rel='stylesheet' />
+    <link th:href='@{/css/calendar/main.css}' rel='stylesheet' />
 
     <script th:src="@{/js/calendar/jquery-3.6.0.min.js}"></script>
-    <script th:src="@{/js/calendar/main.min.js}"></script>
+    <script th:src="@{/js/calendar/main.js}"></script>
     <script th:src="@{/js/calendar/locales-all.min.js}"></script>
 
     <script>
+
+        let start;
+        let end;
+        let calendar;
+        let title;
 
         (function () {
             $(function () {
@@ -19,11 +24,11 @@
 
                 // full-calendar 생성하기
                 var calendar = new FullCalendar.Calendar(calendarEl, {
-                    height: '700px', // calendar 높이 설정        
-                    expandRows: true, // 화면에 맞게 높이 재설정        
-                    slotMinTime: '06:00', // Day 캘린더에서 시작 시간        
-                    slotMaxTime: '23:00', // Day 캘린더에서 종료 시간        
-                    // 해더에 표시할 툴바        
+                    height: '700px', // calendar 높이 설정
+                    expandRows: true, // 화면에 맞게 높이 재설정
+                    slotMinTime: '00:00', // Day 캘린더에서 시작 시간
+                    slotMaxTime: '23:00', // Day 캘린더에서 종료 시간
+                    // 해더에 표시할 툴바
                     headerToolbar: {
                         left: 'prev,next today',
                         center: 'title',
@@ -37,13 +42,76 @@
                     nowIndicator: true, // 현재 시간 마크
                     dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
                     locale: 'ko', // 한국어 설정
+                    //                       console.log(start.toLocaleDateString('ko-KR'));
+                    //                       console.log(end.toLocaleDateString('ko-KR'));
+                    //                       console.log(start.getFullYear());
+                    //                       console.log(start.getMonth() + 1);
+                    //                      console.log(start.getDate());
+                    //                     console.log(start.getHours());
+                    //                    console.log(start.getMinutes());
                     eventAdd: function (obj) { // 이벤트가 추가되면 발생하는 이벤트
                         console.log(obj);
-                        let start = obj.event.start;
-                        let end = obj.event.end;
-                        console.log(start, end);
+                        let st = obj.event.start;
+                        let e = obj.event.end;
 
+                        let star = st.toLocaleDateString('ko-KR');
+                        star = star.substr(0, 11);
+                        let end = e.toLocaleDateString('ko-KR');
+                        end = end.substr(0, 11);
 
+                        //let calendar = (star + ' ~ ' + en);
+                        let allday = star + " ~ " + end;
+                        console.log(obj.event);
+                        let title = obj.event._def.title;
+                        let wsid = window.location.search;
+                        wsid = wsid.substr(6);
+
+                        console.log("star :", star);
+                        console.log("end :", end);
+                        console.log("allday :", allday);
+                        console.log("title:", title);
+                        console.log("wsid:", wsid);
+
+                        $.ajax({
+                            url: "/scoop/calendarView/callin",
+                            type: "POST",
+                            data: {
+                                title: title, star: star, end: end, allday: allday, wsid: wsid
+                            }, success: function (data) {
+                                alert('통신성공!!');
+                            },
+                            error: function (e) {
+                                alert(JSON.stringify(e));
+                            }
+                        });
+
+                        $(function () {
+                            var request = $.ajax({
+                                url: "/scoop/calendarView/calendar1",
+                                method: "GET",
+                                dataType: "json"
+                            });
+                            request.done(function (data) {
+                                //console.log(data);
+
+                                var calendarEl = document.getElementById('calendar');
+                                var calendar = new FullCalendar.Calendar(calendarEl, {
+                                    initialView: 'dayGridMonth',
+                                    headerToolbar: {
+                                        left: 'prev,next today',
+                                        center: 'title',
+                                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                                    },
+                                    events: data
+                                });
+
+                                calendar.render();
+                            });
+
+                            request.fail(function (jqXHR, textStatus) {
+                                alert("Request failed: " + textStatus);
+                            });
+                        });
                     },
                     eventChange: function (obj) { // 이벤트가 수정되면 발생하는 이벤트
                         console.log(obj);
@@ -60,6 +128,7 @@
                                 end: arg.end,
                                 allDay: arg.allDay
                             })
+                            console.log("arg: " + arg.value);
                         }
                         calendar.unselect()
                     },
@@ -82,36 +151,7 @@
 
     </script>
 </head>
-<!-- $(function () {
 
-var request = $.ajax({
-url: "/scoop/calendarView/calendar_insert",
-method: "GET",
-dataType: "json"
-});
-
-request.done(function (data) {
-console.log(data);
-
-var calendarEl = document.getElementById('calendar');
-
-var calendar = new FullCalendar.Calendar(calendarEl, {
-initialView: 'dayGridMonth',
-headerToolbar: {
-left: 'prev,next today',
-center: 'title',
-right: 'dayGridMonth,timeGridWeek,timeGridDay'
-},
-events: data
-});
-
-calendar.render();
-});
-
-request.fail(function (jqXHR, textStatus) {
-alert("Request failed: " + textStatus);
-});
-}); -->
 
 <body>
     <div id='calendar-container'>

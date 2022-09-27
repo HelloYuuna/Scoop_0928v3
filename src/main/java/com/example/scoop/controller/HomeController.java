@@ -78,7 +78,7 @@ public class HomeController {
 			 */
 			String loginId = loginInfo.getUsername();
 			User formLoginUser = userService.findById(loginId);
-			String userName = formLoginUser.getName();
+			String userName = formLoginUser.getUsername();
 
 			log.info("폼로그인정보: {}", userName);
 
@@ -132,7 +132,12 @@ public class HomeController {
 		log.debug("넘어온 프로젝트 리스트:{}", plist);
 		model.addAttribute("projectlist", plist);
 
+		ArrayList<User> ulist = service.selectMember();
+		// 유저인게?
+		log.debug("넘어온 프로젝트 리스트:{}", ulist);
+		model.addAttribute("ulist", ulist);
 		return "scoophome";
+
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.example.scoop.service;
 
+import java.util.ArrayList;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,32 @@ public class GoalSeviceImpl implements GoalService {
 
     public int insertgoal(Goal goal) {
         int result = boardDAO.insertgoal(goal);
+        return result;
+    };
+
+    public ArrayList<Goal> selectOne1Goal() {
+        ArrayList<Goal> result = boardDAO.selectOne1Goal();
+        ArrayList<Goal> returnGList = new ArrayList<Goal>();
+
+        for (Goal goal : result) {
+            log.debug("처음값 : {}", goal);
+            if (goal.getGstartdate() != "" && goal.getGenddate() != "" &&
+                    goal.getGstartdate() != null && goal.getGenddate() != null) {
+                String goal1 = goal.getGstartdate() + "~" + goal.getGenddate();
+                goal.setCalendar(goal1);
+                returnGList.add(goal);
+                log.debug("Calendar1 : {}", goal);
+                result = returnGList;
+            } else if (goal.getGstartdate() == "" || goal.getGenddate() == "" &&
+                    goal.getGstartdate() == null || goal.getGenddate() == null) {
+                String goal1 = "";
+                goal.setCalendar(goal1);
+                returnGList.add(goal);
+                log.debug("Calendar2 : {}", goal);
+                result = returnGList;
+            }
+
+        }
         return result;
     };
 

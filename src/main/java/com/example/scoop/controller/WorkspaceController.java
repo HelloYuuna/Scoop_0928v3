@@ -119,7 +119,7 @@ public class WorkspaceController {
 		model.addAttribute("dayOfWeek", dayOfWeek);
 		//
 		
-		return "home";
+		return "scoophome";
 	}
 	
 //	@GetMapping("removeWorkspace")

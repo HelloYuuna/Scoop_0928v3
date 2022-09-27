@@ -1,181 +1,381 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
-<script th:src="@{/js/jquery-3.6.0.js}"></script>
-<script>
-$(document).ready(function(){
-	$('#pnotice').keyup(insert);
-	$('#ptext').keyup(insert);
-	$('#memberselect').click(set);
-});
 
-function insert(){
-//	let input = $('#input').val();
-//	let context = $('#context').val();
 
-	$.ajax({
-		url: 'insert',
-		type: 'post',
-		data: $('#writeform').serialize(),
-		success: function(){
-			/* alert('되긴함'); */
-			//$(input).val(ob);
-		},
-		error: function(){
-			alert('실패');
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Insert title here</title>
+	<script th:src="@{/js/jquery-3.6.0.js}"></script>
+	<script>
+		$(document).ready(function () {
+			$('#pnotice').keyup(insert);
+			$('#ptext').keyup(insert);
+			$('#mmm').change(asd);
+		});
+
+
+		function insert() {
+			//	let input = $('#input').val();
+			//	let context = $('#context').val();
+
+			$.ajax({
+				url: 'insert',
+				type: 'post',
+				data: $('#writeform').serialize(),
+				success: function () {
+					/* alert('되긴함'); */
+					//$(input).val(ob);
+				},
+				error: function () {
+					alert('실패');
+				}
+			});
+
 		}
-	});
-	
-}
-
-function set(){
-	let val = $('#val').val();
-	$('#memberlist').html(val);
-	
-	let pnum = $('#pnum').val();
-	
-	$.ajax({
-		url: 'insertmember',
-		type: 'post',
-		data: {str:$('#memberlist').html(), pnum:pnum},
-		success: function(){
-			//alert('되긴함');
-			//$(input).val(ob);
-		},
-		error: function(){
-			alert('실패');
-		}
-	});
-	
-}
 
 
 
+		let memberNameList = '';
+		let listCount = 0;
 
-</script>
-<link rel="stylesheet" th:href="@{/css/sidebar.css}">
+		function asd() {
+			//select 선택시
+			let member = $('#mmm').val();
+			console.log(member); //option에서 선택한 값
 
-<style>
+			let val = $('#mmm').val(); //option의 값
+			//만일 선택을 하면 그 선택 창 안에
+			$('#mlist').html(val);
 
-	*{padding:0;margin:0}
-	li{list-style:none}
-	a{text-decoration:none;font-size:14px}
+			//프로젝트 넘버
+			let pnum = $('#pnum').val();
 
+			$.ajax({
+				url: 'insertmember',
+				type: 'post',
+				data: { member: member },
+				success: function () {
 
-	body {
-/* 		background-image: url("https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MjRfNzAg%2FMDAxNjU4NTg5Njg2Njcz.12YsjbC98JoY-ES4RUZzzsJJAi09twC3rgPTNylO3Ywg.k5NGotQqqruQ1dv1XdqEzcoYPbvx3UHAY7qR3dna0YIg.JPEG.heng2log%2F1658589685856.jpg&type=sc960_832");
- */		background-size: cover;
-		background-color: aliceblue;	
-	}
-	
-	.submenu > li {
-	  line-height: 50px;
-	  background-color: #94a9ff;
-	}
-	
-	.submenu {
-	  height: 0; /*ul의 높이를 안보이게 처리*/
-	  overflow: hidden;
-	}
-	
-	#pnotice{
-		resize: none;
-		margin-right: 1050px;
-		border-radius: 50px 50px;
-		border-collapse: collapse;
-		/* border: solid;
-		border-width: thin; */
-		background-color: #C0C6CC;
-		/* background-color: rgba( 255, 255, 255, 0.0 ); */
-	}
-	
-	#sub{
-	 	display:inline-flex; 	
-	 }
-	 
-	 #mes{
-	 	display:inline-flex; 
-	 	
-	}
-	 
-	 #mess{
-	 	text-align: center;
-	 	
-	 }
-	 
-	#ptext{
-		resize: none;
-		width: 575px;
-		height: 400px;
-		/* border: solid;
-		border-width: thin; */
-		border-radius: 10px 10px;
-		border-collapse: collapse;
-		margin-right: 25px;
-		background-color:#C0C6CC;
-		/* background-color: rgba( 255, 255, 255, 0.0 ); */
-	
-	}
-	
-	#title{
-		margin: 0 auto;
-		text-align: center;
-	
-	}
-	
-	#member{
-		width: 575px;
-		height: 400px;
-		/* border: solid;
-		border-width: thin; */
-		border-collapse: collapse;
-		background-color: #526A80;
-		/* background-color: rgba( 255, 255, 255, 0.0 ); */
-		border-radius: 10px 10px;
-		margin-left: 25px;
+				},
+				error: function () {
+
+				}
+			})
+
+			/* $.ajax({
+				url: 'insertmember',
+				type: 'post',
+					data: {str:$('#mlist').html(), pnum:pnum},
+				success: function(member){
+					$('#mlist').html(member);
 		
-	
-	
-	}
-	#sub2{
-		display:inline-flex; 
-	}
-	
-	#state{
-		width: 1200px;
-		height: 400px;
-		/* border: solid;
+		
+					//alert('되긴함');
+					//$(input).val(ob);
+				},
+				error: function(){
+					alert('실패');
+				}
+			});  */
+
+		}
+
+		function clickcheck() {
+			onfocus = "this.placeholder=''";
+
+		}
+
+		function deleteProject(num) {
+			if (confirm('해당 프로젝트를 삭제하시겠습니까?')) {
+				location.href = 'deleteproject?pnum=' + num;
+			}
+
+		}
+
+		function update(pnum) {
+			alert(pnum);
+			location.href = 'projectupdate?pnum=' + pnum;
+
+		}
+
+
+	</script>
+	<link rel="stylesheet" th:href="@{/css/sidebar.css}">
+	<link rel="stylesheet" th:href="@{/css/projectupdatemodal.css}">
+	<style>
+		li {
+			list-style: none
+		}
+
+		a {
+			text-decoration: none;
+			font-size: 14px
+		}
+
+
+
+		body {
+			/* 		background-image: url("https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MjRfNzAg%2FMDAxNjU4NTg5Njg2Njcz.12YsjbC98JoY-ES4RUZzzsJJAi09twC3rgPTNylO3Ywg.k5NGotQqqruQ1dv1XdqEzcoYPbvx3UHAY7qR3dna0YIg.JPEG.heng2log%2F1658589685856.jpg&type=sc960_832");
+ */
+			background-size: cover;
+			background-color: aliceblue;
+		}
+
+		.submenu>li {
+			line-height: 50px;
+			background-color: #94a9ff;
+		}
+
+		.submenu {
+			height: 0;
+			/*ul의 높이를 안보이게 처리*/
+			overflow: hidden;
+		}
+
+		#pnotice {
+			resize: none;
+			width: 300px;
+			margin-right: 780px;
+			font-size: 20px;
+			border-radius: 12px 12px;
+			/* border-collapse: collapse; */
+			padding: 2px;
+			border: solid;
+			border-width: thin;
+			background-color: white;
+			/* background-color: rgba( 255, 255, 255, 0.0 ); */
+		}
+
+		#projectdelete {
+
+			color: #526A80;
+
+		}
+
+		#two {
+			display: inline-flex;
+			margin-bottom: 10px;
+
+		}
+
+		#deletebox {
+			background-color: #C0C6CC;
+			color: #526A80;
+			border: 0;
+			outline: 0;
+			padding-top: 1px;
+			width: 120px;
+			height: 22px;
+			text-decoration: none;
+			color: #526A80;
+			border-radius: 10px 10px;
+			margin-top: 30px;
+
+		}
+
+		#deletebox:hover {
+			/* color: white; */
+			background-color: aliceblue;
+			font-weight: 700;
+		}
+
+		#sub {
+			display: inline-flex;
+		}
+
+		#mes {
+			display: inline-flex;
+
+		}
+
+		#mess {
+			text-align: center;
+
+		}
+
+		#ptext {
+			resize: none;
+			width: 575px;
+			height: 400px;
+			font-size: 15px;
+			border: solid;
+			border-width: thin;
+			border-radius: 10px 10px;
+			/* border-collapse: collapse; */
+			padding: 2px;
+			margin-right: 25px;
+			background-color: white;
+			/* background-color: rgba( 255, 255, 255, 0.0 ); */
+
+		}
+
+		#title {
+			margin: 0 auto;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+		}
+
+		#member {
+			padding: 18px;
+			width: 575px;
+			height: 400px;
+			border: solid;
+			border-width: thin;
+			/* border-collapse: collapse; */
+			background-color: white;
+			/* background-color: rgba( 255, 255, 255, 0.0 ); */
+			border-radius: 10px 10px;
+			margin-left: 25px;
+
+
+		}
+
+		#sub2 {
+			display: inline-flex;
+		}
+
+		#state {
+			padding: 18px;
+			width: 1200px;
+			height: 400px;
+			border: solid;
+			border-width: thin;
+			/* border-collapse: collapse; */
+			background-color: white;
+			/* background-color: rgba( 255, 255, 255, 0.0 ); */
+			border-radius: 10px 10px;
+			margin: 50px;
+
+		}
+
+		#menu {
+			width: 200px;
+			height: 30px;
+			border-collapse: collapse;
+			background-color: white;
+			background-color: rgba(255, 255, 255, 0.0);
+
+		}
+
+		#memberselect {
+			resize: none;
+
+		}
+
+		#tbl3 {
+			margin-top: 50px;
+			margin-left: auto;
+			margin-right: auto;
+			text-align: center;
+			padding: 5px;
+
+		}
+
+		#pname {
+			border: none;
+			float: left;
+			width: 250px;
+			height: 30px;
+			border-radius: 8px 8px;
+
+		}
+
+		#pmember {
+			border: none;
+			float: left;
+			width: 250px;
+			height: 30px;
+			border-radius: 8px 8px;
+		}
+
+		#updateproject {
+			text-align: center;
+			margin-top: 20px;
+		}
+
+		#updatebtn {
+			margin: 30px auto;
+			text-align: center;
+			width: 180px;
+			height: 30px;
+			border-collapse: collapse;
+			border-radius: 10px 10px;
+			border: 0;
+			outline: 0;
+			color: #526A80;
+			background-color: #C0C6CC;
+
+		}
+
+		#updatebtn:hover {
+			background-color: aliceblue;
+			font-weight: 700;
+		}
+
+		#updatetitle {
+			border-collapse: collapse;
+			border: 0;
+			outline: 0;
+			background-color: aliceblue;
+		}
+
+		#updatetitle:hover {
+			color: #526A80;
+			font-weight: 700;
+		}
+
+		#sign {
+			background-color: aliceblue;
+			width: 20px;
+			margin-top: 10px;
+			margin-left: 5px;
+			cursor: pointer;
+
+		}
+
+
+
+
+
+		#sub2 {
+			display: inline-flex;
+		}
+
+		#state {
+			width: 1200px;
+			height: 400px;
+			/* border: solid;
 		border-width: thin; */
-		border-collapse: collapse;
-		background-color: #A3D4FF;
-		/* background-color: rgba( 255, 255, 255, 0.0 ); */
-		border-radius: 10px 10px;
-		margin: 50px;
-	
-	}
-	#menu{
-		width: 200px;
-		height: 30px;
-		border-collapse: collapse;
-		background-color: white;
-		background-color: rgba( 255, 255, 255, 0.0 );
-	
-	}
-	
-	memberselect{
-		resize: none;
-	
-	}
+			border-collapse: collapse;
+			background-color: #A3D4FF;
+			/* background-color: rgba( 255, 255, 255, 0.0 ); */
+			border-radius: 10px 10px;
+			margin: 50px;
 
+		}
 
-</style>
+		#menu {
+			width: 200px;
+			height: 30px;
+			border-collapse: collapse;
+			background-color: white;
+			background-color: rgba(255, 255, 255, 0.0);
+
+		}
+
+		memberselect {
+			resize: none;
+
+		}
+	</style>
 
 
 
 </head>
+
 <body>
 	<div class="navbar">
 		<a href="#" class="menu-bars" id="show-menu">
@@ -186,76 +386,171 @@ function set(){
 			<img th:src="@{/img/add_circle.png}" style="width: 30px">
 		</div>
 	</div>
-	
-	<div id="title"><p>프로젝트</p></div>
-	
+
+	<div id="title">
+		<div id="title2">
+			<h2 th:text="${input.pname}"></h2>
+		</div>
+		<!-- <a th:text="${input.pname}" th:href="@{/projectView/projectupdate(pnum=${input.pnum})}" class="updatetitle" id="updatetitle"></a> -->
+		<!-- <button class="updatetitle" id="updatetitle" th:onclick="|location.href='@{/projectView/projectupdate(pnum=${input.pnum})} '|">버튼</button> -->
+		<div id="updatebtn2"><button th:href="@{/projectView/projectupdate(pnum=${input.pnum})}" class="updatetitle"
+				id="updatetitle"><img th:src="@{/img/sign.png}" id="sign" title="프로젝트 수정"></button></div>
+
+	</div>
+
 	<nav id="nav-menu">
 		<ul class="nav-menu-items">
 			<div id="navbar-toggle">
 				<a th:href="@{/}" class="menu-bars" id="hide-menu">
 					<img alt="sidebar" th:src="@{/img/white_menu.png}" width="30px"></i>
 				</a>
-				<a href="#"><h1>Task-it</h1></a>
+				<a href="#">
+					<h1>Task-it</h1>
+				</a>
 			</div>
 			<hr>
 			<div class="nav-section">
-					<li class="nav-text"><a th:href="@{/}">메인</a></li>
-					<li class="nav-text"><a href="#">내 작업</a></li>
-					<li class="nav-text"><a th:href="@{/projectView/project}">프로젝트 목록</a></li>
-					<li class="nav-text"><a th:href="@{/mh}">목표</a></li>
-					
+				<li class="nav-text"><a th:href="@{/}">메인</a></li>
+				<li class="nav-text"><a href="#">내 작업</a></li>
+				<li class="nav-text"><a th:href="@{/projectView/project}">프로젝트 목록</a></li>
+				<li class="nav-text"><a th:href="@{/mh}">목표</a></li>
+
 			</div>
 			<hr>
 		</ul>
 	</nav>
-	
+
 	<script th:src="@{/js/sidebar.js}"></script>
-	
 
-	<div id="mess">	
-	
-	<form id="writeform">
-		<div id="mes">
-			<div>
-			<!-- 폼으로 보내는게 맞는데... --><!-- [[${input}]] -->
-				<textarea id="pnotice" name="pnotice" th:text="${input.pnotice}"></textarea>
-				<input type="hidden" id="pnum" name="pnum" th:value="${input.pnum}">
-			</div>
-		</div>
-		<div id="sub">
-			<div>
-				<textarea id="ptext" name="ptext" th:text="${input.ptext}"></textarea>
-			</div>
-			<div id="member">
-				<p>프로젝트 멤버</p>
-				
-				<div id="list">
-					<select id="memberselect" name="memberselect">
-						<option value="">선택</option>
-						<option th:each="val: ${memberlist}"
-							th:value="${val.name}" 
-							th:utext="${val.name}" id="val">
-						</option>
-					</select>
-				</div>
-				
-				<div id="memberlist" th:text="${choiceMember}">
-					
-				
-				</div>
-				
-			</div>
-		</div>
+	<div id="mess">
 
-		
-		<div id="sub2">
-			<div id="state">
-				<p>진행 및 상태</p>
-			</div>
-		</div>
-		
-	</form>
-	
-	</div>
+		<form id="writeform">
+			<div id="mes">
+				<div>
+					<!-- 폼으로 보내는게 맞는데... -->
+					<!-- [[${input}]] -->
+					<textarea id="pnotice" name="pnotice" th:text="${input.pnotice}"></textarea>
+					<input type="hidden" id="pnum" name="pnum" th:value="${input.pnum}">
+				</div>
+				=======
+				<div id="mess">
+
+					<form id="writeform">
+						<div id="mes">
+							<div>
+								<!-- 폼으로 보내는게 맞는데... -->
+								<!-- [[${input}]] -->
+								<div id="two">
+									<textarea id="pnotice" name="pnotice" th:text="${input.pnotice}"
+										placeholder="프로젝트 협업 방식" onsubmit="return clickcheck"></textarea>
+									<div id="deletebox"><a th:href="|javascript:deleteProject(${input.pnum})|"
+											id="projectdelete">프로젝트 삭제</a></div>
+								</div>
+								<input type="hidden" id="pnum" name="pnum" th:value="${input.pnum}">
+
+							</div>
+						</div>
+						<div id="sub">
+							<div>
+								<textarea id="ptext" name="ptext" th:text="${input.ptext}"
+									placeholder="수행할 업무를 정하고 중요한 정보를 추가하세요." onsubmit="return clickcheck"></textarea>
+							</div>
+							<div id="member">
+								<h3>멤버추가</h3>
+
+								<div id="list">
+									<select id="mmm" name="memberselect">
+										<!-- <option id="choose">선택</option> -->
+										<option th:each="val: ${memberlist}" th:value="${val.email}"
+											th:utext="${val.email}" id="val">
+										</option>
+									</select>
+								</div>
+
+								<div id="mlist" th:text="${choiceMember}">
+
+
+								</div>
+
+							</div>
+						</div>
+
+
+						<div id="sub2">
+							<div id="state">
+								<h3>진행 및 상태</h3>
+								>>>>>>> 42cade8d94db9c6ba00ee69076aeb1f0db1706c2
+							</div>
+							<div id="sub">
+								<div>
+									<textarea id="ptext" name="ptext" th:text="${input.ptext}"></textarea>
+								</div>
+								<div id="member">
+									<p>프로젝트 멤버</p>
+
+									<div id="list">
+										<select id="memberselect" name="memberselect">
+											<option value="">선택</option>
+											<option th:each="val: ${memberlist}" th:value="${val.name}"
+												th:utext="${val.name}" id="val">
+											</option>
+										</select>
+									</div>
+
+									<div id="memberlist" th:text="${choiceMember}">
+
+
+									</div>
+
+								</div>
+							</div>
+
+
+							<div id="sub2">
+								<div id="state">
+									<p>진행 및 상태</p>
+								</div>
+							</div>
+
+					</form>
+
+				</div>
+
+
+				<div class="projectupdatemodal">
+					<div class="modalmodalmodal">
+						<h2 id="updateproject">프로젝트 수정</h2>
+						<form th:object="${input}" th:action="@{/projectView/projectupdate}" method="post"
+							onsubmit="return check()">
+							<input type="hidden" name="pnum" id="pnum" th:value="${input.pnum}">
+
+							<table id="tbl3">
+
+								<tr id="updatename">
+									<th>프로젝트 이름 수정</th>
+									<td><input type="text" maxlength='16' name="pname" id="pname"
+											th:value="${input.pname}"></td>
+								</tr>
+
+								<tr id="updatemember">
+									<th>참여 멤버 수정</th>
+									<td><input type="text" maxlength='16' name="pmember" id="pmember"
+											th:value="${input.pmember}"></td>
+								</tr>
+
+								<tr id="updatebutton">
+									<th colspan="2" id="btn"><input type="submit" value="수정" id="updatebtn"></th>
+								</tr>
+
+							</table>
+
+						</form>
+					</div>
+
+				</div>
+
+				<script th:src="@{/js/projectupdatemodal.js}"></script>
+
 </body>
+
 </html>

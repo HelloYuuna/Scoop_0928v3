@@ -23,6 +23,6 @@ public class Goal {
     String gmember; // 참가맴버 아이디등록
     int gfinish; // 0: 미완료, 1: 완료 (마일스톤)
     String gcreator; // 생성자 (못지움)
-    
-    
+    String calendar; // 일 총합
+
 }

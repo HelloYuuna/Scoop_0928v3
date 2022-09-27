@@ -1,14 +1,13 @@
-package com.example.scoop.service;
+package com.example.scoop.dao;
 
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.hibernate.annotations.Parameter;
 
 import com.example.scoop.domain.Calendar;
 
-public interface CalendarService {
-
+@Mapper
+public interface CalendarDAO {
     public int insert(Calendar calendar);
-
 }

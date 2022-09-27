@@ -9,7 +9,7 @@ public interface WorkspaceService {
 	public int insertWorkspace(Workspace workspace);
 
 	public Workspace selectLately(String email);
-	
+
 	public int updateLately(Workspace workspace);
 
 	public Workspace selectOne(int wsid);

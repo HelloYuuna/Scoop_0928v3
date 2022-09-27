@@ -2,16 +2,41 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.scoop.service.dao.GoalDAO">
+<mapper namespace="com.example.scoop.dao.GoalDAO">
 
-    <!-- <insert id="insertgoal" parameterType="Goal">
-        INSERT INTO Goal (key, wsid, gname,gstartdate,genddate, gstatus, uowner, gpublic, gfinish, gcreator)
-        VALUES (key_seq.nextval, 1, #{gname},#{gstartdate},,#{genddate}, #{gstatus}, #{uowner}, #{gpublic}, #{gfinish},#{gcreator})
-    </insert> -->
     <insert id="insertgoal" parameterType="Goal">
-        INSERT INTO goal (key, gcreator)
-        VALUES (key_seq.nextval,#{gcreator})
+        INSERT INTO scoop_goal 
+        (key, wsid, gname,
+        <if test="gstartdate != null and genddate != null">
+        gstartdate,genddate, 
+        </if>
+        gstatus, uowner, gpublic, gfinish, gcreator)
+        VALUES 
+        (key_seq.nextval, #{wsid}, #{gname},
+        <if test="gstartdate != null and genddate != null">
+        #{gstartdate},#{genddate}, 
+        </if>
+        #{gstatus}, #{uowner}, #{gpublic}, #{gfinish},#{gcreator})
     </insert>
+    
+    <select id="selectOne1Goal" parameterType="String" resultType="Goal">
+        SELECT * FROM scoop_goal
+    </select>
+
+    <select id="selectOne1" parameterType="Goal" resultType="Goal">
+        SELECT * FROM scoop_goal WHERE wsid = #{wsid}
+    </select>
+    
+
+    <select id="selectteam" parameterType="int" resultType="Goal">
+        SELECT * FROM scoop_goal WHERE wsid = #{wsid}
+    </select>
+    <select id="selectme" parameterType="Goal" resultType="Goal">
+        SELECT * FROM scoop_goal WHERE gcreator = #{gcreator} and wsid=#{wsid}
+    </select>
+
+
+     
 
 
 </mapper>
