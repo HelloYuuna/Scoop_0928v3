@@ -120,7 +120,7 @@ public class ProjectController {
 	
 	@PostMapping("projectupdate")
 	public String projectupdate(Project project) {
-		SessionUser user = (SessionUser) htKtpSession.getAttribute("user");
+		SessionUser user = (SessionUser) httpSession.getAttribute("user");
 		log.debug("가져온 유저 user:{}", user);
 		project.setUemail(user.getEmail());
 		//project.setPmember(user.getName());
