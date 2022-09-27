@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.scoop.auth.dto.SessionUser;
+import com.example.scoop.config.auth.dto.SessionUser;
 import com.example.scoop.domain.Project;
 import com.example.scoop.domain.User;
 import com.example.scoop.service.ProjectService;

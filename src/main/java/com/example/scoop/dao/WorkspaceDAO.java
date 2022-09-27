@@ -19,4 +19,8 @@ public interface WorkspaceDAO {
 
 	public ArrayList<Workspace> selectOwner(String email);
 
+	public int selectKey(Workspace workspace);
+
+	public int countOwner(String email);
+
 }
