@@ -16,6 +16,7 @@
 	<title>Goal</title>
 
 	<script>
+		let wsid = document.getElementById("wsid").value;
 		function calendar() {
 			var wsid = document.getElementById("wsid").value;
 			var url = "http://localhost:9500/scoop/calendarView/calendar1?wsid=" + wsid;
@@ -26,6 +27,34 @@
 			window.open("http://localhost:9500/scoop/calendarView1/calendar11", "calendar_parent"
 				, "width=750, height=750, left=1500, top=350");
 		}
+
+		$(document).ready(function () {
+			$('#insertform_btn').click(insertform);
+		});
+
+		function insertform(wsid) {
+			alert("Remove Workspace Home Number : " + wsid);
+			let gstatus = $("select[name=gstatus]").val();
+			alert(gstatus);
+			let gpublic = $("select[name=gpublic]").val();
+			alert(gpublic);
+			let gfinish = $("select[name=gfinish]").val();
+			alert(gfinish);
+			$.ajax({
+				type: "Get",
+				url: "insertform",
+				data: { wsid: wsid, gname: gname, gstartdate: gstartdate, genddate: genddate, gstatus: gstatus, uowner: uowner, gpublic: gpublic, gmember: gmember, gfinish: gfinish },
+				success: function () {
+					confirm("success : " + wsid);
+				},
+				error: function (e) {
+					alert(JSON.stringify(e));
+				}
+			})
+		}
+
+
+
 	</script>
 
 </head>
@@ -132,7 +161,7 @@
 				<br>
 				<div>
 					<div style="font-family: bold; font-size: 17px;">진행상황 :
-						<select name="category" style="width: 150px; height: 30px;" id="tyty">
+						<select name="gstatus" style="width: 150px; height: 30px;" id="gstatus">
 							<option value="0">0 : 진행상태</option>
 							<option value="1">1 : 위험</option>
 							<option value="2">2 : 기간지남</option>
@@ -141,10 +170,28 @@
 					</div>
 				</div>
 				<br>
+				<div>
+					<div style="font-family: bold; font-size: 17px;">공개여부 :
+						<select name="gpublic" style="width: 150px; height: 30px;" id="gpublic">
+							<option value="1">0 : 공개</option>
+							<option value="0">1 : 비공개</option>
+						</select>
+					</div>
+				</div>
+				<br>
+				<div>
+					<div style="font-family: bold; font-size: 17px;">마일스톤 :
+						<select name="gfinish" style="width: 150px; height: 30px;" id="gfinish">
+							<option value="0">0 : 미완료</option>
+							<option value="1">1 : 완료</option>
+						</select>
+					</div>
+				</div>
+				<br>
 				<div>맴버 : <input type="text" id="gmember" name="gmember" placeholder="이름또는 이메일로 맴버 추가"></div>
 				<br>
 				<div>
-					<input type="submit" id="subutu" value="확인" th:goal="@{insertgoal.insertgoal}"
+					<input type="submit" id="insertform_btn" value="확인" th:goal="@{insertgoal.insertgoal}"
 						th:onclick="test(this.getAttribute('goal'))">
 				</div>
 			</form>
@@ -177,18 +224,18 @@
 			<th id="gil" style="width: 10%;">[ 소유자 ]</th>
 		</tr>
 		<br>
-		<tr th:each="goallist: ${goallist}" class="gilta">
+		<tr th:each="goallist1: ${goallist1}" class="gilta">
 			<form th:action="@{/goalView/goalvyu}" id="list" name="list" method="post" onsubmit="return validation();">
 				<div class="modal">
 					<div class="modal_body">
-						<td th:text="${goallist.gname}" class="goalne" id="gname" name="gname">
+						<td th:text="${goallist1.gname}" class="goalne" id="gname" name="gname">
 						</td>
 						<input type="hidden" id="wsid" name="wsid" th:value="${wsid}">
-						<td th:text="|${goallist.calendar}|" class="goalne" id="gnal" name="gnal">
+						<td th:text="|${goallist1.calendar}|" class="goalne" id="gnal" name="gnal">
 						</td>
-						<td th:text="${goallist.gstatus}" class="goalne" id="gstatus" name="gstatus">
+						<td th:text="${goallist1.gstatus}" class="goalne" id="gstatus" name="gstatus">
 						</td>
-						<td th:text="${goallist.gcreator}" class="goalne" id="gcreator" name="gcreator"><br>
+						<td th:text="${goallist1.gcreator}" class="goalne" id="gcreator" name="gcreator"><br>
 						</td>
 					</div>
 				</div>

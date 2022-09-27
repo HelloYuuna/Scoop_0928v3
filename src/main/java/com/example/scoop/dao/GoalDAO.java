@@ -15,4 +15,6 @@ public interface GoalDAO {
 
 	public ArrayList<Goal> selectOne1Goal();
 
+	public ArrayList<Goal> selectOne1(int wsid);
+
 }

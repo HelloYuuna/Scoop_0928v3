@@ -11,11 +11,11 @@
         (key_seq.nextval, #{wsid}, #{gname}, #{gstartdate},#{genddate}, #{gstatus}, #{uowner}, #{gpublic}, #{gmember} , #{gfinish},#{gcreator})
     </insert>
     
-    <select id="selectOne1Goal" parameterType="String" resultType="Goal">
-        SELECT * FROM scoop_goal where wsid = #{wsid}
+    <select id="selectOne1Goal" resultType="Goal">
+        SELECT * FROM scoop_goal
     </select>
 
-    <select id="selectOne1" parameterType="Goal" resultType="Goal">
+    <select id="selectOne1" parameterType="int" resultType="Goal">
         SELECT * FROM scoop_goal WHERE wsid = #{wsid}
     </select>
     

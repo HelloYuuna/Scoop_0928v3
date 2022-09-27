@@ -25,8 +25,8 @@ public class GoalSeviceImpl implements GoalService {
         return result;
     };
 
-    public ArrayList<Goal> selectOne1Goal() {
-        ArrayList<Goal> result = boardDAO.selectOne1Goal();
+    public ArrayList<Goal> selectOne1(int wsid) {
+        ArrayList<Goal> result = boardDAO.selectOne1(wsid);
         ArrayList<Goal> returnGList = new ArrayList<Goal>();
 
         for (Goal goal : result) {
@@ -44,6 +44,32 @@ public class GoalSeviceImpl implements GoalService {
                 goal.setCalendar(goal1);
                 returnGList.add(goal);
                 log.debug("Calendar2 : {}", goal);
+                result = returnGList;
+            }
+
+        }
+        return result;
+    };
+
+    public ArrayList<Goal> selectOne1Goal() {
+        ArrayList<Goal> result = boardDAO.selectOne1Goal();
+        ArrayList<Goal> returnGList = new ArrayList<Goal>();
+
+        for (Goal goal : result) {
+            log.debug("처음값 : {}", goal);
+            if (goal.getGstartdate() != "" && goal.getGenddate() != "" &&
+                    goal.getGstartdate() != null && goal.getGenddate() != null) {
+                String goal1 = goal.getGstartdate() + "~" + goal.getGenddate();
+                goal.setCalendar(goal1);
+                returnGList.add(goal);
+                log.debug("Calendar3 : {}", goal);
+                result = returnGList;
+            } else if (goal.getGstartdate() == "" || goal.getGenddate() == "" &&
+                    goal.getGstartdate() == null || goal.getGenddate() == null) {
+                String goal1 = "";
+                goal.setCalendar(goal1);
+                returnGList.add(goal);
+                log.debug("Calendar4 : {}", goal);
                 result = returnGList;
             }
 
