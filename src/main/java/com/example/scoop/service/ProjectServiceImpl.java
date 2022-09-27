@@ -89,7 +89,7 @@ public class ProjectServiceImpl implements ProjectService {
 	public int updatemember(int pnum, User user) {
 		// select String으로 pmember 다 받아오고
 		String pmember = choiceMember(pnum);
-		pmember += user.getName();
+		pmember += user.getUsername();
 		// map을 선언한다. pnum과 user를 넘기는
 		HashMap<String, Object> map = new HashMap<>();
 

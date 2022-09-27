@@ -1,16 +1,24 @@
 package com.example.scoop.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 
+/**
+ * Oauth 인증용 도메인
+ * 구글 API저장용
+ */
 @Getter
+@Setter
 @NoArgsConstructor
+@Builder
 @Entity
-@Table(name="SCOOP_MEMBER")
-public class User {
+@Table(name="scoop_member")
+public class User implements UserDetails {
+
 	@Id
 	@Column(nullable = false, unique = true)
 	private String email;				// 회원 아이디 이메일
@@ -63,5 +71,50 @@ public class User {
 	public String getRoleKey() {
 		return this.role.getKey();
 	}
+
+
+	//************************** implements UserDetails methods ****************************//
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		return this.email;
+	}
+
+	@Override
+	public String getPassword() {
+		return this.password;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	/**
+	 * enabled
+	 * 0 : false 비활성화
+	 * 1 : true 활성화
+	 * @return true/false
+	 */
+	@Override
+	public boolean isEnabled() {
+		return this.enabled;
+	}
+
 }
 

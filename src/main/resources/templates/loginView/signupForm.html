@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up Task-it!</title>
+    <script th:src="@{/js/jquery-3.6.0.js}"></script>
+    <script th:src="@{/js/login/loginJS.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/login/signup.css}">
+</head>
+<body>
+<!--/*
+* 로그인 유효성 체크 submit버튼으로 해결*
+* 아이디 & 비밀번호 required 속성부여
+* 아이디 이메일 형식 확인
+* 비밀번호 형식 확인
+* 비밀번호는 8~ 10자리
+*/-->
+<div class="content">
+    <div class="left-image"></div>
+    <div id="sign-up-form">
+        <h2 id="sign-up-title">회원가입</h2>
+        <div><span id="idchk-msg"></span></div>
+        <form th:object="${user}" id="signupForm" th:action="@{/}" method="post" onsubmit="return submitFalse();">
+            <div class="userid">
+                <label>
+                    <input type="email" th:field="*{email}" placeholder="email" required="required">
+                </label>
+            </div>
+            <div class="userpw">
+                <label>
+                    <input type="password" th:field="*{password}" placeholder="password" minlength="8" maxlength="10" required="required">
+                </label>
+            </div>
+            <div class="username">
+                <label>
+                    <input type="text" th:field="*{name}" placeholder="name" minlength="2" maxlength="30" required="required">
+                </label>
+            </div>
+            <div class="btn_submit">
+                <input type="submit" id="submit-btn" value="sign up">
+            </div>
+        </form>
+        <div><a th:href="@{/member/loginForm}">뒤로가기</a></div>
+    </div>
+</div>
+</body>
+</html>

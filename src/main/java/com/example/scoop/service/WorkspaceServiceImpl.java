@@ -43,6 +43,18 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 	public ArrayList<Workspace> selectOwner(String email) {
 		ArrayList<Workspace> list = workspaceDAO.selectOwner(email);
 		return list;
+	}
+
+	@Override
+	public int selectKey(Workspace workspace) {
+		int result = workspaceDAO.selectKey(workspace);
+		return result;
+	}
+
+	@Override
+	public int countOwner(String email) {
+		int result = workspaceDAO.countOwner(email);
+		return result;
 	};
 
 }

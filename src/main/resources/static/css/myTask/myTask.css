@@ -1,0 +1,145 @@
+@charset "UTF-8";
+
+body {
+    color: white;
+    background-color: #2D2E31;
+}
+
+.content {
+    margin: auto;
+    width: 99%;
+}
+
+.task-menu {
+    margin-top: 10px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+#task-menu-name {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+button {
+    all: unset;
+    background-color: #005ade;
+    color: white;
+    font-size: 0.8em;
+    font-weight: 700;
+    /*margin-top: 10px;*/
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.modalButton {
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0052CC;
+}
+
+span {
+    display: inline-block;
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-left: 5px;
+    padding: 10px 0;
+    color: #92939F;
+}
+
+#btnTaskMake {
+    width: 95%;
+}
+
+.modal {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.modal__overlay {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+}
+
+.modal__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: stretch;
+    background-color: #2D2E31;
+    padding: 15px;
+    border-radius: 15px;
+    top: 0;
+    width: 40%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19),
+    0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+#top-button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal__text {
+    text-align: left;
+}
+
+textarea#task-title {
+    color: white;
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+    background-color: #2D2E31;
+    resize: none;
+    overflow: hidden;
+    padding: 1em 1em 0.1em;
+    margin-top: 10px;
+}
+
+#task-title:hover {
+    border: 1px solid #909090;
+}
+
+#task-title:focus {
+    border: 1px solid #909090;
+}
+
+.hidden {
+    display: none;
+}
+
+.spreadsheet-title {
+    display: flex;
+    margin-top: 10px;
+    border-top: 1px solid #68686F;
+    border-bottom: 1px solid #68686F;
+    width: 100%;
+}
+
+#taskName {
+    border-right: 1px solid #68686F;
+    width: 40%;
+}
+
+#deadLine {
+    border-right: 1px solid #68686F;
+    width: 30%;
+}
+
+#projectName {
+    width: 30%;
+}

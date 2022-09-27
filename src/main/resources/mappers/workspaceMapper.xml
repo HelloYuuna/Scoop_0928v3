@@ -4,16 +4,18 @@
 
 <mapper namespace="com.example.scoop.dao.WorkspaceDAO">
 
-<insert id="insertWorkspace" parameterType="Workspace">
-	INSERT INTO scoop_workspace
-		(
+<insert id="selectKey" parameterType="Workspace">
+	<selectKey resultType="int" keyProperty="wsid" order="BEFORE">
+		select scoop_workspace_seq.NEXTVAL from dual
+	</selectKey>
+	INSERT INTO scoop_workspace  (
 			wsid
 			, wsname
 			, wsowner
 		)
 	VALUES
 		(
-			scoop_workspace_seq.NEXTVAL
+			#{wsid}
 			, #{wsname}
 			, #{wsowner}
 		)
@@ -61,4 +63,12 @@
 		wsowner=#{wsowner}
 </select>
 
+<select id="countOwner" parameterType="String" resultType="int">
+	SELECT
+		count(*)
+	FROM
+		scoop_workspace
+	WHERE
+		wsowner=#{wsowner}
+</select>
 </mapper>

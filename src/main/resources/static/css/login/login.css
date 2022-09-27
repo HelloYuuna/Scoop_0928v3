@@ -1,0 +1,79 @@
+
+body {
+	background: aliceblue;
+	font-family: Georgia, sans-serif;
+}
+
+div.content {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: 10%;
+}
+
+div.left-image {
+	display: flex;
+	width: 300px;
+	height: 480px;
+	background-image: url("https://images.unsplash.com/photo-1455218873509-8097305ee378?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80");
+	background-repeat: no-repeat;
+	opacity: 0.7; 
+	box-shadow: 1px 2px 30px 1px #dbdbdb;
+}
+
+div.container {
+	display: flex;
+	justify-content: center;
+	width: 400px;
+	height: 450px;
+	padding-top: 30px;
+	background: white;
+	box-shadow: 1px 2px 30px 1px #dbdbdb;
+}
+
+div#login-info {
+	text-align: center;
+
+}
+
+h2 {
+	color: #354f52;
+	margin-bottom: 40px;
+
+}
+
+/*input#btn_idChk {*/
+/*	margin-left: 10px;*/
+/*}*/
+
+div.sign-with-another {
+	margin: 20px 0;
+}
+
+input[type=password],
+input[type=email] {
+	border-radius: 10px;
+	border: 1px solid #dbdbdb;
+	margin-bottom: 12px;
+	width: 300px;
+	line-height: 30px;
+	padding-left: 10px;
+}
+
+div.btn_submit {
+	margin: 30px 0;
+}
+
+input[type=submit] {
+	border: none;
+	width: 310px;
+	border-radius: 10px;
+	padding: 10px 10px;
+	background: #354f52;
+	color: #fff;
+	font-weight: 600;
+}
+
+input[type=submit]:hover {
+	background: #44676b;
+}
