@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 로그인 및 회원가입 컨트롤러
- * projectName     :Scoop
- * fileName        :MemberController
- * author          :yuuna
- * since           :2022/09/14
+ * projectName :Scoop
+ * fileName :MemberController
+ * author :yuuna
+ * since :2022/09/14
  */
 
 @Slf4j
@@ -23,6 +23,7 @@ public class UserController {
     /**
      * 로그인 폼으로 이동
      * 로그인 상태가 아니면 여기로 항상 이동
+     * 
      * @return loginForm
      */
     @GetMapping("loginForm")
@@ -32,6 +33,7 @@ public class UserController {
 
     /**
      * 회원가입 폼으로 이동
+     * 
      * @return signupForm
      */
     @GetMapping("/signupForm")

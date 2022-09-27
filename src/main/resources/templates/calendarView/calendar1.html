@@ -71,20 +71,22 @@
                         console.log("allday :", allday);
                         console.log("title:", title);
                         console.log("wsid:", wsid);
-
                         $.ajax({
                             url: "/scoop/calendarView/callin",
                             type: "POST",
                             data: {
                                 title: title, star: star, end: end, allday: allday, wsid: wsid
-                            }, success: function (data) {
+                            },
+                            dataType: {
+                                title: "text", star: "text", end: "text", wsid: "text"
+                            },
+                            success: function (data) {
                                 alert('통신성공!!');
                             },
                             error: function (e) {
                                 alert(JSON.stringify(e));
                             }
                         });
-
                         $(function () {
                             var request = $.ajax({
                                 url: "/scoop/calendarView/calendar1",
@@ -93,7 +95,6 @@
                             });
                             request.done(function (data) {
                                 //console.log(data);
-
                                 var calendarEl = document.getElementById('calendar');
                                 var calendar = new FullCalendar.Calendar(calendarEl, {
                                     initialView: 'dayGridMonth',
@@ -104,10 +105,8 @@
                                     },
                                     events: data
                                 });
-
                                 calendar.render();
                             });
-
                             request.fail(function (jqXHR, textStatus) {
                                 alert("Request failed: " + textStatus);
                             });
@@ -147,8 +146,6 @@
                 calendar.render()
             });
         })();
-
-
     </script>
 </head>
 

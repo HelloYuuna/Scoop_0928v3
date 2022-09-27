@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,20 +8,19 @@
 	<link rel="stylesheet" th:href="@{/css/home.css}">
 	<link rel="stylesheet" th:href="@{/css/header.css}">
 	<link rel="stylesheet" th:href="@{/css/sidebar.css}">
-	
+
 	<!-- modal -->
 	<link rel="stylesheet" th:href="@{/css/newWorkspace.css}">
 	<link rel="stylesheet" th:href="@{/css/removeWorkspace.css}">
 	<link rel="stylesheet" th:href="@{/css/inviteWorkspace.css}">
 	<link rel="stylesheet" th:href="@{/css/projectmodal.css}">
-	
+
 	<script th:src="@{/js/jquery-3.6.0.js}"></script>
 	<script th:src="@{/js/email.js}"></script>
 	<script th:src="@{/js/header.js}"></script>
 	<script>
 		$(document).ready(function () {
 			$('#mmm').change(asd);
-
 		})
 
 		function check() {
@@ -41,14 +41,9 @@
 				alert('프로젝트에 참여 할 멤버를 선택해주세요.');
 				return false;
 			}
-
-
 		}
-
 		function clickcheck() {
 			onfocus = "this.placeholder=''";
-
-
 		}
 		let memberNameList = '';
 		let listCount = 0;
@@ -64,12 +59,301 @@
 
 			//console.log(memberNameList);
 			$('#pmember').html(memberNameList); //이곳의 div 칸에다가 선택 된 value 값을 집어 넣고
-			$('#pmber').val(memberNameList); //이것은 선택 된 애들을 hidden으로 보내기 위한 것 
+			$('#pmber').val(memberNameList); //이것은 선택 된 애들을 hidden으로 보내기 위한 것
 			console.log($('#pmber').val());
 		}
 
 	</script>
+	<style>
+		* {
+			padding: 0;
+			margin: 0
+		}
+
+		.men {
+			background: rgba(0, 0, 0, 0.3);
+		}
+
+		body {
+			/* background-image: url("https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA3MjRfNzAg%2FMDAxNjU4NTg5Njg2Njcz.12YsjbC98JoY-ES4RUZzzsJJAi09twC3rgPTNylO3Ywg.k5NGotQqqruQ1dv1XdqEzcoYPbvx3UHAY7qR3dna0YIg.JPEG.heng2log%2F1658589685856.jpg&type=sc960_832"); */
+			background-size: cover;
+			background-color: aliceblue;
+		}
+
+		.menu {
+			width: 800px;
+			overflow: hidden;
+			margin: 150px auto;
+		}
+
+		.menu>li {
+			width: 20%;
+			/*20*5=100%*/
+			float: left;
+			text-align: center;
+			line-height: 40px;
+			background-color: #5778ff;
+		}
+
+		.menu a {
+			color: #1b1b1b;
+			font-style: normal;
+			font-size: 16px;
+			font-weight: bold;
+		}
+
+		.submenu>li {
+			line-height: 50px;
+			background-color: #94a9ff;
+		}
+
+		.submenu {
+			height: 0;
+			/*ul의 높이를 안보이게 처리*/
+			overflow: hidden;
+		}
+
+		.menu>li:hover {
+			background-color: #94a9ff;
+			transition-duration: 0.5s;
+		}
+
+		.menu>li:hover .submenu {
+			height: 250px;
+			/*서브메뉴 li한개의 높이 50*5*/
+			transition-duration: 1s;
+		}
+
+		.center {
+			text-align: center;
+		}
+
+		#sub {
+			display: inline-flex;
+		}
+
+		#sub2 {
+			display: inline-flex;
+		}
+
+		#tess {
+			text-align: center;
+		}
+
+		#goal {
+			border-left: .5rem solid #CFD5E8 !important;
+			margin-top: 50px;
+			width: 575px;
+			height: 400px;
+			border-collapse: collapse;
+			/* border: solid;
+			border-width: thin; */
+			margin-right: 50px;
+			background-color: #C0C6CC;
+			background-color: rgba(255, 255, 255, 1.0);
+			border-radius: 10px 10px;
+
+		}
+
+		#project {
+			margin-top: 50px;
+			width: 575px;
+			height: 400px;
+			border-left: .5rem solid #CFE3E8 !important;
+			/* border-collapse: collapse;
+			border: solid; */
+			border-width: thin;
+			background-color: #526A80;
+			background-color: rgba(255, 255, 255, 1.0);
+			border-radius: 8px 8px;
+			position: relative;
+
+		}
+
+		#user {
+			margin-top: 50px;
+			width: 1202px;
+			height: 400px;
+			border-left: .5rem solid #E3E3FF !important;
+			/* border-collapse: collapse;
+			border: solid; */
+			border-width: thin;
+			background-color: #A3D4FF;
+			background-color: rgba(255, 255, 255, 1.0);
+			margin-bottom: 100px;
+			border-radius: 10px 10px;
+
+		}
+
+		#g1 {
+			padding: 10px;
+			margin: 10px
+		}
+
+		#p1 {
+			padding: 10px;
+			margin: 10px
+		}
+
+		#u1 {
+			padding: 10px;
+			margin: 10px
+		}
+
+		#tete {
+			height: 30px;
+			width: 230px;
+			border-radius: 4px;
+			font-size: 15px;
+			padding: 0 0 0 5px;
+		}
+
+		#butt {
+			height: 30px;
+			width: 50px;
+			font-size: 16px;
+			background-color: white;
+		}
+
+
+		#createproject {
+			background-color: #C0C6CC;
+			/* padding: 15px 15px; */
+			border: 0;
+			outline: 0;
+			padding-top: 2px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			color: #526A80;
+			border-radius: 10px 10px;
+			width: 180px;
+			height: 30px;
+			margin: 2px;
+			position: absolute;
+			clear: right;
+			float: left;
+			right: 0;
+			bottom: 0px;
+		}
+
+		#createproject:hover {
+			/* color: white; */
+			background-color: aliceblue;
+			font-weight: 700;
+		}
+
+		#pplist {
+			display: inline-flex;
+		}
+
+
+		#tabled {
+			background-color: aliceblue;
+			padding: 15px 25px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			color: #526A80;
+			overflow: auto;
+			border-radius: 10px 10px;
+			/*  width: 150px;
+		    height: 50px; */
+			margin: 1px;
+		}
+
+		#tabled:hover {
+			/* background-color:#C0C6CC; */
+			font-weight: 700;
+		}
+
+
+		#projecttitle {
+			margin-top: 20px;
+
+		}
+
+		#tbl2 {
+			margin-top: 50px;
+			margin-left: auto;
+			margin-right: auto;
+			text-align: center;
+
+		}
+
+		#pname {
+			padding: 5px;
+			border: none;
+			float: left;
+			width: 250px;
+			height: 30px;
+			border-radius: 8px 8px;
+
+		}
+
+		#pnotice {
+			padding: 5px;
+			border: none;
+			float: left;
+			width: 250px;
+			height: 30px;
+			border-radius: 8px 8px;
+		}
+
+		#ptext {
+			padding: 5px;
+			border: none;
+			float: left;
+			border-radius: 10px 10px;
+		}
+
+		#pname {
+			margin-left: 10px;
+			margin-bottom: 10px;
+			border-collapse: collapse;
+			border: solid;
+			border-width: thin;
+		}
+
+		#pnotice {
+			margin-left: 10px;
+			margin-bottom: 10px;
+			border-collapse: collapse;
+			border: solid;
+			border-width: thin;
+		}
+
+		#ptext {
+			margin-left: 10px;
+			margin-bottom: 10px;
+			border-collapse: collapse;
+			border: solid;
+			border-width: thin;
+		}
+
+		#btn3 {
+			margin: 30px auto;
+			text-align: center;
+			width: 180px;
+			height: 30px;
+			border-radius: 10px 10px;
+			border: 0;
+			outline: 0;
+			color: #526A80;
+			background-color: #C0C6CC
+		}
+
+		#btn3:hover {
+			background-color: aliceblue;
+			font-weight: 700;
+		}
+
+		#mmm {
+			margin-top: 5px;
+		}
+	</style>
 </head>
+
 <body>
 
 	<!-- modal : New Workspace -->
@@ -82,18 +366,17 @@
 					<table class="newWorkspace_table">
 						<tr>
 							<td class="newWorkspace_td-name">작업 공간 이름</td>
-							<td><input type="text" id="wsname" name="wsname" class="newWorkspace_input" placeholder="회사 또는 팀 이름"></td>
+							<td><input type="text" id="wsname" name="wsname" class="newWorkspace_input"
+									placeholder="회사 또는 팀 이름"></td>
 						</tr>
 						<tr>
 							<td class="newWorkspace_td-name">멤버</td>
-							<td><br><textarea class="newWorkspace_textarea" placeholder="name@company.com"></textarea></td>
+							<td><br><textarea class="newWorkspace_textarea" placeholder="name@company.com"></textarea>
+							</td>
 						</tr>
 					</table>
 				</div>
 				<hr>
-				<div class="newWorkspace_button" >
-					<input type="submit" id="newWorkspace_submitbtn" value="작업 공간 생성">
-				</div>
 			</form>
 		</div>
 	</div>
@@ -109,7 +392,7 @@
 					액세스 권한을 다시 부여받으려면 동료에게 작업 공간에 다시 초대해달라고 요청해야 합니다.
 				</div>
 				<hr>
-				<div class="removeWorkspace_button" >
+				<div class="removeWorkspace_button">
 					<input type="submit" id="removeWorkspace_submitbtn" value="제거">
 				</div>
 			</form>
@@ -123,23 +406,26 @@
 			<hr>
 			<div class="invite_content">
 				팀원에게 회원님의 팀에 대한 액세스 권한을 부여하는 이메일이 전송됩니다.
-				<form> <!--  id="inviteForm" th:action="@{/sendEmail}" method="Post" -->
+				<form>
+					<!--  id="inviteForm" th:action="@{/sendEmail}" method="Post" -->
 					<table class="invite_table">
 						<tr>
 							<td class="invite_td-name">이메일 주소</td>
 						</tr>
 						<tr>
-							<td><br><textarea id="userId" name="userId" class="invite_textarea" placeholder="name@company.com, name@company.com, ..."></textarea></td>
+							<td><br><textarea id="userId" name="userId" class="invite_textarea"
+									placeholder="name@company.com, name@company.com, ..."></textarea></td>
 						</tr>
 						<tr>
 							<td class="invite_td-name">프로젝트에 추가</td>
 						</tr>
 						<tr>
-							<td><br><input type="text" id="addProject" name="addProject" class="invite_input" placeholder="프로젝트를 추가하려면 입력하세요"></td>
+							<td><br><input type="text" id="addProject" name="addProject" class="invite_input"
+									placeholder="프로젝트를 추가하려면 입력하세요"></td>
 						</tr>
 					</table>
 					<hr>
-					<div class="invite_button" >
+					<div class="invite_button">
 						<input type="submit" id="invite_submitbtn" value="보내기">
 					</div>
 				</form>
@@ -176,7 +462,9 @@
 						<form>
 							<table th:each="workspaceList : ${ownerWorkspaceList}">
 								<tr>
-									<td><input type="submit" th:wsnum="${workspaceList.wsid}" th:onclick="switchWorkspace(this.getAttribute('wsnum'))" th:value="${workspaceList.wsname}"></td>
+									<td><input type="submit" th:wsnum="${workspaceList.wsid}"
+											th:onclick="switchWorkspace(this.getAttribute('wsnum'))"
+											th:value="${workspaceList.wsname}"></td>
 								</tr>
 							</table>
 						</form>
@@ -206,7 +494,9 @@
 				<a class="menu-bars" id="hide-menu">
 					<img alt="sidebar" th:src="@{/img/white_menu.png}" width="30px"> <i class="nav-icon"></i>
 				</a>
-				<a><h1><i id="logo"></i>Task-it</h1></a>
+				<a>
+					<h1><i id="logo"></i>Task-it</h1>
+				</a>
 			</div>
 			<hr>
 			<div class="nav-section">
@@ -217,8 +507,10 @@
 			</div>
 			<hr>
 			<div class="nav-section2">
-				<li class="nav-text" th:wsnum="${workspace.wsid}" th:onclick="workspaceHome(this.getAttribute('wsnum'))">
-					<a th:href="@{/workspaceHome}"><i class="nav-icon sidebar-wsname" th:text="${workspace.wsname}"></i></a>
+				<li class="nav-text" th:wsnum="${workspace.wsid}"
+					th:onclick="workspaceHome(this.getAttribute('wsnum'))">
+					<a th:href="@{/workspaceHome}"><i class="nav-icon sidebar-wsname"
+							th:text="${workspace.wsname}"></i></a>
 				</li>
 				<li class="nav-text"><a th:href="@{/}"><i class="nav-icon"></i>(사람들 표시)</a></li>
 				<li class="nav-text"><a th:href="@{/}"><i class="nav-icon"></i>(프로젝트명)</a></li>
@@ -238,15 +530,15 @@
 			<br>
 			<div class="today-date">
 				<h2>[[${month}]] 월 [[${dayOfMonth}]] 일 [[${dayOfWeek}]]</h2>
-	
+
 			</div>
-	
+
 			<div class="login-area">
 				<span th:if="${userName != null}">
 					<h3><span th:text="${userName}"></span> 님 안녕하세요 </h3><br>
 				</span>
 			</div>
-	
+
 			<div id="tess">
 				<div id="sub">
 					<div id="goal">
@@ -256,16 +548,15 @@
 						<div>
 							<p id="p1">프로젝트</p>
 						</div>
-						
 						<div>
 							<div id="tbl">
 								<div th:each="pplist: ${projectlist}" class="pplist" id="pplist">
-									<div><a th:text="${pplist.pname}" th:href="@{/projectView/project(pnum=${pplist.pnum})}"
-											id="tabled"></a></div>
+									<div><a th:text="${pplist.pname}"
+											th:href="@{/projectView/project(pnum=${pplist.pnum})}" id="tabled"></a>
+									</div>
 								</div>
 							</div>
 						</div>
-		
 						<div>
 							<input type="button" id="createproject" class="createproject" value="프로젝트 생성">
 							<!-- <p><a th:href="@{/projectView/createproject}">프로젝트 생성</a></p> -->
@@ -278,19 +569,19 @@
 						<h3 id="u1">사용자</h3>
 					</div>
 				</div>
-			</div>	
+			</div>
 		</div>
 
 		<div class="projectmodal">
 			<div class="modalmodal">
 				<h2 id="projecttitle">프로젝트 생성</h2>
 				<form th:action="@{/projectView/createproject}" method="post" onsubmit="return check()">
-	
+
 					<table id="tbl2">
 						<tr id="inputname">
 							<th><input type="text" maxlength='16' name="pname" id="pname" placeholder="프로젝트 이름 입력"></th>
 						</tr>
-	
+
 						<tr id="selectmember">
 							<th>
 								<p>멤버 선택</p>
@@ -299,19 +590,19 @@
 									<option th:each="val: ${ulist}" th:value="${val.email}" th:utext="${val.email}">
 									</option>
 								</select>
-	
+
 							</th>
 						</tr>
-	
+
 						<tr>
 							<th>
 								<div id="pmember"></div>
 							</th>
 						</tr>
-	
+
 						<tr id="inputbtn">
 							<th colspan="2" id="btn"><input type="submit" value="프로젝트 생성" id="btn3"></th>
-	
+
 						</tr>
 					</table>
 					<input type="hidden" name="pmember" id="pmber">
@@ -319,8 +610,9 @@
 			</div>
 		</div>
 	</div>
-	
+  
 	<script th:src="@{/js/modal.js}"></script>
 
-	</body>
+</body>
+
 </html>
