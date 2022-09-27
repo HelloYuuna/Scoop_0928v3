@@ -1,0 +1,20 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.scoop.dao.UserDAO">
+    <select id="findById" parameterType="String" resultType="User">
+        select * from SCOOP_MEMBER
+        where EMAIL = #{email}
+    </select>
+
+    <insert id="insertUser" parameterType="User">
+        insert into SCOOP_MEMBER (EMAIL, ENABLED, NAME, PASSWORD, PICTURE, ROLE, UDEPT, WSID)
+        VALUES (#{email}, default, #{name}, #{password}, null, #{role}, null, null)
+    </insert>
+
+    <select id="fingfindByWsid" parameterType="int" resultType="User">
+        select * from SCOOP_MEMBER
+        where WSID = #{wsid}
+    </select>
+</mapper>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>welcome to task-it world</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" th:href="@{/css/login/login.css}">
+	</head>
+	<body>
+		<div class="content">
+			<div class="left-image"></div>
+			<div class="container">
+				<div id="login-info">
+					<h2>로그인</h2>
+					<form th:action="@{/member/login}" method="post">
+						<div class="userid">
+							<label>
+								<input type="email" name="email" placeholder="이메일" required="required">
+							</label>
+						</div>
+						<div class="userpw">
+							<label>
+								<input type="password" name="password" placeholder="비밀번호" maxlength="10" required="required">
+							</label>
+						</div>
+						<div class="btn_submit">
+							<div class="white">
+								<!-- 아이디 비번 틀렸을때 에러 -->
+								<span id="error-panel" th:if="${param.error}">ID 또는 비밀번호가 틀렸습니다.</span>
+							</div>
+							<input type="submit" value="sign in">
+						</div>
+					</form>
+					<div class="sign-with-another">
+						<span>— Or Sign in with —</span>
+						<div>
+							<span th:if="${userName == null}">
+								<a href="/scoop/oauth2/authorization/google" class="btn btn-success active" role="button">구글로 로그인!</a>
+							</span>
+						</div>
+					</div>
+					<div><a th:href="@{/member/signupForm}">계정이 없으신가요?</a></div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
