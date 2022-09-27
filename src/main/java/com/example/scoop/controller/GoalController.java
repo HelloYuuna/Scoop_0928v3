@@ -41,9 +41,10 @@ public class GoalController {
 		ArrayList<Goal> goallist = service.selectOne1Goal();
 		int wsid = goallist.get(0).getWsid();
 		model.addAttribute("wsid", wsid);
+		log.debug("wsidlog1:{}", wsid);
 		log.debug("goallist1:{}", goallist);
 		model.addAttribute("goallist", goallist);
-		log.debug("wsidlog:{}", wsid);
+		log.debug("wsidlog2:{}", wsid);
 		return "/goalView/goal";
 	}
 
@@ -60,17 +61,15 @@ public class GoalController {
 	@PostMapping("insertgoal")
 	public String insertgoal(Goal goal, String gstartdate, String genddate) {
 		SessionUser user = (SessionUser) httpSession.getAttribute("user");
-		log.debug("목표 내용 : {}", goal);
-		log.debug("gstartdate : {}", gstartdate);
-		log.debug("genddate : {}", genddate);
 		goal.setGcreator(user.getEmail());
 		service.insertgoal(goal);
+		log.debug("goal11:{}", goal);
 		return "redirect:/goalView/goal";
 	}
 
 	@GetMapping("goalvyu")
 	public String goalvyu() {
-		return "/goalView/goalvyu";
+		return "redirect:/goalView/goalvyu";
 	}
 
 	// @PostMapping("insert")

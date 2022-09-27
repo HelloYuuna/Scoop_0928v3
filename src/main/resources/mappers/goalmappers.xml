@@ -12,7 +12,7 @@
     </insert>
     
     <select id="selectOne1Goal" parameterType="String" resultType="Goal">
-        SELECT * FROM scoop_goal
+        SELECT * FROM scoop_goal where wsid = #{wsid}
     </select>
 
     <select id="selectOne1" parameterType="Goal" resultType="Goal">

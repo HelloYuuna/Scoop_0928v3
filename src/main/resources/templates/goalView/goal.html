@@ -43,13 +43,60 @@
 		</div>
 		<hr style="width:65%;">
 	</div>
-	<div class=" navbar navbar-right" style="margin-left: 70%;">
-		<input type="text" placeholder="검색" id="searchbox">
-		<img th:src="@{/img/add_circle.png}" style="width: 30px">
-	</div>
+	<!-- <div class=" navbar navbar-right" style="margin-left: 70%;">
+		 <input type="text" placeholder="검색" id="searchbox"> 
+		 <img th:src="@{/img/add_circle.png}" style="width: 30px"> 
+	</div> -->
+	<style>
+		#mokucuga {
+			background-color: #C0C6CC;
+			/* padding: 15px 15px; */
+			border: 0;
+			outline: 0;
+			padding-top: 2px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			color: #526A80;
+			border-radius: 10px 10px;
+			width: 180px;
+			height: 50px;
+			margin: 2px;
+			clear: right;
+			right: 0;
+			bottom: 0px;
+		}
+
+		#mokucuga:hover {
+			/* color: white; */
+			background-color: aliceblue;
+			font-weight: 700;
+
+
+		}
+
+		input[type=text] {
+			width: 300px;
+			height: 40px;
+			border-radius: 10px;
+			margin: 5px;
+		}
+
+		#insertform {
+			font-size: 20px;
+		}
+
+		#subutu {
+			width: 100px;
+			height: 40px;
+			border-radius: 10px;
+			margin: 5px;
+			font-size: 20px;
+		}
+	</style>
 	<div style="margin-top: 1%; margin-left: 8%;">
-		<form th:action="@{/goal/selectcal}" method="post" onsubmit="return validation();"> //만들어야함
-			<input type="button" class="btn-open-popup" value="+ 목표추가" style="font-size: 17px;">
+		<form th:action="@{/goal/selectcal}" method="post" onsubmit="return validation();">
+			<input type="button" class="btn-open-popup" value="+ 목표추가" style="font-size: 17px;" id="mokucuga">
 			<div class="write" style="margin-left: 85%;">
 				<div style="font-family: bold; font-size: 25px;">진행상황</div>
 				<div>
@@ -85,7 +132,7 @@
 				<br>
 				<div>
 					<div style="font-family: bold; font-size: 17px;">진행상황 :
-						<select name="category" style="width: 150px; height: 30px;">
+						<select name="category" style="width: 150px; height: 30px;" id="tyty">
 							<option value="0">0 : 진행상태</option>
 							<option value="1">1 : 위험</option>
 							<option value="2">2 : 기간지남</option>
@@ -97,7 +144,7 @@
 				<div>맴버 : <input type="text" id="gmember" name="gmember" placeholder="이름또는 이메일로 맴버 추가"></div>
 				<br>
 				<div>
-					<input type="submit" value="확인" th:goal="@{insertgoal.insertgoal}"
+					<input type="submit" id="subutu" value="확인" th:goal="@{insertgoal.insertgoal}"
 						th:onclick="test(this.getAttribute('goal'))">
 				</div>
 			</form>
@@ -113,6 +160,7 @@
 			height: 20px;
 			text-align: center;
 			font-size: 20px;
+			margin-top: 10px;
 		}
 
 		.goalne {
@@ -125,48 +173,37 @@
 		<tr>
 			<th id="gil" style="width: 10%;">[ 제목 ]</th>
 			<th id="gil" style="width: 30%;">[ 기간 ]</th>
-			<th id="gil" style="width: 55%;">[ 진행상태 ]</th>
-			<th id="gil" style="width: 80px;">[ 소유자 ]</th>
+			<th id="gil" style="width: 30%;">[ 진행상태 ]</th>
+			<th id="gil" style="width: 10%;">[ 소유자 ]</th>
 		</tr>
+		<br>
 		<tr th:each="goallist: ${goallist}" class="gilta">
-			<div>
-				<table>
-					<form th:action="@{/goalView/goalvyu}" id="list" name="list" method="post"
-						onsubmit="return validation();" style="">
-						<!-- <td id="gil" style="width: 10%;">
-							<input type="submit" th:value="${goallist.gname}" th:goal="@{goalvyu.goalvyu}"
-								th:onclick="test(this.getAttribute('goal'))"> -->
+			<form th:action="@{/goalView/goalvyu}" id="list" name="list" method="post" onsubmit="return validation();">
+				<div class="modal">
+					<div class="modal_body">
+						<td th:text="${goallist.gname}" class="goalne" id="gname" name="gname">
+						</td>
 						<input type="hidden" id="wsid" name="wsid" th:value="${wsid}">
-						<div class="goalne">
-							<td th:text="${goallist.gname}" class="goalne" id="gname" name="gname"
-								style="width: 300px;">
-							</td>
-							<div>
-								<td th:text="|${goallist.calendar}|" class="goalne" id="gnal" name="gnal"
-									style="width: 300px;">
-								</td>
-							</div>
-							<td th:text="${goallist.gstatus}" class="goalne" id="gstatus" name="gstatus"
-								style="width: 300px;">
-							</td>
-							<td th:text="${goallist.gcreator}" class="goalne" id="gcreator" name="gcreator"
-								style="width: 300px;"></td>
-							</td>
-							</td>
-							<!-- </td> -->
-					</form>
-				</table>
-			</div>
+						<td th:text="|${goallist.calendar}|" class="goalne" id="gnal" name="gnal">
+						</td>
+						<td th:text="${goallist.gstatus}" class="goalne" id="gstatus" name="gstatus">
+						</td>
+						<td th:text="${goallist.gcreator}" class="goalne" id="gcreator" name="gcreator"><br>
+						</td>
+					</div>
+				</div>
+			</form>
 		</tr>
+		<br>
 	</table>
 
 	<nav id="nav-menu">
 		<ul class="nav-menu-items">
 			<div id="navbar-toggle">
-				<a href="#" class="menu-bars" id="hide-menu">
+				<a href="" class="menu-bars" id="hide-menu">
 					<img alt="sidebar" th:src="@{/img/white_menu.png}" width="30px">
 				</a>
-				<a href="#">
+				<a href="">
 					<h1><i id="logo"></i>Task-it</h1>
 				</a>
 			</div>
