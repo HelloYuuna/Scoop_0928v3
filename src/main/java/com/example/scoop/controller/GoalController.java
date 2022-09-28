@@ -38,8 +38,6 @@ public class GoalController {
 		log.debug("email:{}", user.getEmail());
 		log.debug("wsid:{}", httpSession.getAttribute("wsid"));
 		String email = user.getEmail();
-		// 전체값 가져오기
-		// ArrayList<Goal> goallist = service.selectOne1Goal();
 		int wsid = (int) httpSession.getAttribute("wsid");
 		Goal goal = new Goal();
 		goal.setWsid(wsid);

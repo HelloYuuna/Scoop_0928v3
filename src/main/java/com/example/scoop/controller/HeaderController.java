@@ -14,7 +14,7 @@ import com.example.scoop.service.WorkspaceService;
 @RequiredArgsConstructor
 @Controller
 public class HeaderController {
-	
+
 	private final HttpSession httpSession;
 
 	@Autowired
@@ -24,10 +24,10 @@ public class HeaderController {
 	public String myWorkspaceInfo() {
 		return "/headerView/myWorkspaceInfo";
 	}
-	
+
 	@GetMapping("mySet")
 	public String mySet() {
 		return "/headerView/mySet";
 	}
-	
+
 }
