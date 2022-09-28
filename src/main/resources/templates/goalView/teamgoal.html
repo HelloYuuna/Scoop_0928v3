@@ -8,154 +8,7 @@
 		<link rel="stylesheet" th:href="@{/css/sidebar.css}">
 		<link rel="stylesheet" th:href="@{/css/goalmodel.css}">
 
-		<style>
-			* {
-				padding: 0;
-				margin: 0
-			}
 
-			li {
-				list-style: none
-			}
-
-			a {
-				text-decoration: none;
-				font-size: 14px
-			}
-
-			.men {
-				background: rgba(0, 0, 0, 0.3);
-			}
-
-			body {
-				background-size: cover;
-				background-color: black;
-
-			}
-
-			.menu {
-				width: 800px;
-				overflow: hidden;
-				margin: 150px auto;
-			}
-
-			.menu>li {
-				width: 20%;
-				/*20*5=100%*/
-				float: left;
-				text-align: center;
-				line-height: 40px;
-				background-color: #5778ff;
-			}
-
-			.menu a {
-				color: #1b1b1b;
-				font-style: normal;
-				font-size: 16px;
-				font-weight: bold;
-			}
-
-			.submenu>li {
-				line-height: 50px;
-				background-color: #94a9ff;
-			}
-
-			.submenu {
-				height: 0;
-				/*ul의 높이를 안보이게 처리*/
-				overflow: hidden;
-			}
-
-			.menu>li:hover {
-				background-color: #94a9ff;
-				transition-duration: 0.5s;
-			}
-
-			.menu>li:hover .submenu {
-				height: 250px;
-				/*서브메뉴 li한개의 높이 50*5*/
-				transition-duration: 1s;
-			}
-
-			#sub {
-				display: inline-flex;
-			}
-
-			#sub2 {
-				display: inline-flex;
-			}
-
-			#tess {
-				text-align: center;
-				color: black;
-				font-size: 20px;
-			}
-
-			#goal {
-				margin-top: 50px;
-				width: 575px;
-				height: 400px;
-				border-collapse: collapse;
-				margin-right: 50px;
-				background-color: white;
-				background-color: rgba(255, 255, 255, 0.5);
-				border-radius: 10px 10px;
-
-			}
-
-			#project {
-				margin-top: 50px;
-				width: 575px;
-				height: 400px;
-				border-collapse: collapse;
-				background-color: white;
-				background-color: rgba(255, 255, 255, 0.5);
-				border-radius: 10px 10px;
-
-			}
-
-			#user {
-				margin-top: 50px;
-				width: 1202px;
-				height: 400px;
-				border-collapse: collapse;
-				background-color: white;
-				background-color: rgba(255, 255, 255, 0.5);
-				margin-bottom: 100px;
-				border-radius: 10px 10px;
-
-			}
-
-			#g1 {
-				padding: 10px;
-				margin: 10px
-			}
-
-			#p1 {
-				padding: 10px;
-				margin: 10px
-			}
-
-			#u1 {
-				padding: 10px;
-				margin: 10px
-			}
-
-			#tete {
-				height: 30px;
-				width: 230px;
-				border-radius: 4px;
-				font-size: 15px;
-				padding: 0 0 0 5px;
-			}
-
-			#butt {
-				height: 30px;
-				width: 50px;
-				font-size: 16px;
-				background-color: white;
-			}
-		</style>
 		<meta charset="UTF-8">
 		<title>Goal</title>
 		<script>
@@ -170,7 +23,7 @@
 
 	<body>
 		<div class="navbar">
-			<a href="#" class="menu-bars" id="show-menu">
+			<a href="" class="menu-bars" id="show-menu">
 				<img alt="sidebar" th:src="@{/img/menu.png}" width="30px">
 			</a>
 			<div style="font-size: 25px; margin-left: 2%;">[ 목표 ]
@@ -181,26 +34,62 @@
 				<hr width="65%">
 			</div>
 			<div class=" navbar navbar-right" style="margin-left: 70%;">
-				<input type="text" placeholder="검색" id="searchbox">
-				<img th:src="@{/img/add_circle.png}" style="width: 30px">
+				<!-- <input type="text" placeholder="검색" id="searchbox"> -->
+				<!-- <img th:src="@{/img/add_circle.png}" style="width: 30px"> -->
 			</div>
 		</div>
+		<style>
+			.nemok {
+				width: 20%;
+				height: 5%;
+				font-size: 20px;
+			}
+
+			.neiyo {
+				width: 30%;
+				height: 20%;
+				font-size: 16px;
+			}
+
+			#mokucuga {
+				background-color: #C0C6CC;
+				/* padding: 15px 15px; */
+				border: 0;
+				outline: 0;
+				padding-top: 2px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				color: #526A80;
+				border-radius: 10px 10px;
+				width: 50px;
+				height: 30px;
+				margin: 2px;
+				clear: right;
+				right: 0;
+				bottom: 0px;
+			}
+
+			#mokucuga:hover {
+				/* color: white; */
+				background-color: aliceblue;
+				font-weight: 700;
+			}
+		</style>
 
 		<div style="margin-top: 1%; margin-left: 8%;">
-			<input type="text" placeholder="목표 제목을 적어주세요" id="gname"></input>
+			<input type="text" placeholder="목표 제목을 적어주세요" id="gname" class="nemok"></input>
 		</div>
 		<div style="margin-top: 1%; margin-left: 8%;">
 			<div>
-				<input type="text" placeholder="목표 내용을 적어주세요" id="gtext"></input>
+				<textarea type="text" placeholder="목표 내용을 적어주세요" id="gtext" class="neiyo"></textarea>
 				<a href="">수정</a>
 				<!-- <a th:href="|javascript:deleteBoard(${board.boardnum})|"></a> -->
 			</div>
 		</div>
 		<div style="margin-top: 40px; margin-left: 200px;">
 			<p style="font-size: 30px; font-weight: bold; ;">목표
-				<input type="button" class="btn-open-popup" value="+" style="font-size: 30px;">
-
-				<input type="button" value="기간" style="margin-left: 70%; font-size: 20px;">
+				<input type="button" class="btn-open-popup" value="+" style="font-size: 30px;" id="mokucuga">
 			</p>
 		</div>
 
@@ -214,23 +103,81 @@
 
 		<div class="modal">
 			<div class="modal_body">
-				<form th:action="@{/goal/join}" method="post" onsubmit="return validation();">
+				<form th:action="@{/goalView/insertgoal}" id="insertform" name="insertform" method="post"
+					onsubmit="return validation();">
 					<h2>[ 목표 생성 ]</h2>
 					<br>
-					<div>제목 : <input type="text" id="tete" name="title" placeholder="제목을 입력하세요"></div>
+					<div>제목 : <input type="text" id="gname" name="gname" placeholder="제목을 입력하세요"></div>
 					<br>
 					<div>소유자 : <input type="text" id="uowner" name="uowner"></div>
 					<br>
-					<div>기간 : <input type="button" id="calender" name="calender" value="캘린더" onclick="calendar()"></div>
+					<div>기간 : <input type="date" id="gstartdate" name="gstartdate"> ~ <input type="date" id="genddate"
+							name="genddate">
+						<!-- <input type="button" id="calender" name="calender" value="캘린더" onclick="calendar()"> -->
+					</div>
+					<br>
+					<div>
+						<div style="font-family: bold; font-size: 17px;">진행상황 :
+							<select name="category" style="width: 150px; height: 30px;">
+								<option value="0">0 : 진행상태</option>
+								<option value="1">1 : 위험</option>
+								<option value="2">2 : 기간지남</option>
+								<option value="3">3 : 완료</option>
+							</select>
+						</div>
+					</div>
 					<br>
 					<div>맴버 : <input type="text" id="gmember" name="gmember" placeholder="이름또는 이메일로 맴버 추가"></div>
 					<br>
 					<div>
-						<input type="submit" value="확인">
+						<input type="submit" value="확인" th:goal="@{insertgoal.insertgoal}"
+							th:onclick="test(this.getAttribute('goal'))">
 					</div>
 				</form>
 			</div>
 		</div>
+
+		<hr style="width: 100%; margin-top: 1%;">
+
+		<style>
+			.gilta {
+				width: 100%;
+				height: 20px;
+				text-align: center;
+				font-size: 20px;
+			}
+
+			.goalne {
+				margin-top: 15px;
+
+			}
+		</style>
+
+		<table>
+			<tr>
+				<th id="gil" style="width: 10%;">[ 제목 ]</th>
+				<th id="gil" style="width: 30%;">[ 기간 ]</th>
+				<th id="gil" style="width: 30%;">[ 진행상태 ]</th>
+				<th id="gil" style="width: 10%;">[ 소유자 ]</th>
+			</tr>
+			<tr th:each="goallist: ${goallist}" class="gilta">
+				<form th:action="@{/goalView/goalvyu}" id="list" name="list" method="post"
+					onsubmit="return validation();">
+					<td th:text="${goallist.gname}" class="goalne" id="gname" name="gname">
+					</td>
+					<input type="hidden" id="wsid" name="wsid" th:value="${wsid}">
+					<td th:text="|${goallist.calendar}|" class="goalne" id="gnal" name="gnal">
+					</td>
+					<td th:text="${goallist.gstatus}" class="goalne" id="gstatus" name="gstatus">
+					</td>
+					<td th:text="${goallist.gcreator}" class="goalne" id="gcreator" name="gcreator">
+					</td>
+					</td>
+				</form>
+			</tr>
+		</table>
+
+
 
 		<nav id="nav-menu">
 			<ul class="nav-menu-items">
@@ -238,7 +185,7 @@
 					<a href="#" class="menu-bars" id="hide-menu">
 						<img alt="sidebar" th:src="@{/img/white_menu.png}" width="30px">
 					</a>
-					<a href="#">
+					<a href="">
 						<h1><i id="logo"></i>Task-it</h1>
 					</a>
 				</div>
