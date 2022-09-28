@@ -123,27 +123,25 @@
 			<hr>
 			<div class="invite_content">
 				팀원에게 회원님의 팀에 대한 액세스 권한을 부여하는 이메일이 전송됩니다.
-				<form> <!--  id="inviteForm" th:action="@{/sendEmail}" method="Post" -->
-					<table class="invite_table">
-						<tr>
-							<td class="invite_td-name">이메일 주소</td>
-						</tr>
-						<tr>
-							<td><br><textarea id="userId" name="userId" class="invite_textarea" placeholder="name@company.com, name@company.com, ..."></textarea></td>
-						</tr>
-						<tr>
-							<td class="invite_td-name">프로젝트에 추가</td>
-						</tr>
-						<tr>
-							<td><br><input type="text" id="addProject" name="addProject" class="invite_input" placeholder="프로젝트를 추가하려면 입력하세요"></td>
-						</tr>
-					</table>
-					<hr>
-					<div class="invite_button" >
-						<input type="submit" id="invite_submitbtn" value="보내기">
-					</div>
-				</form>
-
+				<input type="hidden" id="inviteWsid" th:value="${workspace.wsid}">
+				<table class="invite_table">
+					<tr>
+						<td class="invite_td-name">이메일 주소</td>
+					</tr>
+					<tr>
+						<td><br><textarea id="userId" name="userId" class="invite_textarea" placeholder="name@company.com, name@company.com, ..."></textarea></td>
+					</tr>
+					<tr>
+						<td class="invite_td-name">프로젝트에 추가</td>
+					</tr>
+					<tr>
+						<td><br><input type="text" id="addProject" name="addProject" class="invite_input" placeholder="프로젝트를 추가하려면 입력하세요"></td>
+					</tr>
+				</table>
+				<hr>
+				<div class="invite_button" >
+					<input type="submit" id="invite_submitbtn" value="보내기">
+				</div>
 			</div>
 		</div>
 	</div>
