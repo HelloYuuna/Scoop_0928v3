@@ -1,9 +1,12 @@
 
 	      const body = document.querySelector('body');
+	      
 	      const modal = document.querySelector('.modal');
 	      const btnOpenPopup = document.querySelector('.btn-open-popup');
+	      
 	      const modal1 = document.querySelector('.modal1');
 	      const btnOpenPopup1 = document.querySelector('.btn-open-popup1');
+	      
 	      const modal2 = document.querySelector('.modal2');
 	      const btnOpenPopup2 = document.querySelector('.btn-open-popup2');
 	
@@ -62,3 +65,25 @@
 	          }
 	        }
 	      });
+	      
+	      // Project Modal
+		const modal3 = document.querySelector('.projectmodal');
+		const createproject = document.querySelector('.createproject');
+		
+		createproject.addEventListener('click', () => {
+		    modal3.classList.toggle('show');
+		
+		    if (modal3.classList.contains('show')) {
+		        body.style.overflow = 'hidden';
+		    }
+		});
+		
+		modal3.addEventListener('click', (event) => {
+		    if (event.target === modal3) {
+		        modal3.classList.toggle('show');
+		
+		        if (!modal3.classList.contains('show')) {
+		            body.style.overflow = 'auto';
+		        }
+		    }
+		});

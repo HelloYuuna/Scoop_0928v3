@@ -29,8 +29,8 @@ public class TaskController {
         // 등록된 태스크 리스트업8
 
         // 해당 워크스페이스의 멤버 가져오기
-        User user = userService.findByWsid(1);
-        model.addAttribute("members", user);
+//        User user = userService.findByWsid(1);
+//        model.addAttribute("members", user);
 
         // 해당 워크스페이스의 프로젝트 가져오기
 

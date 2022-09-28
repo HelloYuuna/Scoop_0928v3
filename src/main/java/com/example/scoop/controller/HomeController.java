@@ -124,7 +124,6 @@ public class HomeController {
 
 		log.debug("Home_wsid:{}", wsid);
 
-		// session에 담으면 selectOne 할 필요가 없나?
 //		model.addAttribute("workspace", workspace);
 		
 		
