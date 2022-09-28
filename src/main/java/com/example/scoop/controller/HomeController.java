@@ -45,16 +45,6 @@ public class HomeController {
 	@GetMapping({ "", "/" })
 	public String scoophome(Model model, @AuthenticationPrincipal UserDetails loginInfo) {
 
-<<<<<<< HEAD
-=======
-		/*
-		 * 유저 별 워크스페이스 불러오기
-		 */
-		int wsid = (int) httpSession.getAttribute("wsid");
-		// int wsid = 1;
-		log.debug("Home__wsid:{}", wsid);
-
->>>>>>> 1568f6b73ffd7ebfc39a4e03a1be9331ca95188c
 		LocalDate now = LocalDate.now();
 
 		int monthValue = now.getMonthValue();
@@ -86,24 +76,14 @@ public class HomeController {
 
 			model.addAttribute("userName", userName);
 		}
-<<<<<<< HEAD
 		
 		// 로그인 했을 때 워크스페이스가 없을 경우 생성 페이지로 이동
-=======
-
-		// wsowner의 워크스페이스 전체 가져오기
-		ArrayList<Workspace> ownerWorkspaceList = workspaceService.selectOwner(user.getEmail());
-		log.debug("Owner Workspace List: {}", ownerWorkspaceList);
-		model.addAttribute("ownerWorkspaceList", ownerWorkspaceList);
-
->>>>>>> 1568f6b73ffd7ebfc39a4e03a1be9331ca95188c
 		int countOwner = workspaceService.countOwner(user.getEmail());
 		log.debug("Count Owner Workspace: {}", countOwner);
 
 		if (countOwner == 0) {
 			return "/workspaceView/newWorkspace";
 		}
-<<<<<<< HEAD
 		
 		// wsowner의 워크스페이스 전체 가져오기
 		ArrayList<Workspace> ownerWorkspaceList = workspaceService.selectOwner(user.getEmail());
@@ -113,23 +93,6 @@ public class HomeController {
 		// 최근에 접속한 워크스페이스로 이동
 		Workspace workspace = workspaceService.selectLately(user.getEmail());
 		log.debug("Home_Workspace:{}",workspace);
-=======
-
-		// model.addAttribute("userName", "김혜민");
-
-		// ArrayList<Workspace> ownerWorkspaceList =
-		// workspaceService.selectOwner("khyemin0005@gmail.com");
-		// model.addAttribute("ownerWorkspaceList", ownerWorkspaceList);
-
-		// 로그인하고 들어올 경우 최근에 접속한 워크스페이스 번호에 해당하는 워크 스페이스로
-		// Workspace workspace = workspaceService.selectLately(user.getEmail());
-
-		// 접속한 워크스페이스의 lately 업데이트
-		// workspaceService.updateLately(workspace);
-		// Workspace workspace = workspaceService.selectLately(user.getEmail());
-		com.example.scoop.domain.Workspace workspace = workspaceService.selectOne(wsid);
-		log.debug("Home_Workspace:{}", workspace);
->>>>>>> 1568f6b73ffd7ebfc39a4e03a1be9331ca95188c
 		model.addAttribute("workspace", workspace);
 
 		// 접속한 워크스페이스의 lately 업데이트
@@ -140,21 +103,9 @@ public class HomeController {
 		httpSession.setAttribute("wsname", workspace.getWsname());
 		httpSession.setAttribute("wsowner", workspace.getWsowner());
 
-<<<<<<< HEAD
 //		int wsid = (int) httpSession.getAttribute("wsid");
 //		log.debug("Home_wsid:{}", wsid);
 
-=======
-		// int wsid = (int)session.getAttribute("wsid");
-		// String wsname = (String)httpSession.getAttribute("wsname");
-		// String wsowner = (String)httpSession.getAttribute("wsowner");
-
-		log.debug("Home_wsid:{}", wsid);
-
-		// session에 담으면 selectOne 할 필요가 없나?
-		// model.addAttribute("workspace", workspace);
-
->>>>>>> 1568f6b73ffd7ebfc39a4e03a1be9331ca95188c
 		ArrayList<Project> plist = service.selectProject();
 		log.debug("넘어온 프로젝트 리스트:{}", plist);
 		model.addAttribute("projectlist", plist);
