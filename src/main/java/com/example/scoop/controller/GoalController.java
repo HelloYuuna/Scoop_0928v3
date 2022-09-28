@@ -38,18 +38,29 @@ public class GoalController {
 		log.debug("email:{}", user.getEmail());
 		log.debug("wsid:{}", httpSession.getAttribute("wsid"));
 		String email = user.getEmail();
-		ArrayList<Goal> goallist = service.selectOne1Goal();
-		int wsid = goallist.get(0).getWsid();
-		model.addAttribute("wsid", wsid);
-		log.debug("wsidlog1:{}", wsid);
-		log.debug("goallist1:{}", goallist);
-		model.addAttribute("goallist", goallist);
+		// 전체값 가져오기
+		// ArrayList<Goal> goallist = service.selectOne1Goal();
+		int wsid = (int) httpSession.getAttribute("wsid");
+		Goal goal = new Goal();
+		goal.setWsid(wsid);
+		goal.setGcreator((String) email);
+		log.debug("goal:{}", goal);
+		log.debug("wsid1:{}", wsid);
+		ArrayList<Goal> goallist1 = service.selectOne1(goal);
+		log.debug("goallist1:{}", goallist1);
+		model.addAttribute("goallist1", goallist1);
 		log.debug("wsidlog2:{}", wsid);
 		return "/goalView/goal";
 	}
 
 	@GetMapping("teamgoal")
-	public String teamgoal() {
+	public String teamgoal(Model model) {
+		SessionUser user = (SessionUser) httpSession.getAttribute("user");
+		log.debug("wsid:{}", httpSession.getAttribute("wsid"));
+		int wsid = (int) httpSession.getAttribute("wsid");
+		log.debug("wsid1:{}", wsid);
+		ArrayList<Goal> goallist1 = service.selectOne1Goal(wsid);
+		model.addAttribute("goallist1", goallist1);
 		return "/goalView/teamgoal";
 	}
 
@@ -59,9 +70,10 @@ public class GoalController {
 	}
 
 	@PostMapping("insertgoal")
-	public String insertgoal(Goal goal, String gstartdate, String genddate) {
+	public String insertgoal(Goal goal) {
 		SessionUser user = (SessionUser) httpSession.getAttribute("user");
 		goal.setGcreator(user.getEmail());
+		goal.setWsid((int) httpSession.getAttribute("wsid"));
 		service.insertgoal(goal);
 		log.debug("goal11:{}", goal);
 		return "redirect:/goalView/goal";
@@ -70,6 +82,11 @@ public class GoalController {
 	@GetMapping("goalvyu")
 	public String goalvyu() {
 		return "redirect:/goalView/goalvyu";
+	}
+
+	@GetMapping("selectcal")
+	public String selectcal() {
+		return "redirect:/goalView/goal";
 	}
 
 	// @PostMapping("insert")

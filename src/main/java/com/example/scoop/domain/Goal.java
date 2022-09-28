@@ -18,6 +18,7 @@ public class Goal {
     String gstartdate; // 시작일
     String genddate; // 종료일
     int gstatus; // 진행상태(0:진행상태 , 1: 위험, 2:기간지남,3:완료,4:보류,5:목표완성,6:목표미완성,7:목표중지.
+    String gstatus1;
     String uowner; // 소유자 이메일(update가능하도록)
     int gpublic; // 0:비공개, 1:공개
     String gmember; // 참가맴버 아이디등록

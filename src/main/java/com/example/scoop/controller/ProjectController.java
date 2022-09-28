@@ -132,7 +132,7 @@ public class ProjectController {
 		} else {
 			log.debug("수정 성공");
 		}
-		return "redirect:/";
+		return "redirect:/projectView/project?pnum="+project.getPnum();
 	}
 
 }

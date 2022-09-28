@@ -11,17 +11,17 @@
         (key_seq.nextval, #{wsid}, #{gname}, #{gstartdate},#{genddate}, #{gstatus}, #{uowner}, #{gpublic}, #{gmember} , #{gfinish},#{gcreator})
     </insert>
     
-    <select id="selectOne1Goal" parameterType="String" resultType="Goal">
-        SELECT * FROM scoop_goal where wsid = #{wsid}
+    <select id="selectOne1Goal" parameterType="int" resultType="Goal">
+        SELECT * FROM scoop_goal where wsid = #{wsid} ORDER BY key desc
     </select>
 
-    <select id="selectOne1" parameterType="Goal" resultType="Goal">
-        SELECT * FROM scoop_goal WHERE wsid = #{wsid}
+    <select id="selectOne1" parameterType="int" resultType="Goal">
+        SELECT * FROM scoop_goal WHERE wsid = #{wsid} and gcreator = #{gcreator} ORDER BY key desc
     </select>
     
 
     <select id="selectteam" parameterType="int" resultType="Goal">
-        SELECT * FROM scoop_goal WHERE wsid = #{wsid}
+        SELECT * FROM scoop_goal WHERE wsid = #{wsid} ORDER BY key desc
     </select>
     <select id="selectme" parameterType="Goal" resultType="Goal">
         SELECT * FROM scoop_goal WHERE gcreator = #{gcreator} and wsid=#{wsid}

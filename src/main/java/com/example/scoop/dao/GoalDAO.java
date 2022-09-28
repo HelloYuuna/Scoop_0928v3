@@ -13,6 +13,8 @@ public interface GoalDAO {
 
 	// public ArrayList<Goal> selectme(String email, int ws);
 
-	public ArrayList<Goal> selectOne1Goal();
+	public ArrayList<Goal> selectOne1Goal(int wsid);
+
+	public ArrayList<Goal> selectOne1(Goal goal);
 
 }
