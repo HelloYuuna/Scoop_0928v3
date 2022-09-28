@@ -1,0 +1,260 @@
+@charset "UTF-8";
+
+		
+
+		#projectdelete {
+
+			color: #526A80;
+
+		}
+
+		#two {
+			display: inline-flex;
+			margin-bottom: 10px;
+			z-index: 40; 
+
+		}
+
+		#deletebox {
+			background-color: #CFE3E8;
+			border: 0;
+			outline: 0;
+			padding-top: 1px;
+			width: 120px;
+			height: 22px;
+			text-decoration: none;
+			color: #526A80;
+			border-radius: 10px 10px;
+			margin-top: 30px;
+			
+
+		}
+
+		#deletebox:hover {
+			/* color: white; */
+			background-color: aliceblue;
+			font-weight: 700;
+		}
+
+		#sub {
+			display: inline-flex;
+			
+		}
+
+		#mes {
+			display: inline-flex;
+
+		}
+
+		#mess {
+			text-align: center;
+			z-index: 60; 
+
+		}
+		
+		#haba{
+			height: 120px;
+		}
+		
+		
+		#title {
+			margin: 0 auto;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			z-index: 40; 
+		}
+		
+		#pnotice {
+			resize: none;
+			width: 300px;
+			margin-right: 800px;
+			font-size: 20px;
+			border-radius: 10px 10px;
+			padding: 2px;
+			border: none;
+			background-color: white;
+			border-left: 1rem solid #CFD5E8 !important;
+			/* background-color: rgba( 255, 255, 255, 0.0 ); */
+		}
+
+		#ptext {
+			resize: none;
+			width: 575px;
+			height: 400px;
+			font-size: 15px;
+			border-radius: 10px 10px;
+			border: none;
+			padding: 2px;
+			margin-right: 25px;
+			background-color: white;
+			border-left: 1rem solid #CFD5E8 !important;
+			/* background-color: rgba( 255, 255, 255, 0.0 ); */
+
+		}
+
+
+		#member {
+			/* padding: 18px; */
+			width: 575px;
+			height: 400px;
+			border-collapse: collapse; 
+			background-color: white;
+			border-left: 1rem solid #CFE3E8 !important;
+			/* background-color: rgba( 255, 255, 255, 0.0 ); */
+			border-radius: 10px 10px;
+			margin-left: 25px;
+
+		}
+		
+		#list{
+			margin-top: 10px;	
+		}
+
+		#sub2 {
+			display: inline-flex;
+			z-index: 40; 
+		}
+
+		#state {
+			/* padding: 18px; */
+			width: 1220px;
+			height: 400px;
+			border-left: 1rem solid #E3E3FF !important;
+			border-collapse: collapse;
+			background-color: white;
+			/* background-color: rgba( 255, 255, 255, 0.0 ); */
+			border-radius: 10px 10px;
+			margin: 50px;
+
+		}
+		#state2{
+			border-bottom: 1.5px dotted #E3E3FF;
+		
+		
+		}
+
+		#menu {
+			width: 200px;
+			height: 30px;
+			border-collapse: collapse;
+			background-color: white;
+			background-color: rgba(255, 255, 255, 0.0);
+
+		}
+
+		#memberselect {
+			resize: none;
+
+		}
+
+		#tbl3 {
+			margin-top: 50px;
+			margin-left: auto;
+			margin-right: auto;
+			text-align: center;
+			padding: 5px;
+
+		}
+
+		#pname {
+			border: none;
+			float: left;
+			width: 250px;
+			height: 30px;
+			border-radius: 10px 10px;
+
+		}
+
+		#pmember {
+			border: none;
+			float: left;
+			width: 250px;
+			height: 30px;
+			border-radius: 10px 10px;
+		}
+
+		#updateproject {
+			text-align: center;
+			margin-top: 20px;
+		}
+
+		#updatebtn {
+			margin: 30px auto;
+			text-align: center;
+			width: 180px;
+			height: 30px;
+			border-collapse: collapse;
+			border-radius: 10px 10px;
+			border: 0;
+			outline: 0;
+			color: #526A80;
+			background-color: #C0C6CC;
+
+		}
+
+		#updatebtn:hover {
+			background-color: aliceblue;
+			font-weight: 700;
+		}
+
+		#updatetitle {
+			border-collapse: collapse;
+			border: 0;
+			outline: 0;
+			background-color: aliceblue;
+		}
+
+		#updatetitle:hover {
+			color: #526A80;
+			font-weight: 700;
+		}
+
+
+		#menu {
+			width: 200px;
+			height: 30px;
+			border-collapse: collapse;
+			background-color: white;
+			background-color: rgba(255, 255, 255, 0.0);
+
+		}
+		
+		#memberplus{
+			border-bottom: 1.5px dotted #CFE3E8;
+		
+		}
+
+		#sign {
+			background-color: aliceblue;
+			width: 20px;
+			margin-top: 30px;
+			margin-left: 5px;
+			cursor: pointer;
+
+		}
+		
+		#line4{
+			border-style: dotted;
+			color: #CFE3E8;
+			background-color: white;
+			border-width:2px;
+		
+		}
+		
+		#line5{
+			border-style: dotted;
+			color: #E3E3FF;
+			background-color: white;
+			border-width:2px;
+		}
+		#u2{
+			padding: 10px;
+			margin: 10px
+		
+		}
+		#p2{
+			padding: 10px;
+			margin: 10px
+		
+		}

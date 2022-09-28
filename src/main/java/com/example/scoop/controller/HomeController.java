@@ -76,7 +76,7 @@ public class HomeController {
 
 			model.addAttribute("userName", userName);
 		}
-		
+
 		// 로그인 했을 때 워크스페이스가 없을 경우 생성 페이지로 이동
 		int countOwner = workspaceService.countOwner(user.getEmail());
 		log.debug("Count Owner Workspace: {}", countOwner);
@@ -84,15 +84,15 @@ public class HomeController {
 		if (countOwner == 0) {
 			return "/workspaceView/newWorkspace";
 		}
-		
+
 		// wsowner의 워크스페이스 전체 가져오기
 		ArrayList<Workspace> ownerWorkspaceList = workspaceService.selectOwner(user.getEmail());
 		log.debug("Owner Workspace List: {}", ownerWorkspaceList);
 		model.addAttribute("ownerWorkspaceList", ownerWorkspaceList);
-		
+
 		// 최근에 접속한 워크스페이스로 이동
 		Workspace workspace = workspaceService.selectLately(user.getEmail());
-		log.debug("Home_Workspace:{}",workspace);
+		log.debug("Home_Workspace:{}", workspace);
 		model.addAttribute("workspace", workspace);
 
 		// 접속한 워크스페이스의 lately 업데이트
@@ -103,9 +103,12 @@ public class HomeController {
 		httpSession.setAttribute("wsname", workspace.getWsname());
 		httpSession.setAttribute("wsowner", workspace.getWsowner());
 
-//		int wsid = (int) httpSession.getAttribute("wsid");
-//		log.debug("Home_wsid:{}", wsid);
+		// int wsid = (int) httpSession.getAttribute("wsid");
+		// log.debug("Home_wsid:{}", wsid);
 
+		// log.debug("Home_wsid:{}", wsid);
+
+		// model.addAttribute("workspace", workspace);
 		ArrayList<Project> plist = service.selectProject();
 		log.debug("넘어온 프로젝트 리스트:{}", plist);
 		model.addAttribute("projectlist", plist);

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,13 @@
 	<link rel="stylesheet" th:href="@{/css/home.css}">
 	<link rel="stylesheet" th:href="@{/css/header.css}">
 	<link rel="stylesheet" th:href="@{/css/sidebar.css}">
-	
+
 	<!-- modal -->
 	<link rel="stylesheet" th:href="@{/css/newWorkspace.css}">
 	<link rel="stylesheet" th:href="@{/css/removeWorkspace.css}">
 	<link rel="stylesheet" th:href="@{/css/inviteWorkspace.css}">
 	<link rel="stylesheet" th:href="@{/css/projectmodal.css}">
-	
+
 	<script th:src="@{/js/jquery-3.6.0.js}"></script>
 	<script th:src="@{/js/email.js}"></script>
 	<script th:src="@{/js/header.js}"></script>
@@ -69,7 +70,9 @@
 		}
 
 	</script>
+
 </head>
+
 <body>
 
 	<!-- modal : New Workspace -->
@@ -82,16 +85,18 @@
 					<table class="newWorkspace_table">
 						<tr>
 							<td class="newWorkspace_td-name">작업 공간 이름</td>
-							<td><input type="text" id="wsname" name="wsname" class="newWorkspace_input" placeholder="회사 또는 팀 이름"></td>
+							<td><input type="text" id="wsname" name="wsname" class="newWorkspace_input"
+									placeholder="회사 또는 팀 이름"></td>
 						</tr>
 						<tr>
 							<td class="newWorkspace_td-name">멤버</td>
-							<td><br><textarea class="newWorkspace_textarea" placeholder="name@company.com"></textarea></td>
+							<td><br><textarea class="newWorkspace_textarea" placeholder="name@company.com"></textarea>
+							</td>
 						</tr>
 					</table>
 				</div>
 				<hr>
-				<div class="newWorkspace_button" >
+				<div class="newWorkspace_button">
 
 					<input type="submit" id="newWorkspace_submitbtn" value="작업 공간 생성">
 				</div>
@@ -110,7 +115,7 @@
 					액세스 권한을 다시 부여받으려면 동료에게 작업 공간에 다시 초대해달라고 요청해야 합니다.
 				</div>
 				<hr>
-				<div class="removeWorkspace_button" >
+				<div class="removeWorkspace_button">
 					<input type="submit" id="removeWorkspace_submitbtn" value="제거">
 				</div>
 			</form>
@@ -124,23 +129,26 @@
 			<hr>
 			<div class="invite_content">
 				팀원에게 회원님의 팀에 대한 액세스 권한을 부여하는 이메일이 전송됩니다.
-				<form> <!--  id="inviteForm" th:action="@{/sendEmail}" method="Post" -->
+				<form>
+					<!--  id="inviteForm" th:action="@{/sendEmail}" method="Post" -->
 					<table class="invite_table">
 						<tr>
 							<td class="invite_td-name">이메일 주소</td>
 						</tr>
 						<tr>
-							<td><br><textarea id="userId" name="userId" class="invite_textarea" placeholder="name@company.com, name@company.com, ..."></textarea></td>
+							<td><br><textarea id="userId" name="userId" class="invite_textarea"
+									placeholder="name@company.com, name@company.com, ..."></textarea></td>
 						</tr>
 						<tr>
 							<td class="invite_td-name">프로젝트에 추가</td>
 						</tr>
 						<tr>
-							<td><br><input type="text" id="addProject" name="addProject" class="invite_input" placeholder="프로젝트를 추가하려면 입력하세요"></td>
+							<td><br><input type="text" id="addProject" name="addProject" class="invite_input"
+									placeholder="프로젝트를 추가하려면 입력하세요"></td>
 						</tr>
 					</table>
 					<hr>
-					<div class="invite_button" >
+					<div class="invite_button">
 						<input type="submit" id="invite_submitbtn" value="보내기">
 					</div>
 				</form>
@@ -177,7 +185,9 @@
 						<form>
 							<table th:each="workspaceList : ${ownerWorkspaceList}">
 								<tr>
-									<td><input type="submit" th:wsnum="${workspaceList.wsid}" th:onclick="switchWorkspace(this.getAttribute('wsnum'))" th:value="${workspaceList.wsname}"></td>
+									<td><input type="submit" th:wsnum="${workspaceList.wsid}"
+											th:onclick="switchWorkspace(this.getAttribute('wsnum'))"
+											th:value="${workspaceList.wsname}"></td>
 								</tr>
 							</table>
 						</form>
@@ -207,19 +217,23 @@
 				<a class="menu-bars" id="hide-menu">
 					<img alt="sidebar" th:src="@{/img/white_menu.png}" width="30px"> <i class="nav-icon"></i>
 				</a>
-				<a><h1><i id="logo"></i>Task-it</h1></a>
+				<a>
+					<h1><i id="logo"></i>Task-it</h1>
+				</a>
 			</div>
 			<hr>
 			<div class="nav-section">
 				<li class="nav-text"><a th:href="@{/}"><i class="nav-icon"></i>메인</a></li>
-				<li class="nav-text"><a th:href="@{/}"><i class="nav-icon"></i>내 작업</a></li>
+				<li class="nav-text"><a th:href="@{/task/myTask}"><i class="nav-icon"></i>내 작업</a></li>
 				<li class="nav-text"><a th:href="@{/projectView/project}"><i class="nav-icon"></i>프로젝트 목록</a></li>
 				<li class="nav-text"><a th:href="@{/goalView/goal}"><i class="nav-icon"></i>목표</a></li>
 			</div>
 			<hr>
 			<div class="nav-section2">
-				<li class="nav-text" th:wsnum="${workspace.wsid}" th:onclick="workspaceHome(this.getAttribute('wsnum'))">
-					<a th:href="@{/workspaceHome}"><i class="nav-icon sidebar-wsname" th:text="${workspace.wsname}"></i></a>
+				<li class="nav-text" th:wsnum="${workspace.wsid}"
+					th:onclick="workspaceHome(this.getAttribute('wsnum'))">
+					<a th:href="@{/workspaceHome}"><i class="nav-icon sidebar-wsname"
+							th:text="${workspace.wsname}"></i></a>
 				</li>
 				<li class="nav-text"><a th:href="@{/}"><i class="nav-icon"></i>(사람들 표시)</a></li>
 				<li class="nav-text"><a th:href="@{/}"><i class="nav-icon"></i>(프로젝트명)</a></li>
@@ -239,54 +253,70 @@
 			<br>
 			<div class="today-date">
 				<h2>[[${month}]] 월 [[${dayOfMonth}]] 일 [[${dayOfWeek}]]</h2>
-	
+
 			</div>
-	
+
 			<div class="login-area">
 				<span th:if="${userName != null}">
 					<h3><span th:text="${userName}"></span> 님 안녕하세요 </h3><br>
 				</span>
 			</div>
-	
+
 			<div id="tess">
 				<div id="sub">
 					<div id="goal">
-						<p id="g1">내 목표</p>
+						<div id="line1">
+							<p id="g1">내 목표</p>
+						</div>
+						<!-- <hr id="line1"> -->
 					</div>
 					<div id="project">
-						<div>
+						<div id="line2">
 							<p id="p1">프로젝트</p>
+							<!-- <hr id="line2"> -->
 						</div>
-						
+
 						<div>
 							<div id="tbl">
 								<div th:each="pplist: ${projectlist}" class="pplist" id="pplist">
-									<div><a th:text="${pplist.pname}" th:href="@{/projectView/project(pnum=${pplist.pnum})}"
-											id="tabled"></a></div>
+									<div><a th:text="${pplist.pname}"
+											th:href="@{/projectView/project(pnum=${pplist.pnum})}" id="tabled"></a>
+									</div>
 								</div>
 							</div>
 						</div>
-		
-						<div>
-							<input type="button" id="createproject" class="createproject" value="프로젝트 생성">
+
+
+						<div id="btn_create_project">
+							<input type="button" id="createproject" class="createproject" value="+프로젝트 생성">
+
 							<!-- <p><a th:href="@{/projectView/createproject}">프로젝트 생성</a></p> -->
 						</div>
 
 					</div>
 				</div>
-			</div>	
+
+				<div id="sub2">
+					<div id="user">
+						<div id="line3">
+							<p id="u1">사용자</p>
+						</div>
+						<!-- <hr id="line3"> -->
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<div class="projectmodal">
 			<div class="modalmodal">
 				<h2 id="projecttitle">프로젝트 생성</h2>
 				<form th:action="@{/projectView/createproject}" method="post" onsubmit="return check()">
-	
+
 					<table id="tbl2">
 						<tr id="inputname">
 							<th><input type="text" maxlength='16' name="pname" id="pname" placeholder="프로젝트 이름 입력"></th>
 						</tr>
-	
+
 						<tr id="selectmember">
 							<th>
 								<p>멤버 선택</p>
@@ -295,19 +325,19 @@
 									<option th:each="val: ${ulist}" th:value="${val.email}" th:utext="${val.email}">
 									</option>
 								</select>
-	
+
 							</th>
 						</tr>
-	
+
 						<tr>
 							<th>
 								<div id="pmember"></div>
 							</th>
 						</tr>
-	
+
 						<tr id="inputbtn">
 							<th colspan="2" id="btn"><input type="submit" value="프로젝트 생성" id="btn3"></th>
-	
+
 						</tr>
 					</table>
 					<input type="hidden" name="pmember" id="pmber">
@@ -315,7 +345,9 @@
 			</div>
 		</div>
 	</div>
+
 	<script th:src="@{/js/modal.js}"></script>
 
-	</body>
+</body>
+
 </html>
