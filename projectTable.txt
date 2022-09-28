@@ -1,0 +1,34 @@
+
+drop table scoop_project;
+drop sequence scoop_project_seq;
+
+create table scoop_project(
+    pnum number(38) primary key, -- 프로젝트 넘버
+    uemail varchar2(50) references scoop_user(email), -- 멤버 아이디 ,멤버 테이블 참조
+    wsid number(38) default 1, -- 워크스페이스 아이디 , 워크스페이스 아이디 참조
+    key number(38) default 1, -- 목표 번호, 목표 참조
+    pnotice varchar2(50) null, -- 공지사항 타이틀
+    ptext varchar2(500) null, -- 공지사항 내용
+    pname varchar2(50) not null, -- 프로젝트 이름
+    powner varchar2(30) not null, -- 프로젝트 오너
+    pmember varchar2(1000) not null--프로젝트 참여자
+);
+
+create sequence scoop_project_seq;
+
+----------------------------------------
+
+
+drop table scoop_user;
+drop sequence scoop_user_seq;
+
+CREATE TABLE scoop_user(
+    id VARCHAR2(1000)
+    , name VARCHAR2(1000) NOT NULL
+    , email VARCHAR2(1000) primary key
+    , picture VARCHAR2(1000)
+    , role VARCHAR2(1000)
+);
+
+CREATE SEQUENCE id_seq;
+

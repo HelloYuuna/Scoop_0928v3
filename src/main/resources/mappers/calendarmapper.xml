@@ -1,0 +1,21 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.scoop.dao.CalendarDAO">
+    <!-- <insert id="insert" parameterType="Calendar">
+        INSERT INTO calendar 
+        (title, text, star, end,startday, endday, allday, wsid)
+        VALUES 
+        (#{title}, #{text},#{star},#{end},#{startday},#{endday},#{allday}, #{wsid})
+    </insert> -->
+    <insert id="insert" parameterType="Calendar">
+        INSERT INTO calendar 
+        (title, star, end,startday, endday, allday, wsid)
+        VALUES 
+        (#{title},#{star},#{end},#{startday},#{endday},#{allday}, #{wsid})
+    </insert>
+
+
+
+</mapper>

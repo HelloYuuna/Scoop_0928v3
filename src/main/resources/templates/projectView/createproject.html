@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+
+function check(){
+	let pname = document.getElementById('pname');
+	
+	if(pname.value == ''){
+		alert('프로젝트 제목을 입력해주세요.');
+		return false;
+	}
+
+}
+
+</script>
+
+</head>
+<body>
+
+<div class="projectmodal">
+	<h2>프로젝트 생성</h2>
+	<form th:action="@{/projectView/createproject}" method="post" onsubmit="return check()">
+	
+	<table>
+		<tr>
+			<th>프로젝트 이름 입력</th>
+			<td><input type="text" name="pname" id="pname"></td>
+		</tr>
+		
+		<tr>
+			<th>공지사항 제목 입력</th>
+			<td><input type="text" name="pnotice" id="pnotice"></td>
+		</tr>
+		
+		<tr>
+			<th>공지사항 내용 입력</th>
+			<td><textarea cols="70" rows="20" style="resize: none;" name="ptext" id="ptext"></textarea></td>
+		</tr>
+		
+		<tr>
+			<th colspan="2" id="btn"><input type="submit" value="프로젝트 생성"></th>
+			
+		</tr>
+	
+	</table>
+	
+	</form>
+</div>
+</body>
+</html>

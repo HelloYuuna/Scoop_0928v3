@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Insert title here</title>
+	<link rel="stylesheet" th:href="@{/css/home.css}">
+	<link rel="stylesheet" th:href="@{/css/header.css}">
+	<link rel="stylesheet" th:href="@{/css/sidebar.css}">
+
+	<!-- modal -->
+	<link rel="stylesheet" th:href="@{/css/newWorkspace.css}">
+	<link rel="stylesheet" th:href="@{/css/removeWorkspace.css}">
+	<link rel="stylesheet" th:href="@{/css/inviteWorkspace.css}">
+	<link rel="stylesheet" th:href="@{/css/projectmodal.css}">
+
+	<script th:src="@{/js/jquery-3.6.0.js}"></script>
+	<script th:src="@{/js/email.js}"></script>
+	<script th:src="@{/js/header.js}"></script>
+	<script>
+		$(document).ready(function () {
+			$('#mmm').change(asd);
+
+		})
+
+		function check() {
+			let pname = document.getElementById('pname');
+			let pmember = document.getElementById('pmember').innerHTML;
+			//alert(pmember);
+			if (pname.value == '') {
+				alert('프로젝트 제목을 입력해주세요.');
+				return false;
+			}
+
+			if (pname.length < 15) {
+				alert('제목은 15자리 이하로 입력하세요.')
+				return false;
+			}
+
+			if (pmember == '') {
+				alert('프로젝트에 참여 할 멤버를 선택해주세요.');
+				return false;
+			}
+
+
+		}
+
+		function clickcheck() {
+			onfocus = "this.placeholder=''";
+
+
+		}
+		let memberNameList = '';
+		let listCount = 0;
+
+		function asd() {
+			//alert($('#mmm').val());
+			if (listCount == 0) {
+				memberNameList += $('#mmm').val();
+				listCount++;
+			} else {
+				memberNameList += ', ' + $('#mmm').val();
+			}
+
+			//console.log(memberNameList);
+			$('#pmember').html(memberNameList); //이곳의 div 칸에다가 선택 된 value 값을 집어 넣고
+			$('#pmber').val(memberNameList); //이것은 선택 된 애들을 hidden으로 보내기 위한 것 
+			console.log($('#pmber').val());
+		}
+
+	</script>
+
+</head>
+
+<body>
+
+	<!-- modal : New Workspace -->
+	<div class="modal" id="newWorkspaceModal">
+		<div class="modal_body" id="newWorkspaceModal_body">
+			<div class="newWorkspace_title" id="newWorkspace_title">작업 공간 생성</div>
+			<hr>
+			<form id="workspaceForm" th:action="@{/newWorkspace}" method="get">
+				<div class="newWorkspace_left">
+					<table class="newWorkspace_table">
+						<tr>
+							<td class="newWorkspace_td-name">작업 공간 이름</td>
+							<td><input type="text" id="wsname" name="wsname" class="newWorkspace_input"
+									placeholder="회사 또는 팀 이름"></td>
+						</tr>
+						<tr>
+							<td class="newWorkspace_td-name">멤버</td>
+							<td><br><textarea class="newWorkspace_textarea" placeholder="name@company.com"></textarea>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<hr>
+				<div class="newWorkspace_button">
+
+					<input type="submit" id="newWorkspace_submitbtn" value="작업 공간 생성">
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- modal : Remove Workspace -->
+	<div class="modal1" id="removeWorkspaceModal">
+		<div class="modal_body1" id="removeWorkspaceModal_body">
+			<div class="removeWorkspace_title">작업 공간에서 본인을 제거할까요?</div>
+			<hr>
+			<form id="removeWorkspace" th:action="@{/removeWorkspace}" method="get">
+				<div class="removeWorkspace_content">
+					본인을 제거하면 [[${workspace.wsname}]]에 있는 프로젝트나 작업에 액세스할 수 없습니다.
+					액세스 권한을 다시 부여받으려면 동료에게 작업 공간에 다시 초대해달라고 요청해야 합니다.
+				</div>
+				<hr>
+				<div class="removeWorkspace_button">
+					<input type="submit" id="removeWorkspace_submitbtn" value="제거">
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- Invite -->
+	<div class="modal2" id="inviteModal">
+		<div class="modal_body2" id="inviteModal_body">
+			<div class="invite_title"><b>[[${workspace.wsname}]]</b>에 초대</div>
+			<hr>
+			<div class="invite_content">
+				팀원에게 회원님의 팀에 대한 액세스 권한을 부여하는 이메일이 전송됩니다.
+
+				<input type="hidden" id="inviteWsid" th:value="${workspace.wsid}">
+				<table class="invite_table">
+					<tr>
+						<td class="invite_td-name">이메일 주소</td>
+					</tr>
+					<tr>
+						<td><br><textarea id="userId" name="userId" class="invite_textarea" placeholder="name@company.com, name@company.com, ..."></textarea></td>
+					</tr>
+					<tr>
+						<td class="invite_td-name">프로젝트에 추가</td>
+					</tr>
+					<tr>
+						<td><br><input type="text" id="addProject" name="addProject" class="invite_input" placeholder="프로젝트를 추가하려면 입력하세요"></td>
+					</tr>
+				</table>
+				<hr>
+				<div class="invite_button" >
+					<input type="submit" id="invite_submitbtn" value="보내기">
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- header -->
+	<div class="header">
+		<div class="navbar">
+			<a class="menu-bars" id="show-menu">
+				<img alt="sidebar" th:src="@{/img/menu.png}" width="30px">
+			</a>
+			<div class="navbar navbar-right">
+				<input type="text" placeholder="검색" id="searchbox">
+
+				<!-- clickable dropdown -->
+				<div class="dropdown">
+					<button onclick="addFunction()" class="dropbtn">+</button>
+					<div id="dropdown" class="dropdown-content">
+						<a th:href="@{/}">작업</a>
+						<a th:href="@{/}">프로젝트</a>
+						<a th:href="@{/}">메시지</a>
+						<a th:href="@{/}">초대</a>
+					</div>
+				</div>
+				<div class="dropdown">
+					<button onclick="myFunction()" class="dropbtn">+</button>
+					<div id="myDropdown" class="dropdown-content my-dropdown-content">
+						<a th:href="@{/}"><span th:text="${wsname}"></span></a>
+
+						<!-- 계정 소유주의 워크스페이스 전체 불러오기 -->
+						<form>
+							<table th:each="workspaceList : ${ownerWorkspaceList}">
+								<tr>
+									<td><input type="submit" th:wsnum="${workspaceList.wsid}"
+											th:onclick="switchWorkspace(this.getAttribute('wsnum'))"
+											th:value="${workspaceList.wsname}"></td>
+								</tr>
+							</table>
+						</form>
+						<hr>
+						<a th:href="@{/myWorkspaceInfo}">내 작업 공간 정보...</a>
+						<div class="dropdown" id="seeMoreDropdown">
+							<button onclick="seeMoreFunction()">더 보기</button>
+							<div class="dropdown-content dropleft">
+								<button class="btn-open-popup">새 작업 공간 생성</button>
+								<button class="btn-open-popup1">이 작업 공간에서 나를 제거</button>
+							</div>
+						</div>
+						<hr>
+						<a th:href="@{/mySet}">내 설정...</a>
+						<a th:href="@{/logout}">로그아웃</a>
+					</div>
+				</div>
+			</div>
+			<br>
+		</div>
+	</div>
+
+	<!-- sidebar -->
+	<div id="nav-menu">
+		<ul class="nav-menu-items">
+			<div id="navbar-toggle">
+				<a class="menu-bars" id="hide-menu">
+					<img alt="sidebar" th:src="@{/img/white_menu.png}" width="30px"> <i class="nav-icon"></i>
+				</a>
+				<a>
+					<h1><i id="logo"></i>Task-it</h1>
+				</a>
+			</div>
+			<hr>
+			<div class="nav-section">
+				<li class="nav-text"><a th:href="@{/}"><i class="nav-icon"></i>메인</a></li>
+				<li class="nav-text"><a th:href="@{/task/myTask}"><i class="nav-icon"></i>내 작업</a></li>
+				<li class="nav-text"><a th:href="@{/projectView/project}"><i class="nav-icon"></i>프로젝트 목록</a></li>
+				<li class="nav-text"><a th:href="@{/goalView/goal}"><i class="nav-icon"></i>목표</a></li>
+			</div>
+			<hr>
+			<div class="nav-section2">
+				<li class="nav-text" th:wsnum="${workspace.wsid}"
+					th:onclick="workspaceHome(this.getAttribute('wsnum'))">
+					<a th:href="@{/workspaceHome}"><i class="nav-icon sidebar-wsname"
+							th:text="${workspace.wsname}"></i></a>
+				</li>
+				<li class="nav-text"><a th:href="@{/}"><i class="nav-icon"></i>(사람들 표시)</a></li>
+				<li class="nav-text"><a th:href="@{/}"><i class="nav-icon"></i>(프로젝트명)</a></li>
+				<li class="nav-text"><a th:href="@{/}"><i class="nav-icon"></i>(프로젝트명)</a></li>
+			</div>
+			<hr>
+			<div>
+				<li class="nav-text nav-section3"><button class="btn-open-popup2">팀원 초대</button></li>
+				<li class="nav-text nav-section4"><a th:href="@{/logout}"><i class="nav-icon"></i>로그아웃</a></li>
+			</div>
+		</ul>
+	</div>
+	<script th:src="@{/js/sidebar.js}"></script>
+
+	<div>
+		<div class="body">
+			<br>
+			<div class="today-date">
+				<h2>[[${month}]] 월 [[${dayOfMonth}]] 일 [[${dayOfWeek}]]</h2>
+
+			</div>
+
+			<div class="login-area">
+				<span th:if="${userName != null}">
+					<h3><span th:text="${userName}"></span> 님 안녕하세요 </h3><br>
+				</span>
+			</div>
+
+			<div id="tess">
+				<div id="sub">
+					<div id="goal">
+						<div id="line1">
+							<p id="g1">내 목표</p>
+						</div>
+						<!-- <hr id="line1"> -->
+					</div>
+					<div id="project">
+						<div id="line2">
+							<p id="p1">프로젝트</p>
+							<!-- <hr id="line2"> -->
+						</div>
+
+						<div>
+							<div id="tbl">
+								<div th:each="pplist: ${projectlist}" class="pplist" id="pplist">
+									<div><a th:text="${pplist.pname}"
+											th:href="@{/projectView/project(pnum=${pplist.pnum})}" id="tabled"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div id="btn_create_project">
+							<input type="button" id="createproject" class="createproject" value="+프로젝트 생성">
+
+							<!-- <p><a th:href="@{/projectView/createproject}">프로젝트 생성</a></p> -->
+						</div>
+
+					</div>
+				</div>
+
+				<div id="sub2">
+					<div id="user">
+						<div id="line3">
+							<p id="u1">사용자</p>
+						</div>
+						<!-- <hr id="line3"> -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="projectmodal">
+			<div class="modalmodal">
+				<h2 id="projecttitle">프로젝트 생성</h2>
+				<form th:action="@{/projectView/createproject}" method="post" onsubmit="return check()">
+
+					<table id="tbl2">
+						<tr id="inputname">
+							<th><input type="text" maxlength='16' name="pname" id="pname" placeholder="프로젝트 이름 입력"></th>
+						</tr>
+
+						<tr id="selectmember">
+							<th>
+								<p>멤버 선택</p>
+								<select id="mmm" name="memberselect">
+									<!-- <option id="choose">선택</option> -->
+									<option th:each="val: ${ulist}" th:value="${val.email}" th:utext="${val.email}">
+									</option>
+								</select>
+
+							</th>
+						</tr>
+
+						<tr>
+							<th>
+								<div id="pmember"></div>
+							</th>
+						</tr>
+
+						<tr id="inputbtn">
+							<th colspan="2" id="btn"><input type="submit" value="프로젝트 생성" id="btn3"></th>
+
+						</tr>
+					</table>
+					<input type="hidden" name="pmember" id="pmber">
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script th:src="@{/js/modal.js}"></script>
+
+</body>
+
+</html>

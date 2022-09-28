@@ -1,0 +1,42 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.3'
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	annotationProcessor(group: 'org.projectlombok',name: 'lombok')
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

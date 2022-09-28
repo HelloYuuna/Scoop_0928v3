@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+#starttime, #endtime {
+    width: 110px;
+    line-height: 27px;
+    padding: 0 3px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #444444;
+    background-color: #2D2E31;
+    color: #fff;
+}
+
+select {
+    height: 27px;
+    padding: 0 5px;
+    /*text-align: center;*/
+    border-radius: 5px;
+    border: 1px solid #444444;
+    background-color: #2D2E31;
+    color: #fff;
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.scoop.dao.WorkspaceDAO">
+
+<insert id="selectKey" parameterType="Workspace">
+	<selectKey resultType="int" keyProperty="wsid" order="BEFORE">
+		select scoop_workspace_seq.NEXTVAL from dual
+	</selectKey>
+	INSERT INTO scoop_workspace  (
+			wsid
+			, wsname
+			, wsowner
+		)
+	VALUES
+		(
+			#{wsid}
+			, #{wsname}
+			, #{wsowner}
+		)
+</insert>
+
+<select id="selectLately" parameterType="string" resultType="Workspace">
+
+	SELECT * 
+	FROM
+		(
+		SELECT *
+		FROM
+			scoop_workspace
+		WHERE
+			wsowner=#{wsowner}
+		ORDER BY
+			lately DESC
+		)
+	WHERE
+		rownum = 1
+</select>
+
+<update id="updateLately" parameterType="Workspace">
+	UPDATE 
+		scoop_workspace 
+	SET 
+		lately = SYSDATE
+	WHERE
+		wsid=#{wsid}
+</update>
+
+<select id="selectOne" parameterType="int" resultType="Workspace">
+	SELECT *
+	FROM
+		scoop_workspace
+	WHERE
+		wsid=#{wsid}
+</select>
+
+<select id="selectOwner" parameterType="String" resultType="Workspace">
+	SELECT *
+	FROM
+		scoop_workspace
+	WHERE
+		wsowner=#{wsowner}
+</select>
+
+<select id="countOwner" parameterType="String" resultType="int">
+	SELECT
+		count(*)
+	FROM
+		scoop_workspace
+	WHERE
+		wsowner=#{wsowner}
+</select>
+</mapper>

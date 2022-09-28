@@ -1,0 +1,147 @@
+CREATE TABLE scoop_user
+(
+    id  VARCHAR2(1000)    
+    , name  VARCHAR2(1000)    NOT NULL
+    , email VARCHAR2(1000)   NOT NULL
+    , picture   VARCHAR2(1000)
+    , role  VARCHAR2(1000)
+);
+
+SELECT * FROM scoop_user;
+
+CREATE SEQUENCE id_seq;
+
+
+//목표 테이블
+
+drop SEQUENCE key_seq;
+drop table scoop_goal;
+
+CREATE TABLE scoop_goal
+(
+    key NUMBER PRIMARY KEY,                                        --목표 넘버(시퀀스)
+    wsid number(30),                                                          --워크스페이스아이디
+    gname varchar2(200),                                                  --목표제목
+    gstartdate varchar2(50),                                                         --시작일
+    genddate varchar2(50),                                                             --종료일
+    gstatus number(1) CHECK (gstatus IN('0','1','2','3','4','5','6','7')),                  --진행상태(0:진행상태 , 1: 위험, 2:기간지남,3:완료,4:보류,5:목표완성,6:목표미완성,7:목표중지.
+    uowner VARCHAR2(50),                                                --소유자 이메일(update가능하도록)
+    gpublic number(1) check (gpublic in('0','1')),                     --0: 비공개, 1:공개
+    gmember varchar2(2000),                                             --참가맴버 아이디등록
+    gfinish number(1) check (gfinish in('0','1')),                      -- 0: 미완료, 1: 완료 (마일스톤)  
+    gcreator VARCHAR2(50) not null                                   -- 생성자 (못지움)
+);
+create SEQUENCE key_seq;
+
+INSERT INTO scoop_goal
+(key,wsid, gname ,gstartdate ,genddate ,gstatus ,uowner ,gpublic ,gmember ,gfinish ,gcreator)
+VALUES
+(key_seq.nextval, '1','생성' ,'2022-09-17' ,'2022-09-19' ,'0' ,'answngusdld@gmail.com' ,'1' ,'answngusdld@gmail.com' ,'0' ,'answngusdld@gmail.com');
+
+select * from scoop_goal;
+
+
+CREATE TABLE calendar
+(
+    title VARCHAR2(100),                                                                 --제목
+    text VARCHAR2(500),                                                            --내용
+    star VARCHAR2(50),                                                  --시작 날짜
+    end VARCHAR2(50),                                                         --종료일
+    startday VARCHAR2(50),                                                       --시작 시간
+    endday VARCHAR2(50),                                                        --종료 시간
+    allday varchar2(50),                                                        --전체시간
+    wsid NUMBER references scoop_workspace(wsid)     --워크스페 넘버(시퀀스)
+);
+drop table calendar;
+
+
+
+DROP TABLE scoop_member;
+CREATE TABLE scoop_member (
+      email	varchar2(320)   primary key NOT NULL,
+      wsid	number		    NOT NULL,
+      password varchar2(100) ,                          -- JS 유효성으로 체크
+      name	varchar2(50)	NOT NULL,                   -- 폼 회원가입일 경우 무조건 받아야함
+      picture VARCHAR2(1000) ,                          -- 구글 프로필 사진 (활용 여부는 미정)
+      udept	varchar2(50)	,
+      role	varchar2(30)
+);
+
+select * from scoop_member;
+
+Drop table scoop_mytask;
+
+CREATE TABLE scoop_mytask (
+        tnum	        NUMBER		        primary key ,
+        wsid	        number
+            references scoop_workspace(wsid) not null ,
+        tname	        VARCHAR2(300)		NOT NULL,
+        tcharge	        VARCHAR2(50)		NOT NULL,
+        tstartperiod	DATE,
+        tendperiod	    DATE,
+        texplain	    VARCHAR2(2000),
+        tparticipant	VARCHAR2(200),
+        tpublic	        NUMBER	            DEFAULT 0,                          -- 0 비공개 or 1 공개
+        tfinish	        NUMBER	            DEFAULT 0,                          -- 0 미완료 or 1 완료
+        tcreator	    VARCHAR2(50)		NOT NULL,                           -- 생성자
+        tsession	    number(1)        default '0'                            -- 0 오늘 1 다음주 2 나중에
+            check ( tsession in ( '0', '1', '2' ) )
+);
+
+CREATE SEQUENCE scoop_myTask_seq;
+
+DROP TABLE scoop_workspace;
+CREATE TABLE scoop_workspace (
+       wsid	    NUMBER	            primary key ,
+       wsname	varchar2(50)		NOT NULL,
+       wsowner	varchar2(1000)		NOT NULL,
+       lately   DATE                DEFAULT SYSDATE
+);
+
+create sequence scoop_workspace_seq;
+
+
+insert into scoop_workspace values (1, '융', '차슈', default);
+
+
+drop table scoop_project;
+create table scoop_project(
+      pnum number(38) primary key, -- 프로젝트 넘버
+      uemail varchar2(3200), -- 멤버 아이디 ,멤버 테이블 참조
+      wsid number(38) not null, -- 워크스페이스 아이디 , 워크스페이스 아이디 참조
+      key number(38) , -- 목표 번호, 목표 참조
+      pnotice varchar2(50) , -- 공지사항 타이틀
+      ptext varchar2(500) , -- 공지사항 내용
+      pname varchar2(50) not null, -- 프로젝트 이름
+      powner varchar2(30) not null -- 프로젝트 오너
+--       pmember varchar2(1000) -- 프로젝트 참여자
+);
+
+create sequence scoop_project_seq;
+
+select * from scoop_project;
+
+insert into scoop_project
+values (1, 'hah1236.k@gmail.com,hah1236@hotmail.co.jp,hah1236.j@gmail.com,hah1236@naver.com', 1, null, null, null, 'hello1', '차슈');
+
+insert into scoop_project
+values (2, 'hah1236.k@gmail.com,hah1236@hotmail.co.jp,hah1236.j@gmail.com,hah1236@naver.com', 1, null, null, null, 'hello2', '차슈');
+
+insert into scoop_project
+values (3, 'hah1236.k@gmail.com,hah1236@hotmail.co.jp,hah1236.j@gmail.com,hah1236@naver.com', 1, null, null, null, 'hello3', '차슈');
+
+
+-- scoop_workspace
+CREATE TABLE scoop_workspace
+(
+    wsid    NUMBER  PRIMARY KEY -- 워크스페이스 아이디
+    , wsname    VARCHAR2(50)    NOT NULL    -- 워크스페이스명
+    , wsowner   VARCHAR2(1000)    NOT NULL  -- 워크스페이스 생성시 세션에서 로그인 아이디 가져옴
+    , lately    DATE DEFAULT SYSDATE
+);
+
+CREATE SEQUENCE scoop_workspace_seq;
+
+
+
+

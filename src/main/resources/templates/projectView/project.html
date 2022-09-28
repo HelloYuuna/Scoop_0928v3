@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Insert title here</title>
+	<script th:src="@{/js/jquery-3.6.0.js}"></script>
+	
+	<script>
+		$(document).ready(function () {
+			$('#pnotice').keyup(insert);
+			$('#ptext').keyup(insert);
+			$('#mmm').change(asd);
+		});
+
+
+		function insert() {
+			//	let input = $('#input').val();
+			//	let context = $('#context').val();
+
+			$.ajax({
+				url: 'insert',
+				type: 'post',
+				data: $('#writeform').serialize(),
+				success: function () {
+					/* alert('되긴함'); */
+					//$(input).val(ob);
+				},
+				error: function () {
+					alert('실패');
+				}
+			});
+
+		}
+
+
+
+		let memberNameList = '';
+		let listCount = 0;
+
+		function asd() {
+			//select 선택시
+			let member = $('#mmm').val();
+			console.log(member); //option에서 선택한 값
+
+			let val = $('#mmm').val(); //option의 값
+			//만일 선택을 하면 그 선택 창 안에
+			$('#mlist').html(val);
+
+			//프로젝트 넘버
+			let pnum = $('#pnum').val();
+
+			$.ajax({
+				url: 'insertmember',
+				type: 'post',
+				data: { member: member },
+				success: function () {
+
+				},
+				error: function () {
+
+				}
+			})
+
+			/* $.ajax({
+				url: 'insertmember',
+				type: 'post',
+					data: {str:$('#mlist').html(), pnum:pnum},
+				success: function(member){
+					$('#mlist').html(member);
+		
+		
+					//alert('되긴함');
+					//$(input).val(ob);
+				},
+				error: function(){
+					alert('실패');
+				}
+			});  */
+
+		}
+
+		function clickcheck() {
+			onfocus = "this.placeholder=''";
+
+		}
+
+		function deleteProject(num) {
+			if (confirm('해당 프로젝트를 삭제하시겠습니까?')) {
+				location.href = 'deleteproject?pnum=' + num;
+			}
+
+		}
+
+		function update(pnum) {
+			alert(pnum);
+			location.href = 'projectupdate?pnum=' + pnum;
+
+		}
+
+
+	</script>
+	<!-- <link rel="stylesheet" th:href="@{/css/sidebar.css}"> -->
+	<link rel="stylesheet" th:href="@{/css/header.css}">
+	<link rel="stylesheet" th:href="@{/css/projectupdatemodal.css}">
+	<link rel="stylesheet" th:href="@{/css/project.css}">
+	
+	<style>
+	
+		li {
+			list-style: none
+		}
+
+		a {
+			text-decoration: none;
+			font-size: 14px
+		}
+
+
+
+		body {
+			background-size: cover;
+			background-color: aliceblue;
+		}
+
+		.submenu>li {
+			line-height: 50px;
+			background-color: #94a9ff;
+		}
+
+		.submenu {
+			height: 0;
+			/*ul의 높이를 안보이게 처리*/
+			overflow: hidden;
+		}
+
+
+	</style>
+
+</head>
+
+
+
+<body>
+
+	<!-- header -->
+	<div class="header">
+		<div class="navbar">
+			<a class="menu-bars" id="show-menu">
+				<img alt="sidebar" th:src="@{/img/menu.png}" width="30px">
+			</a>
+			<div class="navbar navbar-right">
+				<input type="text" placeholder="검색" id="searchbox">
+
+				<!-- clickable dropdown -->
+				<div class="dropdown">
+					<button onclick="addFunction()" class="dropbtn">+</button>
+					<div id="dropdown" class="dropdown-content">
+						<a th:href="@{/}">작업</a>
+						<a th:href="@{/}">프로젝트</a>
+						<a th:href="@{/}">메시지</a>
+						<a th:href="@{/}">초대</a>
+					</div>
+				</div>
+				<div class="dropdown">
+					<button onclick="myFunction()" class="dropbtn">+</button>
+					<div id="myDropdown" class="dropdown-content my-dropdown-content">
+						<a th:href="@{/}"><span th:text="${wsname}"></span></a>
+
+						<!-- 계정 소유주의 워크스페이스 전체 불러오기 -->
+						<form>
+							<table th:each="workspaceList : ${ownerWorkspaceList}">
+								<tr>
+									<td><input type="submit" th:wsnum="${workspaceList.wsid}"
+											th:onclick="switchWorkspace(this.getAttribute('wsnum'))"
+											th:value="${workspaceList.wsname}"></td>
+								</tr>
+							</table>
+						</form>
+						<hr>
+						<a th:href="@{/myWorkspaceInfo}">내 작업 공간 정보...</a>
+						<div class="dropdown" id="seeMoreDropdown">
+							<button onclick="seeMoreFunction()">더 보기</button>
+							<div class="dropdown-content dropleft">
+								<button class="btn-open-popup">새 작업 공간 생성</button>
+								<button class="btn-open-popup1">이 작업 공간에서 나를 제거</button>
+							</div>
+						</div>
+						<hr>
+						<a th:href="@{/mySet}">내 설정...</a>
+						<a th:href="@{/logout}">로그아웃</a>
+					</div>
+				</div>
+			</div>
+			<br>
+		</div>
+	</div>
+
+	<!-- sidebar -->
+	
+
+
+
+
+
+	<div id="haba">
+	</div>
+
+
+	<div id="title">
+		<div id="title2">
+			<h2 th:text="${input.pname}"></h2>
+		</div>
+		
+		<div id="updatebtn2"><button th:href="@{/projectView/projectupdate(pnum=${input.pnum})}" class="updatetitle"
+				id="updatetitle"><img th:src="@{/img/sign.png}" id="sign" title="프로젝트 수정"></button></div>
+
+	</div>
+
+
+	<div id="mess">
+
+		<form id="writeform">
+			<div id="mes">
+				<div>
+					<div id="two">
+						<textarea id="pnotice" name="pnotice" th:text="${input.pnotice}"
+								placeholder="프로젝트 협업 방식" onsubmit="return clickcheck"></textarea>
+						<div id="deletebox"><a th:href="|javascript:deleteProject(${input.pnum})|"
+											id="projectdelete">프로젝트 삭제</a></div>
+					</div>
+					<input type="hidden" id="pnum" name="pnum" th:value="${input.pnum}">
+
+				</div>
+			</div>
+			<div id="sub">
+				<div>
+					<textarea id="ptext" name="ptext" th:text="${input.ptext}"
+						placeholder="수행할 업무를 정하고 중요한 정보를 추가하세요." onsubmit="return clickcheck"></textarea>
+				</div>
+				<div id="member">
+					<div id="memberplus">
+						<p id="p2">멤버추가</p>
+						<!-- <hr id="line4"> -->
+					</div>
+					<div id="list">
+						<select id="mmm" name="memberselect">
+							<!-- <option id="choose">선택</option> -->
+								<option th:each="val: ${memberlist}" th:value="${val.email}"
+									th:utext="${val.email}" id="val">
+								</option>
+						</select>
+					</div>
+
+				<div id="mlist" th:text="${choiceMember}">
+
+
+				</div>
+
+				</div>
+			</div>
+
+
+					<div id="sub2">
+						<div id="state">
+							<div id="state2">
+								<p id="u2">진행 및 상태</p>
+							<!-- <hr id="line5"> -->
+							</div>
+						</div>
+					</div>
+
+		</form>
+
+	</div>
+
+
+				<div class="projectupdatemodal">
+					<div class="modalmodalmodal">
+						<h2 id="updateproject">프로젝트 수정</h2>
+						<form th:object="${input}" th:action="@{/projectView/projectupdate}" method="post"
+							onsubmit="return check()">
+							<input type="hidden" name="pnum" id="pnum" th:value="${input.pnum}">
+
+							<table id="tbl3">
+
+								<tr id="updatename">
+									<th>프로젝트 이름 수정</th>
+									<td><input type="text" maxlength='16' name="pname" id="pname"
+											th:value="${input.pname}"></td>
+								</tr>
+
+								<tr id="updatemember">
+									<th>참여 멤버 수정</th>
+									<td><input type="text" maxlength='16' name="pmember" id="pmember"
+											th:value="${input.pmember}"></td>
+								</tr>
+
+								<tr id="updatebutton">
+									<th colspan="2" id="btn"><input type="submit" value="수정" id="updatebtn"></th>
+								</tr>
+
+							</table>
+
+						</form>
+					</div>
+
+				</div>
+
+				<script th:src="@{/js/projectupdatemodal.js}"></script>
+
+</body>
+
+</html>

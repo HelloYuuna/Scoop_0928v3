@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/home.css}">
+	<link rel="stylesheet" th:href="@{/css/sidebar.css}">
+	<link rel="stylesheet" th:href="@{/css/goalmodel.css}">
+	<meta charset="UTF-8">
+	<title>Goal</title>
+	<script>
+		let wsid = document.getElementById("wsid").value;
+		function calendar() {
+			var wsid = document.getElementById("wsid").value;
+			var url = "http://localhost:9500/scoop/calendarView/calendar1?wsid=" + wsid;
+			var res = encodeURI(url);
+			window.open(res, "", "width=750, height=750, left=1500, top=350");
+		}
+		function calendar11() {
+			window.open("http://localhost:9500/scoop/calendarView1/calendar11", "calendar_parent"
+				, "width=750, height=750, left=1500, top=350");
+		}
+
+		$(document).ready(function () {
+			$('#insertform_btn').click(insertform);
+		});
+
+		function insertform(wsid) {
+			alert("Remove Workspace Home Number : " + wsid);
+			let gstatus = $("select[name=gstatus]").val();
+			alert(gstatus);
+			let gpublic = $("select[name=gpublic]").val();
+			alert(gpublic);
+			let gfinish = $("select[name=gfinish]").val();
+			alert(gfinish);
+			$.ajax({
+				type: "Get",
+				url: "insertform",
+				data: { wsid: wsid, gname: gname, gstartdate: gstartdate, genddate: genddate, gstatus: gstatus, uowner: uowner, gpublic: gpublic, gmember: gmember, gfinish: gfinish },
+				success: function () {
+					confirm("success : " + wsid);
+				},
+				error: function (e) {
+					alert(JSON.stringify(e));
+				}
+			})
+		}
+
+		function insertgoal() {
+			alert("안녕");
+		}
+
+
+
+	</script>
+
+</head>
+
+<body>
+	<div class="navbar">
+		<a class="menu-bars" id="show-menu">
+			<img alt="sidebar" th:src="@{/img/menu.png}" width="30px">
+		</a>
+		<div style="font-size: 25px; margin-left: 2%;">[ 목표 ]
+			<div id="subb" style="width: 200px;">
+				<a id="tess" th:href="@{/goalView/teamgoal}">팀목표</a>
+				<a id="tess" th:href="@{/goalView/goal}">내목표</a>
+			</div>
+		</div>
+		<hr style="width:65%;">
+	</div>
+	<!-- <div class=" navbar navbar-right" style="margin-left: 70%;">
+		 <input type="text" placeholder="검색" id="searchbox"> 
+		 <img th:src="@{/img/add_circle.png}" style="width: 30px"> 
+	</div> -->
+	<style>
+		#mokucuga {
+			background-color: #C0C6CC;
+			/* padding: 15px 15px; */
+			border: 0;
+			outline: 0;
+			padding-top: 2px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			color: #526A80;
+			border-radius: 10px 10px;
+			width: 180px;
+			height: 50px;
+			margin: 2px;
+			clear: right;
+			right: 0;
+			bottom: 0px;
+		}
+
+		#mokucuga:hover {
+			/* color: white; */
+			background-color: aliceblue;
+			font-weight: 700;
+
+
+		}
+
+		input[type=text] {
+			width: 300px;
+			height: 40px;
+			border-radius: 10px;
+			margin: 5px;
+		}
+
+		#insertform {
+			font-size: 20px;
+		}
+
+		#subutu {
+			width: 100px;
+			height: 40px;
+			border-radius: 10px;
+			margin: 5px;
+			font-size: 20px;
+		}
+	</style>
+	<div style="margin-top: 1%; margin-left: 8%;">
+		<form th:action="@{/goal/selectcal}" method="post" onsubmit="return validation();">
+			<input type="button" class="btn-open-popup" value="+ 목표추가" style="font-size: 17px;" id="mokucuga">
+			<div class="write" style="margin-left: 85%;">
+				<div style="font-family: bold; font-size: 25px;">진행상황</div>
+				<div>
+					<select name="gstatus" style="width: 150px; height: 30px;">
+						<option value="0">0 : 진행중</option>
+						<option value="1">1 : 위험</option>
+						<option value="2">2 : 기간지남</option>
+						<option value="3">3 : 완료</option>
+					</select>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div style="text-align: center;">
+		<div class="goalne"></div>
+	</div>
+
+
+	<div class="modal">
+		<div class="modal_body">
+			<form th:action="@{/goalView/insertgoal}" id="insertform" name="insertform" method="post"
+				onsubmit="return validation();">
+				<h2>[ 목표 생성 ]</h2>
+				<br>
+				<div>제목 : <input type="text" id="gname" name="gname" placeholder="제목을 입력하세요"></div>
+				<br>
+				<div>소유자 : <input type="text" id="uowner" name="uowner"></div>
+				<br>
+				<div>기간 : <input type="date" id="gstartdate" name="gstartdate"> ~ <input type="date" id="genddate"
+						name="genddate">
+					<!-- <input type="button" id="calender" name="calender" value="캘린더" onclick="calendar()"> -->
+				</div>
+				<br>
+				<div>
+					<div style="font-family: bold; font-size: 17px;">진행상황 :
+						<select name="gstatus" style="width: 150px; height: 30px;" id="gstatus">
+							<option value="0">0 : 진행상태</option>
+							<option value="1">1 : 위험</option>
+							<option value="2">2 : 기간지남</option>
+							<option value="3">3 : 완료</option>
+						</select>
+					</div>
+				</div>
+				<br>
+				<div>
+					<div style="font-family: bold; font-size: 17px;">공개여부 :
+						<select name="gpublic" style="width: 150px; height: 30px;" id="gpublic">
+							<option value="1">0 : 공개</option>
+							<option value="0">1 : 비공개</option>
+						</select>
+					</div>
+				</div>
+				<br>
+				<div>
+					<div style="font-family: bold; font-size: 17px;">마일스톤 :
+						<select name="gfinish" style="width: 150px; height: 30px;" id="gfinish">
+							<option value="0">0 : 미완료</option>
+							<option value="1">1 : 완료</option>
+						</select>
+					</div>
+				</div>
+				<br>
+				<div>맴버 : <input type="text" id="gmember" name="gmember" placeholder="이름또는 이메일로 맴버 추가"></div>
+				<br>
+				<div>
+					<input type="submit" id="insertform_btn" value="확인" th:goal="@{insertgoal.insertgoal}"
+						th:onclick="test(this.getAttribute('goal'))">
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<hr style="width: 100%; margin-top: 1%;">
+
+	<style>
+		.gilta {
+			width: 100%;
+			height: 20px;
+			text-align: center;
+			font-size: 20px;
+			margin-top: 10px;
+		}
+
+		.goalne {
+			margin-top: 15px;
+
+		}
+	</style>
+
+	<table>
+		<tr>
+			<th id="gil" style="width: 10%;">[ 제목 ]</th>
+			<th id="gil" style="width: 30%;">[ 기간 ]</th>
+			<th id="gil" style="width: 30%;">[ 진행상태 ]</th>
+			<th id="gil" style="width: 10%;">[ 소유자 ]</th>
+		</tr>
+		<br>
+		<tr th:each="goallist1: ${goallist1}" class="gilta">
+			<form th:action="@{/goalView/goalvyu}" id="list" name="list" method="post" onsubmit="return validation();">
+				<div class="modal">
+					<div class="modal_body">
+						<td th:text="${goallist1.gname}" class="goalne" id="gname" name="gname">
+						</td>
+						<input type="hidden" id="wsid" name="wsid" th:value="${wsid}">
+						<td th:text="|${goallist1.calendar}|" class="goalne" id="gnal" name="gnal">
+						</td>
+						<td th:text="${goallist1.gstatus1}" class="goalne1" id="gstatus1" name="gstatus1">
+						</td>
+						<td th:text="${goallist1.gcreator}" class="goalne" id="gcreator" name="gcreator"><br>
+						</td>
+					</div>
+				</div>
+			</form>
+		</tr>
+		<br>
+	</table>
+
+	<nav id="nav-menu">
+		<ul class="nav-menu-items">
+			<div id="navbar-toggle">
+				<a href="" class="menu-bars" id="hide-menu">
+					<img alt="sidebar" th:src="@{/img/white_menu.png}" width="30px">
+				</a>
+				<a href="">
+					<h1><i id="logo"></i>Task-it</h1>
+				</a>
+			</div>
+			<hr>
+			<div class="nav-section">
+				<li class="nav-text"><a th:href="@{/}"><i class="nav-icon"></i>메인</a></li>
+				<li class="nav-text"><a href="#"><i class="nav-icon"></i>내 작업</a></li>
+				<li class="nav-text"><a href="#"><i class="nav-icon"></i>프로젝트 목록</a></li>
+				<li class="nav-text"><a th:href="@{/goalView/goal}"><i class="nav-icon"></i>목표</a></li>
+			</div>
+			<hr>
+			<div class="nav-section2">
+				<li class="nav-text"><a href="#"><i class="nav-icon"></i>(워크스페이스명) +</a></li>
+				<li class="nav-text"><a href="#"><i class="nav-icon"></i>(사람들 표시)</a></li>
+				<li class="nav-text"><a href="#"><i class="nav-icon"></i>(프로젝트명)</a></li>
+				<li class="nav-text"><a href="#"><i class="nav-icon"></i>(프로젝트명)</a></li>
+			</div>
+			<hr>
+			<div>
+				<li class="nav-text nav-section3"><a href="#"><i class="nav-icon"></i>팀원 초대</a></li>
+			</div>
+		</ul>
+	</nav>
+	<script th:src="@{/js/sidebar.js}"></script>
+	<!-- model 창을 띄우기 -->
+	<script th:src="@{/js/goalmodel.js}"></script>
+</body>
+
+</html>

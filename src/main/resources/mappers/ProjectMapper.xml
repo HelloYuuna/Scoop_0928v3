@@ -1,0 +1,106 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace ="com.example.scoop.dao.ProjectDAO">
+
+	<!-- <insert id="insertMember" parameterType="User">
+		insert scoop_project (pnum, uemail, wsid, key, pname, powner, pmember)
+		values ()
+	</insert> -->
+	
+	<update id="updateContent" parameterType="Project">
+		update scoop_project
+		set pnotice = #{pnotice}, ptext = #{ptext}
+		where pnum = #{pnum}
+	</update>
+
+	<select id="selectContent" resultType="String" parameterType="int">
+		select pnotice
+		from scoop_project
+		where pnum = #{pnum}
+	</select>
+
+	<select id="selectMember" resultType="User">
+		select *
+		from scoop_member
+	</select>
+
+	<select id="memberselect" resultType="String" parameterType="String">
+		select email
+		from scoop_member
+		where id = #{id}
+	</select>
+
+	<update id="updatemember" parameterType="map">
+		update scoop_member
+		set pmember = #{pmember}
+		where pnum= #{pnum}
+	</update>
+
+	<insert id="projectInsert" parameterType="Project">
+		insert into scoop_project 
+		(pnum
+			, uemail
+			, wsid
+			, key
+			, pname
+			, powner
+			, pmember
+			)
+		values 
+		(scoop_project_seq.nextval
+			, #{uemail}
+			, 1
+			, 1
+			, #{pname}
+			, #{powner}
+			, #{pmember}
+		)
+	</insert>
+
+	<select id="selectProject" resultType="Project">
+		select *
+		from scoop_project
+		order by pnum desc
+	</select>
+	
+	<select id="projectread" resultType="Project" parameterType="int">
+		select * 
+		from scoop_project
+		where pnum = #{pnum}
+	</select>
+	
+	<select id="choiceMember" resultType="String" parameterType="int">
+		select pmember
+		from scoop_project
+		where pnum = #{pnum}
+	</select>
+	
+	<update id="memberupdate" parameterType="map">
+		update scoop_project
+		set pmember = pmember ||','||#{pmember}
+		where pnum = #{pnum}
+	</update>
+	
+	<update id="updateproject" parameterType="Project">
+		update scoop_project
+		set 
+			pname = #{pname}, 
+			pmember = #{pmember}
+		where pnum = #{pnum}
+	</update>
+	
+	<delete id="deleteproject" parameterType="Project">
+		delete from scoop_project
+		where pnum = #{pnum}
+			
+	</delete>
+
+	<select id="findByWsid" parameterType="int" resultType="Project">
+		select * from SCOOP_PROJECT
+		where WSID = #{wsid}
+	</select>
+	
+	
+</mapper>

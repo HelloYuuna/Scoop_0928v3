@@ -1,0 +1,276 @@
+<kk!DOCTYPE html>
+	<html xmlns:th="http://thymeleaf.org">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" th:href="@{/css/home.css}">
+		<link rel="stylesheet" th:href="@{/css/sidebar.css}">
+		<link rel="stylesheet" th:href="@{/css/goalmodel.css}">
+
+
+
+		<style>
+			* {
+				padding: 0;
+				margin: 0
+			}
+
+			li {
+				list-style: none
+			}
+
+			a {
+				text-decoration: none;
+				font-size: 14px
+			}
+
+			.men {
+				background: rgba(0, 0, 0, 0.3);
+			}
+
+			body {
+				background-size: cover;
+				background-color: black;
+
+			}
+
+			.menu {
+				width: 800px;
+				overflow: hidden;
+				margin: 150px auto;
+			}
+
+			.menu>li {
+				width: 20%;
+				/*20*5=100%*/
+				float: left;
+				text-align: center;
+				line-height: 40px;
+				background-color: #5778ff;
+			}
+
+			.menu a {
+				color: #1b1b1b;
+				font-style: normal;
+				font-size: 16px;
+				font-weight: bold;
+			}
+
+			.submenu>li {
+				line-height: 50px;
+				background-color: #94a9ff;
+			}
+
+			.submenu {
+				height: 0;
+				/*ul의 높이를 안보이게 처리*/
+				overflow: hidden;
+			}
+
+			.menu>li:hover {
+				background-color: #94a9ff;
+				transition-duration: 0.5s;
+			}
+
+			.menu>li:hover .submenu {
+				height: 250px;
+				/*서브메뉴 li한개의 높이 50*5*/
+				transition-duration: 1s;
+			}
+
+			#sub {
+				display: inline-flex;
+			}
+
+			#sub2 {
+				display: inline-flex;
+			}
+
+			#tess {
+				text-align: center;
+				color: black;
+				font-size: 20px;
+			}
+
+			#goal {
+				margin-top: 50px;
+				width: 575px;
+				height: 400px;
+				border-collapse: collapse;
+				margin-right: 50px;
+				background-color: white;
+				background-color: rgba(255, 255, 255, 0.5);
+				border-radius: 10px 10px;
+
+			}
+
+			#project {
+				margin-top: 50px;
+				width: 575px;
+				height: 400px;
+				border-collapse: collapse;
+				background-color: white;
+				background-color: rgba(255, 255, 255, 0.5);
+				border-radius: 10px 10px;
+
+			}
+
+			#user {
+				margin-top: 50px;
+				width: 1202px;
+				height: 400px;
+				border-collapse: collapse;
+				background-color: white;
+				background-color: rgba(255, 255, 255, 0.5);
+				margin-bottom: 100px;
+				border-radius: 10px 10px;
+
+			}
+
+			#g1 {
+				padding: 10px;
+				margin: 10px
+			}
+
+			#p1 {
+				padding: 10px;
+				margin: 10px
+			}
+
+			#u1 {
+				padding: 10px;
+				margin: 10px
+			}
+
+			#tete {
+				height: 30px;
+				width: 230px;
+				border-radius: 4px;
+				font-size: 15px;
+				padding: 0 0 0 5px;
+			}
+
+			#butt {
+				height: 30px;
+				width: 50px;
+				font-size: 16px;
+				background-color: white;
+			}
+		</style>
+		<meta charset="UTF-8">
+		<title>Goal</title>
+		<script>
+			function calendar() {
+				window.open("http://localhost:9500/scoop/calendarView/calendar1", "calendar_parent"
+					, "width=750, height=750, left=1500, top=350");
+
+			}
+
+		</script>
+	</head>
+
+	<body>
+		<div class="navbar">
+			<a href="#" class="menu-bars" id="show-menu">
+				<img alt="sidebar" th:src="@{/img/menu.png}" width="30px">
+			</a>
+		</div>
+
+		<div style="text-align: center;">
+			<div class="goalne"></div>
+		</div>
+
+
+		<div class="modal">
+			<div class="modal_body">
+				<form th:action="@{/goalView/insertgoal}" id="insertform" name="insertform" method="post"
+					onsubmit="return validation();">
+					<h2>[ 목표 생성 ]</h2>
+					<br>
+					<div>제목 : <input type="text" id="gname" name="gname" placeholder="제목을 입력하세요"></div>
+					<br>
+					<div>소유자 : <input type="text" id="uowner" name="uowner"></div>
+					<br>
+					<div>기간 : <input type="button" id="calender" name="calender" value="캘린더" onclick="calendar()"></div>
+					<br>
+					<div>
+						<div style="font-family: bold; font-size: 17px;">진행상황 :
+							<select name="category" style="width: 150px; height: 30px;">
+								<option value="0">0 : 진행상태</option>
+								<option value="1">1 : 위험</option>
+								<option value="2">2 : 기간지남</option>
+								<option value="3">3 : 완료</option>
+							</select>
+						</div>
+					</div>
+					<br>
+					<div>맴버 : <input type="text" id="gmember" name="gmember" placeholder="이름또는 이메일로 맴버 추가"></div>
+					<br>
+					<div>
+						<input type="submit" value="확인" th:goal="@{insertgoal.insertgoal}"
+							th:onclick="test(this.getAttribute('goal'))">
+					</div>
+				</form>
+			</div>
+		</div>
+
+
+		<hr style="width: 100%; margin-top: 1%;">
+
+		<div style="width: 100%; font-size: 17px; font-weight: bold;">
+			<span style="margin-left: 10%;">이름</span>
+			<span style="margin-left: 20%;">기간</span>
+			<span style="margin-left: 40%;">진행상태</span>
+			<span style="margin-left: 10%;">소유자</span>
+		</div>
+		<form>
+
+			<div style="width: 100%;">
+				<span style="margin-left: 10%;"></span>
+				<span style="margin-left: 20%;"></span>
+				<span style="margin-left: 40%;"></span>
+				<span style="margin-left: 10%;"></span>
+			</div>
+		</form>
+
+
+
+
+
+		<nav id="nav-menu">
+			<ul class="nav-menu-items">
+				<div id="navbar-toggle">
+					<a href="#" class="menu-bars" id="hide-menu">
+						<img alt="sidebar" th:src="@{/img/white_menu.png}" width="30px">
+					</a>
+					<a href="#">
+						<h1><i id="logo"></i>Task-it</h1>
+					</a>
+				</div>
+				<hr>
+				<div class="nav-section">
+					<li class="nav-text"><a th:href="@{/}"><i class="nav-icon"></i>메인</a></li>
+					<li class="nav-text"><a href="#"><i class="nav-icon"></i>내 작업</a></li>
+					<li class="nav-text"><a href="#"><i class="nav-icon"></i>프로젝트 목록</a></li>
+					<li class="nav-text"><a th:href="@{/goalView/goal}"><i class="nav-icon"></i>목표</a></li>
+				</div>
+				<hr>
+				<div class="nav-section2">
+					<li class="nav-text"><a href="#"><i class="nav-icon"></i>(워크스페이스명) +</a></li>
+					<li class="nav-text"><a href="#"><i class="nav-icon"></i>(사람들 표시)</a></li>
+					<li class="nav-text"><a href="#"><i class="nav-icon"></i>(프로젝트명)</a></li>
+					<li class="nav-text"><a href="#"><i class="nav-icon"></i>(프로젝트명)</a></li>
+				</div>
+				<hr>
+				<div>
+					<li class="nav-text nav-section3"><a href="#"><i class="nav-icon"></i>팀원 초대</a></li>
+				</div>
+			</ul>
+		</nav>
+		<script th:src="@{/js/sidebar.js}"></script>
+		<!-- model 창을 띄우기 -->
+		<script th:src="@{/js/goalmodel.js}"></script>
+	</body>
+
+	</html>

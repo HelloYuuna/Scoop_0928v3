@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>New Workspace</title>
+</head>
+<body>
+	<div class="newWorkspace_title" id="newWorkspace_title">작업 공간 생성</div>
+		<hr>
+		<form id="workspaceForm" th:action="@{/newWorkspace}" method="get">
+		<div class="newWorkspace_left">
+			<table class="newWorkspace_table">
+				<tr>
+					<td class="newWorkspace_td-name">작업 공간 이름</td>
+					<td><input type="text" id="wsname" name="wsname" class="newWorkspace_input" placeholder="회사 또는 팀 이름"></td>
+				</tr>
+				<tr>
+					<td class="newWorkspace_td-name">멤버</td>
+					<td><br><textarea class="newWorkspace_textarea" placeholder="name@company.com"></textarea></td>
+				</tr>
+			</table>
+		</div>
+		<hr>
+		<div class="newWorkspace_button" >
+			<input type="submit" id="newWorkspace_submitbtn" value="작업 공간 생성">
+		</div>
+	</form>
+</body>
+</html>
