@@ -10,8 +10,8 @@ public interface GoalService {
 
 	// public ArrayList<Goal> selectme();
 
-	public ArrayList<Goal> selectOne1Goal();
+	public ArrayList<Goal> selectOne1Goal(int wsid);
 
-	public ArrayList<Goal> selectOne1(int wsid);
+	public ArrayList<Goal> selectOne1(Goal goal);
 
 }

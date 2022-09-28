@@ -7,14 +7,8 @@
 	<link rel="stylesheet" th:href="@{/css/home.css}">
 	<link rel="stylesheet" th:href="@{/css/sidebar.css}">
 	<link rel="stylesheet" th:href="@{/css/goalmodel.css}">
-
-
-
-
-
 	<meta charset="UTF-8">
 	<title>Goal</title>
-
 	<script>
 		let wsid = document.getElementById("wsid").value;
 		function calendar() {
@@ -51,6 +45,10 @@
 					alert(JSON.stringify(e));
 				}
 			})
+		}
+
+		function insertgoal() {
+			alert("안녕");
 		}
 
 
@@ -129,8 +127,8 @@
 			<div class="write" style="margin-left: 85%;">
 				<div style="font-family: bold; font-size: 25px;">진행상황</div>
 				<div>
-					<select name="category" style="width: 150px; height: 30px;">
-						<option value="0">0 : 진행상태</option>
+					<select name="gstatus" style="width: 150px; height: 30px;">
+						<option value="0">0 : 진행중</option>
 						<option value="1">1 : 위험</option>
 						<option value="2">2 : 기간지남</option>
 						<option value="3">3 : 완료</option>

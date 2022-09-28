@@ -41,8 +41,12 @@ public class GoalController {
 		// 전체값 가져오기
 		// ArrayList<Goal> goallist = service.selectOne1Goal();
 		int wsid = (int) httpSession.getAttribute("wsid");
+		Goal goal = new Goal();
+		goal.setWsid(wsid);
+		goal.setGcreator((String) email);
+		log.debug("goal:{}", goal);
 		log.debug("wsid1:{}", wsid);
-		ArrayList<Goal> goallist1 = service.selectOne1(wsid);
+		ArrayList<Goal> goallist1 = service.selectOne1(goal);
 		log.debug("goallist1:{}", goallist1);
 		model.addAttribute("goallist1", goallist1);
 		log.debug("wsidlog2:{}", wsid);
@@ -50,7 +54,13 @@ public class GoalController {
 	}
 
 	@GetMapping("teamgoal")
-	public String teamgoal() {
+	public String teamgoal(Model model) {
+		SessionUser user = (SessionUser) httpSession.getAttribute("user");
+		log.debug("wsid:{}", httpSession.getAttribute("wsid"));
+		int wsid = (int) httpSession.getAttribute("wsid");
+		log.debug("wsid1:{}", wsid);
+		ArrayList<Goal> goallist1 = service.selectOne1Goal(wsid);
+		model.addAttribute("goallist1", goallist1);
 		return "/goalView/teamgoal";
 	}
 
@@ -72,6 +82,11 @@ public class GoalController {
 	@GetMapping("goalvyu")
 	public String goalvyu() {
 		return "redirect:/goalView/goalvyu";
+	}
+
+	@GetMapping("selectcal")
+	public String selectcal() {
+		return "redirect:/goalView/goal";
 	}
 
 	// @PostMapping("insert")
