@@ -15,7 +15,7 @@
         SELECT * FROM scoop_goal where wsid = #{wsid} ORDER BY key desc
     </select>
 
-    <select id="selectOne1" parameterType="int" resultType="Goal">
+    <select id="selectOne1" parameterType="Goal" resultType="Goal">
         SELECT * FROM scoop_goal WHERE wsid = #{wsid} and gcreator = #{gcreator} ORDER BY key desc
     </select>
     
