@@ -177,6 +177,25 @@ public class WorkspaceController {
 		return "scoophome";
 	}
 	
+//	@GetMapping("inviteWorkspace")
+//	public String inviteWorkspace(Model model, int wsid) { // , HttpSession session
+//		log.debug("Invite wsid:{}", wsid);
+//		
+//		// 전달받은 parameter wsid의 값을 세션에 저장
+//		httpSession.setAttribute("wsid", wsid);
+//		
+//		// 1. 계정이 있으면 로그인과 동시에 워크스페이스에 참여
+//		// 2. 계정이 없으면 회원가입을 거쳐서 로그인을 하고 워크스페이스에 참여 
+//		
+//		// 로그인
+//
+//		// 처리할 거 있으면 하기
+////		service.inviteWorkspace(wsid, user.getEmail());
+//		
+//		// 그 워크스페이스 주소로 이동
+//		return "scoophome";
+//	}
+	
 //	@GetMapping("removeWorkspace")
 //	public String removeWorkspace(Model model, Workspace workspace) {
 //		

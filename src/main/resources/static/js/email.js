@@ -9,34 +9,23 @@
     //이메일 발송
     function emailSend() {
 		let userId = $("#userId").val();
-		alert("User Id1 : " + userId);
+		let inviteWsid =  $("#inviteWsid").val();
 		
-        var subject = "chats 회원인증번호 입니다.";
-        var body = "안녕하세요 chats 입니다. \n 회원가입 인증번호는 입니다.";
-
-        var params1 = {
-             userId : userId
-            ,subject : subject
-            ,body : body
-        }
-        
-        const params = JSON.stringify(params1);
-        
-		alert("User Id2 : " + userId);
-		alert("Params1 : " + params1); // Params : [object Object]
-		alert("Params : " + params);
+		alert("User Id : " + userId);
+		alert("Invite Workspace Id1 : " + inviteWsid);
+		
+        var subject = "혜민 님이 Asana에 있는 Scoop에 참가하도록 초대했습니다";
+        var body = "혜민 님이 Scoop에 참가하도록 초대했습니다 \n http://localhost:9500/scoop/inviteWorkspace?wsid=" + inviteWsid;
 
         $.ajax({
             url: 'sendEmail' // /auth/
-            ,type: 'Post'
-            ,accept: 'application/json'
-            ,contentType: 'application/json' // ; charset=utf-8
-            ,data: encodeURIComponent(params) // encodeURI(params)
-            ,dataType: 'text'
-            ,success: function(data) {
-				alert("success data : " + data);
-            },
-            error: function(e) {
+            , type: 'Post'
+            , data: {userId: userId, subject:subject, body:body}
+            , dataType: 'json'
+            , success: function() {
+				alert("success");
+            }
+            , error: function(e) {
                 alert(JSON.stringify(e));
             }
         });
