@@ -1,0 +1,11 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.scoop.dao.TaskDAO">
+    <insert id="insertTask" parameterType="Task">
+        INSERT INTO SCOOP_MYTASK
+        VALUES (scoop_myTask_seq.nextval, #{wsid}, #{tname}, #{tcharge}, #{tstartperiod}, #{tendperiod}, #{texplain}, #{tparticipaint}, #{tpublic}, #{tfinish}, #{tcreator}, #{tsession}, #{pnum}, sysdate)
+    </insert>
+
+</mapper>
