@@ -1,5 +1,7 @@
 package com.example.scoop.service;
 
+import com.example.scoop.domain.Task;
+
 /**
  * projectName     :Scoop
  * fileName        :TaskService
@@ -7,4 +9,5 @@ package com.example.scoop.service;
  * since           :2022/09/23
  */
 public interface TaskService {
+    int insertTask(Task task);
 }

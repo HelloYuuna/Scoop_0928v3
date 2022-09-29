@@ -95,9 +95,12 @@
 		delete from scoop_project
 		where pnum = #{pnum}
 			
-	</delete>	
-	
-	
+	</delete>
+
+	<select id="findByWsid" parameterType="int" resultType="Project">
+		select * from SCOOP_PROJECT
+		where WSID = #{wsid}
+	</select>
 	
 	
 </mapper>

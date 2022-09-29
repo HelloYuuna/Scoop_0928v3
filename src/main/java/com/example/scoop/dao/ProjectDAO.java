@@ -1,6 +1,7 @@
 package com.example.scoop.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -52,5 +53,8 @@ public interface ProjectDAO {
 //	public int insertMember(User user);
 //
 //	public User findByName(String member);
+	
+	// 내작업공간에서 프로젝트 리스트 받아오기
+	List<Project> findByWsid(int wsid);
 
 }

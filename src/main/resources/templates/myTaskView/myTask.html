@@ -4,11 +4,14 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>myTask management</title>
+	<script th:src="@{/js/jquery-3.6.0.js}"></script>
+
 	<link rel="stylesheet" th:href="@{/css/home.css}">
 	<link rel="stylesheet" th:href="@{/css/sidebar.css}">
 	<link rel="stylesheet" th:href="@{/css/myTask/myTask.css}">
 	<link rel="stylesheet" th:href="@{/css/myTask/datepicker.css}">
-	<script th:src="@{/js/jquery-3.6.0.js}"></script>
+	<link rel="stylesheet" th:href="@{/css/myTask/toggle.css}">
+
 	<script th:src="@{/js/myTask/task.js}"></script>
 
 </head>
@@ -70,50 +73,89 @@
 			<div class="modal__overlay"></div>
 			<div class="modal__content">
 				<div class="modal__text">
-					<form id="formTaskMake">
+					<form id="insertTaskByForm">
 						<div id="top-button">
+							<span id="newTask">새로운 작업 생성</span>
 							<button class="closeModal">X</button>
 						</div>
 						<div>
-							<textarea id="task-title" aria-label="작업이름" placeholder="작업 이름 입력" tabindex="0"></textarea>
+							<textarea id="task-title" name="tname" aria-label="작업이름" placeholder="작업 이름 입력" tabindex="0"></textarea>
 						</div>
 						<div>
 							<span>담당자</span>
-							<span id="charger"></span>
+							<span id="tcharge" th:text="${userName}"></span>
 							<label>
-								<select name="taskSession" id="taskSession">
-									<option value="0">오늘 할 일</option>
-									<option value="1">다음주에 할 일</option>
-									<option value="2">나중에 할 일</option>
+								<select name="tsession" id="tsession">
+									<option value="0"> 오늘 할 일</option>
+									<option value="1"> 다음주에 할 일</option>
+									<option value="2"> 나중에 할 일</option>
 								</select>
 							</label>
 						</div>
 						<div id="task-date">
 							<span>시작일</span>
 							<label>
-								<input type="date" name="starttime" id="starttime">
+								<input type="date" name="tstartperiod" id="starttime">
 							</label>
 							<span>마감일</span>
 							<label>
-								<input type="date" name="endtime" id="endtime">
+								<input type="date" name="tendperiod" id="endtime">
 							</label>
 						</div>
 						<div>
 							<span>프로젝트</span>
-							<select name="projectSelect" id="projectSelect">
-								<option value=""></option>
-							</select>
+							<label>
+								<select name="pnum" id="projectSelect">
+									<option value="null" selected><span id="selectPOpt">-- 프로젝트 선택 --</span></option>
+									<option th:each="projects : ${projects}" th:value="${projects.pnum}">
+										<span th:text="${projects.pname}"></span>
+									</option>
+								</select>
+							</label>
 						</div>
+						<div>
+							<textarea aria-label="작업설명란" placeholder="작업 설명란" name="texplain" id="texplain" rows="5"></textarea>
+						</div>
+						<input type="hidden" name="wsid" id="wsid" th:value="${wsid}">
 					</form>
 				</div>
-				<div><button id="btnTaskMake" name="">작업 생성</button></div>
+				<div><button id="btnTaskMake">작업 생성</button></div>
 			</div>
 		</div>
 <!--	스프레드 시트 타이틀 	-->
 		<div class="spreadsheet-title">
-			<div id="taskName"><span>작업 이름</span></div>
-			<div id="deadLine"><span>마감일</span></div>
-			<div id="projectName"><span>프로젝트</span></div>
+			<div class="taskName"><span>작업 이름</span></div>
+			<div class="deadLine"><span>마감일</span></div>
+			<div class="projectName"><span>프로젝트</span></div>
+		</div>
+		<div class="spreadsheet-content">
+			<details>
+				<summary>오늘 할 일</summary>
+				<div class="today">
+					<div class="taskName">
+						<input type="checkbox" name="" id="" aria-label="today">
+						<span>나는 밥을 먹는다</span>
+						<!-- TODO: 버튼 커스텀CSS 클릭하면 오른쪽 사이드바(구현중) https://wsss.tistory.com/879 -->
+						<input type="button" value="세부정보">
+					</div>
+					<div class="deadLine">
+						<input type="date" name="" id="" value="2022-09-28" aria-label="" readonly>
+						<span>~</span>
+						<input type="date" name="" id="" value="2022-09-30" aria-label="" readonly>
+					</div>
+					<div class="projectName">
+
+					</div>
+				</div>
+			</details>
+			<details>
+				<summary>다음주에 할 일</summary>
+				<div class="nxtwk"></div>
+			</details>
+			<details>
+				<summary>나중에 할 일</summary>
+				<div class="later"></div>
+			</details>
 		</div>
 	</div>
 

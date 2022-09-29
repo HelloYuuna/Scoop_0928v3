@@ -3,6 +3,8 @@ package com.example.scoop.dao;
 import com.example.scoop.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface UserDAO {
 
@@ -10,5 +12,5 @@ public interface UserDAO {
 
     int insertUser(User persistentUser);
 
-    User fingfindByWsid(int i);
+    List<User> findByWsid(int wsid);
 }

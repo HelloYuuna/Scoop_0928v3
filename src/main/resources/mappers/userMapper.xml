@@ -13,7 +13,7 @@
         VALUES (#{email}, default, #{name}, #{password}, null, #{role}, null, null)
     </insert>
 
-    <select id="fingfindByWsid" parameterType="int" resultType="User">
+    <select id="findByWsid" parameterType="int" resultType="User">
         select * from SCOOP_MEMBER
         where WSID = #{wsid}
     </select>

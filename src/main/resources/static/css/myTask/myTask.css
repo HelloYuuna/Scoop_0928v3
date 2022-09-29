@@ -29,7 +29,7 @@ button {
     font-size: 0.8em;
     font-weight: 700;
     /*margin-top: 10px;*/
-    padding: 5px 10px;
+    padding: 10px 10px;
     border-radius: 6px;
     cursor: pointer;
 }
@@ -46,14 +46,12 @@ span {
     display: inline-block;
     font-size: 0.8em;
     font-weight: 600;
-    margin-left: 5px;
+    margin: 0 7px 0 5px;
     padding: 10px 0;
     color: #92939F;
 }
 
-#btnTaskMake {
-    width: 95%;
-}
+/* 개별 */
 
 .modal {
     position: fixed;
@@ -89,9 +87,16 @@ span {
     0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
+span#newTask {
+    font-size: 20px;
+    padding: 0;
+}
+
 #top-button {
     display: flex;
-    justify-content: flex-end;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .modal__text {
@@ -101,13 +106,12 @@ span {
 textarea#task-title {
     color: white;
     width: 100%;
-    border: none;
+    border: 1px solid #494949;
     border-radius: 6px;
     background-color: #2D2E31;
     resize: none;
     overflow: hidden;
     padding: 1em 1em 0.1em;
-    margin-top: 10px;
 }
 
 #task-title:hover {
@@ -130,16 +134,66 @@ textarea#task-title {
     width: 100%;
 }
 
-#taskName {
+.taskName {
+    display: flex;
+    align-items: center;
     border-right: 1px solid #68686F;
     width: 40%;
 }
 
-#deadLine {
+.deadLine {
+    display: flex;
+    align-items: center;
     border-right: 1px solid #68686F;
     width: 30%;
 }
 
-#projectName {
+.projectName {
+    display: flex;
+    align-items: center;
     width: 30%;
+}
+
+textarea#texplain {
+    color: white;
+    width: 100%;
+    border: 1px solid #494949;
+    border-radius: 6px;
+    background-color: #2D2E31;
+    resize: none;
+    overflow: hidden;
+    padding: 1em 1em 0.1em;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+#texplain:hover {
+    border: 1px solid #909090;
+}
+
+#texplain:focus {
+    border: 1px solid #909090;
+}
+
+#tcharge {
+    color: white;
+    font-weight: 400;
+    margin-right: 10px;
+    margin-left: 16px;
+}
+
+#task-date {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+/* 프로젝트 선택 */
+#selectPOpt {
+    color: #92939F;
+}
+
+#btnTaskMake {
+    width: 95%;
+    padding: 15px 10px;
 }

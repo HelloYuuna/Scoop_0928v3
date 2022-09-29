@@ -1,6 +1,7 @@
 package com.example.scoop.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.example.scoop.domain.Project;
 import com.example.scoop.domain.User;
@@ -32,5 +33,8 @@ public interface ProjectService {
 	public int deleteproject(Project project);
 
 	public int insertMember(String member);
+
+	// 내작업공간에서 사용
+	List<Project> findByWsid(int wsid);
 	
 }

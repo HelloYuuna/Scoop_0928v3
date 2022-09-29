@@ -2,6 +2,7 @@ package com.example.scoop.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -140,6 +141,17 @@ public class ProjectServiceImpl implements ProjectService {
 
 		// return projectdao.insertMember(user);
 		return 0;
+	}
+
+	/**
+	 * 내작업공간에 사용
+	 * 등록된 프로젝트 가져오기
+	 * @param wsid 워크스페이스 아이디
+	 * @return 프로젝트 리스트 리턴
+	 */
+	@Override
+	public List<Project> findByWsid(int wsid) {
+		return projectdao.findByWsid(wsid);
 	}
 
 }
