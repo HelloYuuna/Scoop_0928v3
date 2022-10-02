@@ -50,10 +50,11 @@ public class TaskRestController {
          * 구글 로그인 정보 받아오기
          */
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
-        log.debug("User: {}", user);
+        log.debug("구글로그인 정보: {}", user);
 
         if(user != null) {
             task.setTcreator(user.getName());
+            task.setTcharge(user.getName());
 
         } else {
             /*
@@ -66,14 +67,16 @@ public class TaskRestController {
             log.info("폼로그인정보: {}", userName);
 
             task.setTcreator(userName);
+            task.setTcharge(userName);
         }
 
-//        int res = taskService.insertTask(task);
-//
-//        if(res < 1) {
-//            log.debug("데이터 입력 실패");
-//            return 1;
-//        }
+        log.debug("DB로넘길 task 객체값 : {}", task);
+        int res = taskService.insertTask(task);
+
+        if(res < 1) {
+            log.debug("데이터 입력 실패");
+            return 1;
+        }
 
         return 0;
     }

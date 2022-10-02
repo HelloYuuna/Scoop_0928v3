@@ -2,13 +2,15 @@
 -- #### 멤버 테이블 #####
 DROP TABLE scoop_member;
 CREATE TABLE scoop_member (
-      email	varchar2(320)   primary key NOT NULL,
+      membernum number primary key ,
+      email	varchar2(320)   NOT NULL,
       wsid	number		    NOT NULL,
       password varchar2(100) ,                          -- JS 유효성으로 체크
       name	varchar2(50)	NOT NULL,                   -- 폼 회원가입일 경우 무조건 받아야함
       picture VARCHAR2(1000) ,                          -- 구글 프로필 사진 (활용 여부는 미정)
       udept	varchar2(50)	,
-      role	varchar2(30)
+      role	varchar2(30) ,
+      enabled number
 );
 
 ----------------------------------------------------------------------------------------------------------
@@ -41,14 +43,13 @@ CREATE SEQUENCE scoop_myTask_seq;
 DROP TABLE scoop_workspace;
 CREATE TABLE scoop_workspace (
        wsid	    NUMBER	            primary key ,
+       MEMBERNUM number references SCOOP_MEMBER( MEMBERNUM ) ,
        wsname	varchar2(50)		NOT NULL,
        wsowner	varchar2(1000)		NOT NULL,
        lately   date    default sysdate
 );
 
 create sequence scoop_workspace_seq;
-
-insert into scoop_workspace values (0, '융', '차슈', default);
 
 ----------------------------------------------------------------------------------------------------------
 -- #### 프로젝트 테이블 #####
@@ -76,6 +77,31 @@ values (2, 'hah1236.k@gmail.com,hah1236@hotmail.co.jp,hah1236.j@gmail.com,hah123
 insert into scoop_project
 values (3, 'hah1236.k@gmail.com,hah1236@hotmail.co.jp,hah1236.j@gmail.com,hah1236@naver.com', 1, null, null, null, 'hello3', '차슈');
 
+-- ### 테스트용 ####
+CREATE SEQUENCE SCOOP_TEST_SEQ start with 1;
+
+insert into SCOOP_WORKSPACE ( wsid,  WSNAME, WSOWNER)
+values (SCOOP_TEST_SEQ.nextval, 'cha', 'cha');
+
+insert into SCOOP_WORKSPACE ( wsid,  WSNAME, WSOWNER)
+values (SCOOP_TEST_SEQ.nextval, 'cha2', 'cha');
+
+insert into SCOOP_WORKSPACE ( wsid,  WSNAME, WSOWNER)
+values (SCOOP_TEST_SEQ.nextval, 'cha3', 'cha');
+
+select SCOOP_TEST_SEQ.currval from DUAL;
+
+select * from SCOOP_WORKSPACE where wsowner = 'cha';
+
+update SCOOP_MEMBER
+set wsid = (select * from ( select wsid from SCOOP_WORKSPACE
+                            where WSOWNER = 'cha'
+                            order by LATELY desc )
+            where ROWNUM <= 1)
+where EMAIL = 'hah1236.k@gmail.com';
+
+select * from SCOOP_MEMBER;
+------------------------------------------------------------------
 
 commit;
 

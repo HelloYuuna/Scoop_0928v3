@@ -14,12 +14,18 @@ import java.util.Collection;
 @Getter
 @Setter
 @NoArgsConstructor
-@Builder
 @Entity
+@SequenceGenerator (name = "SCOOP_MEMBER_GENERATOR",
+		sequenceName = "SCOOP_MEMBER_SEQ",
+		initialValue = 1, allocationSize = 1)
 @Table(name="scoop_member")
 public class User implements UserDetails {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE
+						, generator = "SCOOP_MEMBER_SEQ")
+	private Long membernum;
+
 	@Column(nullable = false, unique = true)
 	private String email;				// 회원 아이디 이메일
 	
@@ -46,7 +52,8 @@ public class User implements UserDetails {
 	private boolean enabled;            // 1 or 0 계정활성화
 	
 	@Builder
-	public User(String email, String password, String name, String picture, Role role, int wsid, String udept, boolean enabled) {
+	public User(long membernum, String email, String password, String name, String picture, Role role, int wsid, String udept, boolean enabled) {
+		this.membernum = membernum;
 		this.email = email;
 		this.password = password;
 		this.name = name;

@@ -5,7 +5,11 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.scoop.domain.User;
+import com.example.scoop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +30,9 @@ public class WorkspaceController {
 
 	@Autowired
 	WorkspaceService service;
+
+	@Autowired
+	private UserService userService;
 	
 	/**
 	 * 워크스페이스 홈으로 이동
@@ -87,24 +94,36 @@ public class WorkspaceController {
 	}
 	
 	@GetMapping("newWorkspace")
-	public String newWorkspace(Model model, Workspace workspace) {
-		
+	public String newWorkspace(Model model, Workspace workspace
+										, @AuthenticationPrincipal UserDetails loginInfo) {
+		String userId = "";
+
 		SessionUser user = (SessionUser) httpSession.getAttribute("user");
 		log.debug("User: {}", user);
 		
 		if(user != null) {
+			userId = user.getEmail();
 			model.addAttribute("userName", user.getName());
-			workspace.setWsowner(user.getEmail());
+			workspace.setWsowner(userId);
+		} else {
+
+			userId = loginInfo.getUsername();
+			User formLoginUser = userService.findById(userId);
+			String userName = formLoginUser.getUsername();
+
+			model.addAttribute("userName", userName);
+			workspace.setWsowner(userId);
 		}
+
 		log.debug("Insert Workspace:{}", workspace);
 
-
-		ArrayList<Workspace> ownerWorkspaceList = service.selectOwner(user.getEmail());
+		ArrayList<Workspace> ownerWorkspaceList = service.selectOwner(userId);
 		log.debug("Owner Workspace List: {}", ownerWorkspaceList);
 		model.addAttribute("ownerWorkspaceList", ownerWorkspaceList);
 		
 		// 저장한 후, 저장된 값 리턴받기
-		service.selectKey(workspace);
+		int wsid = service.selectKey(workspace);
+
 		
 		httpSession.setAttribute("wsid", workspace.getWsid());
 		httpSession.setAttribute("wsname", workspace.getWsname());
@@ -145,9 +164,10 @@ public class WorkspaceController {
 		log.debug("Invite Workspace:{}", workspace);
 
 		
-		// 저장한 후, 저장된 값 리턴받기
-		service.selectKey(workspace);
-		
+		// 저장한 후, 저장된 값 리턴받기 워크스페이스 테이블에 wsid 저장
+		int wsid = service.selectKey(workspace);
+
+
 		httpSession.setAttribute("wsid", workspace.getWsid());
 		httpSession.setAttribute("wsname", workspace.getWsname());
 		httpSession.setAttribute("wsowner", workspace.getWsowner());

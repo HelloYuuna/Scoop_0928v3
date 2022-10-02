@@ -106,13 +106,24 @@
 							<span>프로젝트</span>
 							<label>
 								<select name="pnum" id="projectSelect">
-									<option value="null" selected><span id="selectPOpt">-- 프로젝트 선택 --</span></option>
+									<option value="" selected><span id="selectPOpt">-- 프로젝트 선택 --</span></option>
 									<option th:each="projects : ${projects}" th:value="${projects.pnum}">
 										<span th:text="${projects.pname}"></span>
 									</option>
 								</select>
 							</label>
 						</div>
+<!--			TODO: 디폴트 0 비공개			-->
+<!--						<div>-->
+<!--							<span>공개여부</span>-->
+<!--							<label>-->
+<!--								<select name="tpublic" id="tpublic">-->
+<!--									<option value="0">-->
+<!--										<span>비공개</span>-->
+<!--									</option>-->
+<!--								</select>-->
+<!--							</label>-->
+<!--						</div>-->
 						<div>
 							<textarea aria-label="작업설명란" placeholder="작업 설명란" name="texplain" id="texplain" rows="5"></textarea>
 						</div>
@@ -135,7 +146,7 @@
 					<div class="taskName">
 						<input type="checkbox" name="" id="" aria-label="today">
 						<span>나는 밥을 먹는다</span>
-						<!-- TODO: 버튼 커스텀CSS 클릭하면 오른쪽 사이드바(구현중) https://wsss.tistory.com/879 -->
+						<!-- TODO: 버튼 커스텀CSS 클릭하면 오른쪽 사이드바(구현) -->
 						<input type="button" value="세부정보">
 					</div>
 					<div class="deadLine">

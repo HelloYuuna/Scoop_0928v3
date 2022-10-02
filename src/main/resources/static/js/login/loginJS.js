@@ -48,7 +48,7 @@
                 console.log(result);
 
                 if(result >= 1) {
-                    let gotoLoginPage = '/';
+                    let gotoLoginPage = './loginForm';
                     alert('회원가입이 완료되었습니다.');
                     location.href=gotoLoginPage;
                 }

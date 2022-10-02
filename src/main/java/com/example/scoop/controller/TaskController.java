@@ -74,8 +74,7 @@ public class TaskController {
         // TODO: 등록된 태스크 리스트업
 
 
-        // TODO: 혜민상이 구현한 워크스페이스 번호 넘기기
-        int wsid = 0;                                       // 테스트용 0번
+        int wsid = 1;                                       // 테스트용 0번
         model.addAttribute("wsid", wsid);
 
         // 해당 워크스페이스의 멤버 가져오기

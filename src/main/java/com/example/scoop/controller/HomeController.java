@@ -55,6 +55,9 @@ public class HomeController {
 		model.addAttribute("dayOfMonth", dayOfMonth);
 		model.addAttribute("dayOfWeek", dayOfWeek);
 
+
+		String userId;																	// 로그인한 유저의 아이디(이메일)을 담는 변수
+
 		/*
 		 * 구글 로그인 정보 받아오기
 		 */
@@ -62,14 +65,17 @@ public class HomeController {
 		log.debug("User: {}", user);
 
 		if (user != null) {
+
 			model.addAttribute("userName", user.getName());
+			log.debug("아이디: {}", user.getEmail());
+			userId = user.getEmail();
 
 		} else {
 			/*
 			 * 폼 로그인 정보 받아오기
 			 */
-			String loginId = loginInfo.getUsername();
-			User formLoginUser = userService.findById(loginId);
+			userId = loginInfo.getUsername();
+			User formLoginUser = userService.findById(userId);
 			String userName = formLoginUser.getUsername();
 
 			log.info("폼로그인정보: {}", userName);
@@ -78,20 +84,21 @@ public class HomeController {
 		}
 
 		// 로그인 했을 때 워크스페이스가 없을 경우 생성 페이지로 이동
-		int countOwner = workspaceService.countOwner(user.getEmail());
+		int countOwner = workspaceService.countOwner(userId);
 		log.debug("Count Owner Workspace: {}", countOwner);
+
 
 		if (countOwner == 0) {
 			return "/workspaceView/newWorkspace";
 		}
 
 		// wsowner의 워크스페이스 전체 가져오기
-		ArrayList<Workspace> ownerWorkspaceList = workspaceService.selectOwner(user.getEmail());
+		ArrayList<Workspace> ownerWorkspaceList = workspaceService.selectOwner(userId);
 		log.debug("Owner Workspace List: {}", ownerWorkspaceList);
 		model.addAttribute("ownerWorkspaceList", ownerWorkspaceList);
 
 		// 최근에 접속한 워크스페이스로 이동
-		Workspace workspace = workspaceService.selectLately(user.getEmail());
+		Workspace workspace = workspaceService.selectLately(userId);
 		log.debug("Home_Workspace:{}", workspace);
 		model.addAttribute("workspace", workspace);
 

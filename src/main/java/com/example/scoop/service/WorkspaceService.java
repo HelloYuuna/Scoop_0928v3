@@ -6,7 +6,6 @@ import com.example.scoop.domain.Workspace;
 
 public interface WorkspaceService {
 
-	public int insertWorkspace(Workspace workspace);
 
 	public Workspace selectLately(String email);
 

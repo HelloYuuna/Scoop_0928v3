@@ -20,7 +20,7 @@
     <div id="sign-up-form">
         <h2 id="sign-up-title">회원가입</h2>
         <div><span id="idchk-msg"></span></div>
-        <form th:object="${user}" id="signupForm" th:action="@{/}" method="post" onsubmit="return submitFalse();">
+        <form th:object="${user}" id="signupForm" th:action="@{/member/loginForm}" method="post" onsubmit="return submitFalse();">
             <div class="userid">
                 <label>
                     <input type="email" th:field="*{email}" placeholder="email" required="required">

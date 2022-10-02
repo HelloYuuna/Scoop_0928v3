@@ -9,8 +9,6 @@ import com.example.scoop.domain.Workspace;
 @Mapper
 public interface WorkspaceDAO {
 
-	public int insertWorkspace(Workspace workspace);
-
 	public Workspace selectLately(String email);
 	
 	public int updateLately(Workspace workspace);
@@ -23,4 +21,5 @@ public interface WorkspaceDAO {
 
 	public int countOwner(String email);
 
+	int setUserID(Workspace workspace);
 }
