@@ -1,6 +1,7 @@
 package com.example.scoop.dao;
 
 import com.example.scoop.domain.User;
+import com.example.scoop.domain.Workspace;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface UserDAO {
     int insertUser(User persistentUser);
 
     List<User> findByWsid(int wsid);
+
+    int updateWsid(Workspace workspace);
 }

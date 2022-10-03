@@ -26,21 +26,17 @@ import javax.servlet.http.HttpSession;
  * since           :2022/09/23
  */
 
+@Slf4j
 @Controller
-
+@ResponseBody
 @RequestMapping("/task")
 @RequiredArgsConstructor
-@Slf4j
 public class TaskRestController {
     private final HttpSession httpSession;
 
     @Autowired
     private TaskService taskService;
 
-    @Autowired
-    private UserService userService;
-
-    @ResponseBody
     @PostMapping("insertTask")
     public int insertTask(Task task
                             ,  @AuthenticationPrincipal UserDetails loginInfo) {
@@ -53,21 +49,19 @@ public class TaskRestController {
         log.debug("구글로그인 정보: {}", user);
 
         if(user != null) {
-            task.setTcreator(user.getName());
-            task.setTcharge(user.getName());
+            task.setTcreator(user.getEmail());
+            task.setTcharge(user.getEmail());
 
         } else {
             /*
              * 폼 로그인 정보 받아오기
              */
             String loginId = loginInfo.getUsername();
-            User formLoginUser = userService.findById(loginId);
-            String userName = formLoginUser.getName();
 
-            log.info("폼로그인정보: {}", userName);
+            log.info("폼로그인정보: {}", loginId);
+            task.setTcreator(loginId);
+            task.setTcharge(loginId);
 
-            task.setTcreator(userName);
-            task.setTcharge(userName);
         }
 
         log.debug("DB로넘길 task 객체값 : {}", task);
@@ -75,9 +69,20 @@ public class TaskRestController {
 
         if(res < 1) {
             log.debug("데이터 입력 실패");
-            return 1;
+            return 0;
         }
 
-        return 0;
+        log.debug("데이터 입력 성공");
+        taskService.selectAll(task);
+
+        return 1;
+    }
+
+    /*
+     * todo: 업데이트 작성
+     */
+    @PostMapping("updateTask")
+    public void updateTask() {
+
     }
 }

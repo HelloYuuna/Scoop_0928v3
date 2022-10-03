@@ -15,7 +15,7 @@ public class Task {
     private int tpublic;                        // 0 비공 or 1 공
     private String tname;
     private String tcharge;                     // 담당자
-    private String tsession;
+    private String tsession;                    // 0 오늘 1 다음주 2 나중에
     private String tstartperiod;
     private String tendperiod;
     private String texplain;

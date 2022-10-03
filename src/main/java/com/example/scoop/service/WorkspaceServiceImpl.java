@@ -3,6 +3,9 @@ package com.example.scoop.service;
 import java.util.ArrayList;
 
 import com.example.scoop.dao.UserDAO;
+import com.example.scoop.repository.UserRepository;
+import com.example.scoop.repository.WorkspaceRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,12 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
 	@Autowired
 	private WorkspaceDAO workspaceDAO;
+
+	@Autowired
+	private UserDAO userDAO;
+
+	@Autowired
+	private WorkspaceRepository workspaceRepository;
 
 	@Override
 	public Workspace selectLately(String email) {
@@ -49,12 +58,16 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 	 */
 	@Override
 	public int selectKey(Workspace workspace) {
-		int wsid = workspaceDAO.selectKey(workspace);
+//		int wsid = workspaceDAO.selectKey(workspace);
+
+		int wsid = workspaceRepository.save(workspace).getWsid();
 		log.debug("등록후 가져온 wsid: {}", wsid);
 
-		// TODO: 워크스페이스 아이디를 workspace 테이블에서 가져옴
+		workspace.setWsid(wsid);
+		log.debug("넘길workspace: {}", workspace);
+		int res = userDAO.updateWsid(workspace);
 
-		return wsid;
+		return res;
 	}
 
 	@Override

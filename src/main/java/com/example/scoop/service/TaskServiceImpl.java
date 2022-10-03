@@ -5,6 +5,8 @@ import com.example.scoop.domain.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * projectName     :Scoop
  * fileName        :TaskServiceImpl
@@ -21,5 +23,10 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public int insertTask(Task task) {
         return taskDAO.insertTask(task);
+    }
+
+    @Override
+    public List<Task> selectAll(Task task) {
+        return taskDAO.selectAll(task);
     }
 }

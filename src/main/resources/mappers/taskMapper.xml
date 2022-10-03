@@ -5,13 +5,26 @@
 <mapper namespace="com.example.scoop.dao.TaskDAO">
 
     <insert id="insertTask" parameterType="Task">
-        INSERT INTO SCOOP_MYTASK (TNUM, WSID, PNUM, TNAME,
+        INSERT INTO SCOOP_MYTASK ( TNUM, WSID, TNAME,
                                   TCHARGE, TSESSION, TSTARTPERIOD, TENDPERIOD,
-                                  TEXPLAIN, TCREATOR)
+                                  TEXPLAIN, TCREATOR
+                                    <if test='pnum != 0 or pnum != null'>
+                                        , PNUM
+                                    </if>
+                                  )
         VALUES ( SCOOP_MYTASK_SEQ.nextval,
-                #{wsid}, #{pnum}, #{tname},
-                #{tcharge}, #{tsession}, #{tstartperiod},
-                #{tendperiod}, #{texplain}, #{tcreator})
+                    #{wsid}, #{tname},
+                    #{tcharge}, #{tsession}, #{tstartperiod},
+                    #{tendperiod}, #{texplain}, #{tcreator}
+                    <if test='pnum != 0 or pnum != null'>
+                        , #{pnum}
+                    </if>
+                )
     </insert>
+
+    <select id="selectAll" parameterType="Task" resultType="Task">
+        SELECT * FROM SCOOP_MYTASK
+        WHERE WSID = #{wsid} AND TCHARGE = #{tcharge}
+    </select>
 
 </mapper>

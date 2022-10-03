@@ -121,9 +121,12 @@ public class WorkspaceController {
 		log.debug("Owner Workspace List: {}", ownerWorkspaceList);
 		model.addAttribute("ownerWorkspaceList", ownerWorkspaceList);
 		
-		// 저장한 후, 저장된 값 리턴받기
-		int wsid = service.selectKey(workspace);
+		// 저장한 후, 저장된 값 리턴받기 (멤버테이블에 wsid 업데이트)
+		int res = service.selectKey(workspace);
 
+		if(res < 1) {				// insert가 하나라도 되지 않았다면
+			log.debug("등록실패");
+		}
 		
 		httpSession.setAttribute("wsid", workspace.getWsid());
 		httpSession.setAttribute("wsname", workspace.getWsname());

@@ -17,4 +17,10 @@
         select * from SCOOP_MEMBER
         where WSID = #{wsid}
     </select>
+    
+    <update id="updateWsid" parameterType="Workspace">
+        update SCOOP_MEMBER
+        set wsid = #{wsid}
+        where EMAIL = #{wsowner}
+    </update>
 </mapper>

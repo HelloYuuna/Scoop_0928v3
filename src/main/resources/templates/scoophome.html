@@ -221,7 +221,7 @@
 			<hr>
 			<div class="nav-section">
 				<li class="nav-text"><a th:href="@{/}"><i class="nav-icon"></i>메인</a></li>
-				<li class="nav-text"><a th:href="@{/task/myTask}"><i class="nav-icon"></i>내 작업</a></li>
+				<li class="nav-text"><a th:href="@{/task/myTask(wsid=${workspace.wsid})}"><i class="nav-icon"></i>내 작업</a></li>
 				<li class="nav-text"><a th:href="@{/projectView/project}"><i class="nav-icon"></i>프로젝트 목록</a></li>
 				<li class="nav-text"><a th:href="@{/goalView/goal}"><i class="nav-icon"></i>목표</a></li>
 			</div>

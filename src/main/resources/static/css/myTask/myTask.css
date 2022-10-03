@@ -138,21 +138,21 @@ textarea#task-title {
     display: flex;
     align-items: center;
     border-right: 1px solid #68686F;
-    width: 40%;
+    width: 50%;
 }
 
 .deadLine {
     display: flex;
     align-items: center;
-    border-right: 1px solid #68686F;
-    width: 30%;
+    /*border-right: 1px solid #68686F;*/
+    width: 50%;
 }
 
-.projectName {
-    display: flex;
-    align-items: center;
-    width: 30%;
-}
+/*.projectName {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    width: 30%;*/
+/*}*/
 
 textarea#texplain {
     color: white;

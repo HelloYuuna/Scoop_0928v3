@@ -3,14 +3,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.scoop.dao.WorkspaceDAO">
-	<insert id="selectKey" parameterType="Workspace">
-		INSERT INTO scoop_workspace  ( wsid, wsname, wsowner )
-		VALUES ( #{wsid}, #{wsname}, #{wsowner} )
+<!--	<insert id="selectKey" parameterType="Workspace">-->
+<!--		INSERT INTO scoop_workspace  ( wsid, wsname, wsowner)-->
+<!--		VALUES ( SCOOP_WORKSPACE_SEQ.nextval, #{wsname}, #{wsowner} )-->
 
-		<selectKey keyProperty="wsid" order="BEFORE" resultType="int">
-			select scoop_workspace_seq.NEXTVAL from dual
-		</selectKey>
-	</insert>
+<!--		<selectKey keyProperty="wsid" order="AFTER" resultType="int">-->
+<!--			select scoop_workspace_seq.currval from dual-->
+<!--		</selectKey>-->
+<!--	</insert>-->
 
 	<select id="selectLately" parameterType="string" resultType="Workspace">
 

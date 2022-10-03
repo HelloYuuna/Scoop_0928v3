@@ -1,6 +1,7 @@
 
 -- #### 멤버 테이블 #####
 DROP TABLE scoop_member;
+DROP sequence SCOOP_MEMBER_SEQ;
 CREATE TABLE scoop_member (
       membernum number primary key ,
       email	varchar2(320)   NOT NULL,
@@ -12,16 +13,18 @@ CREATE TABLE scoop_member (
       role	varchar2(30) ,
       enabled number
 );
+-- 수동으로 생성하지 말것 JPA에 의해 자동으로 생성됨
+create sequence SCOOP_MEMBER_SEQ start with 1;
 
 ----------------------------------------------------------------------------------------------------------
 -- #### 내작업 테이블 #####
 Drop table scoop_mytask;
+DROP SEQUENCE scoop_myTask_seq;
 CREATE TABLE scoop_mytask (
         tnum	        NUMBER		        primary key ,
         wsid	        number
             references scoop_workspace(wsid) not null ,
-        pnum            number
-            references scoop_project(pnum)  ,
+        pnum            number ,
         tname	        VARCHAR2(300)		NOT NULL,
         tcharge	        VARCHAR2(50)		NOT NULL,
         tstartperiod	DATE,
@@ -41,6 +44,7 @@ CREATE SEQUENCE scoop_myTask_seq;
 ----------------------------------------------------------------------------------------------------------
 -- #### 워크스페이스 테이블 #####
 DROP TABLE scoop_workspace;
+Drop sequence scoop_workspace_seq;
 CREATE TABLE scoop_workspace (
        wsid	    NUMBER	            primary key ,
        MEMBERNUM number references SCOOP_MEMBER( MEMBERNUM ) ,
@@ -49,11 +53,12 @@ CREATE TABLE scoop_workspace (
        lately   date    default sysdate
 );
 
-create sequence scoop_workspace_seq;
+create sequence scoop_workspace_seq start with 1;
 
 ----------------------------------------------------------------------------------------------------------
 -- #### 프로젝트 테이블 #####
 drop table scoop_project;
+DROP sequence scoop_project_seq;
 create table scoop_project(
       pnum number(38) primary key, -- 프로젝트 넘버
       uemail varchar2(3200), -- 멤버 아이디 ,멤버 테이블 참조
@@ -70,10 +75,8 @@ create sequence scoop_project_seq;
 
 insert into scoop_project
 values (1, 'hah1236.k@gmail.com,hah1236@hotmail.co.jp,hah1236.j@gmail.com,hah1236@naver.com', 1, null, null, null, 'hello1', '차슈');
-
 insert into scoop_project
 values (2, 'hah1236.k@gmail.com,hah1236@hotmail.co.jp,hah1236.j@gmail.com,hah1236@naver.com', 1, null, null, null, 'hello2', '차슈');
-
 insert into scoop_project
 values (3, 'hah1236.k@gmail.com,hah1236@hotmail.co.jp,hah1236.j@gmail.com,hah1236@naver.com', 1, null, null, null, 'hello3', '차슈');
 
@@ -95,7 +98,7 @@ select * from SCOOP_WORKSPACE where wsowner = 'cha';
 
 update SCOOP_MEMBER
 set wsid = (select * from ( select wsid from SCOOP_WORKSPACE
-                            where WSOWNER = 'cha'
+                            where WSOWNER = 'hah1236.k@gmail.com'
                             order by LATELY desc )
             where ROWNUM <= 1)
 where EMAIL = 'hah1236.k@gmail.com';
@@ -104,4 +107,3 @@ select * from SCOOP_MEMBER;
 ------------------------------------------------------------------
 
 commit;
-

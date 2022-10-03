@@ -13,7 +13,8 @@
 	<link rel="stylesheet" th:href="@{/css/myTask/toggle.css}">
 
 	<script th:src="@{/js/myTask/task.js}"></script>
-
+	<style>
+	</style>
 </head>
 <body>
 <!--/*
@@ -106,14 +107,14 @@
 							<span>프로젝트</span>
 							<label>
 								<select name="pnum" id="projectSelect">
-									<option value="" selected><span id="selectPOpt">-- 프로젝트 선택 --</span></option>
+									<option value="0" selected><span id="selectPOpt">-- 프로젝트 선택 --</span></option>
 									<option th:each="projects : ${projects}" th:value="${projects.pnum}">
 										<span th:text="${projects.pname}"></span>
 									</option>
 								</select>
 							</label>
 						</div>
-<!--			TODO: 디폴트 0 비공개			-->
+<!--			디폴트 0 비공개			-->
 <!--						<div>-->
 <!--							<span>공개여부</span>-->
 <!--							<label>-->
@@ -123,7 +124,7 @@
 <!--									</option>-->
 <!--								</select>-->
 <!--							</label>-->
-<!--						</div>-->
+<!--						</div> -->
 						<div>
 							<textarea aria-label="작업설명란" placeholder="작업 설명란" name="texplain" id="texplain" rows="5"></textarea>
 						</div>
@@ -137,35 +138,83 @@
 		<div class="spreadsheet-title">
 			<div class="taskName"><span>작업 이름</span></div>
 			<div class="deadLine"><span>마감일</span></div>
-			<div class="projectName"><span>프로젝트</span></div>
+<!--			<div class="projectName"><span>프로젝트</span></div>-->
 		</div>
 		<div class="spreadsheet-content">
-			<details>
+			<details open>
 				<summary>오늘 할 일</summary>
-				<div class="today">
-					<div class="taskName">
-						<input type="checkbox" name="" id="" aria-label="today">
-						<span>나는 밥을 먹는다</span>
-						<!-- TODO: 버튼 커스텀CSS 클릭하면 오른쪽 사이드바(구현) -->
-						<input type="button" value="세부정보">
-					</div>
-					<div class="deadLine">
-						<input type="date" name="" id="" value="2022-09-28" aria-label="" readonly>
-						<span>~</span>
-						<input type="date" name="" id="" value="2022-09-30" aria-label="" readonly>
-					</div>
-					<div class="projectName">
-
-					</div>
-				</div>
+				<table class="today" th:if="${!today.isEmpty()}">
+					<tr th:each="today : ${today}">
+						<td>
+							<input type="checkbox" name="tfinish" class="tfinish" aria-label="today">
+							<span th:text="${today.tname}"></span>
+							<input type="button" value="세부정보">
+						</td>
+						<td>
+							<div th:if="|${today.tstartperiod eq null} and ${today.tendperiod eq null}|">
+								<span>마감일 없음</span>
+							</div>
+							<div th:if="${today.tstartperiod ne null}">
+								<span th:text="${today.tstartperiod}"></span>
+								<span>부터</span>
+							</div>
+							<div th:if="${today.tendperiod ne null}">
+								<span th:text="${today.tendperiod}"></span>
+								<span>까지</span>
+							</div>
+						</td>
+					</tr>
+				</table>
 			</details>
 			<details>
 				<summary>다음주에 할 일</summary>
-				<div class="nxtwk"></div>
+				<table class="nxtwk" th:if="${!nxtwk.isEmpty()}">
+					<tr th:each="nxtwk : ${nxtwk}">
+						<td>
+							<input type="checkbox" name="tfinish" class="tfinish" aria-label="today">
+							<span th:text="${nxtwk.tname}"></span>
+							<input type="button" value="세부정보">
+						</td>
+						<td>
+							<div th:if="|${nxtwk.tstartperiod eq null} and ${nxtwk.tendperiod eq null}|">
+								<span>마감일 없음</span>
+							</div>
+							<div th:if="${nxtwk.tstartperiod ne null}">
+								<span th:text="${nxtwk.tstartperiod}"></span>
+								<span>부터</span>
+							</div>
+							<div th:if="${nxtwk.tendperiod ne null}">
+								<span th:text="${nxtwk.tendperiod}"></span>
+								<span>까지</span>
+							</div>
+						</td>
+					</tr>
+				</table>
 			</details>
 			<details>
 				<summary>나중에 할 일</summary>
-				<div class="later"></div>
+				<table class="later" th:if="${!later.isEmpty()}">
+					<tr th:each="later : ${later}">
+						<td>
+							<input type="checkbox" name="tfinish" class="tfinish" aria-label="today">
+							<span th:text="${later.tname}"></span>
+							<input type="button" value="세부정보">
+						</td>
+						<td>
+							<div th:if="|${later.tstartperiod eq null} and ${later.tendperiod eq null}|">
+								<span>마감일 없음</span>
+							</div>
+							<div th:if="${later.tstartperiod ne null}">
+								<span th:text="${later.tstartperiod}"></span>
+								<span>부터</span>
+							</div>
+							<div th:if="${later.tendperiod ne null}">
+								<span th:text="${later.tendperiod}"></span>
+								<span>까지</span>
+							</div>
+						</td>
+					</tr>
+				</table>
 			</details>
 		</div>
 	</div>

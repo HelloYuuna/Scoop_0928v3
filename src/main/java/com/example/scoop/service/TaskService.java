@@ -2,6 +2,8 @@ package com.example.scoop.service;
 
 import com.example.scoop.domain.Task;
 
+import java.util.List;
+
 /**
  * projectName     :Scoop
  * fileName        :TaskService
@@ -10,4 +12,6 @@ import com.example.scoop.domain.Task;
  */
 public interface TaskService {
     int insertTask(Task task);
+
+    List<Task> selectAll(Task task);
 }
